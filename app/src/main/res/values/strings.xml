@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Modao</string>
+    <string name="expenses">Expenses</string>
+    <string name="account">Account</string>
+    <string name="friends">Friends</string>
+    <string name="groups">Groups</string>
+    <string name="name">Name:</string>
+    <string name="profile">Profile</string>
+    <string name="test">Test string</string>
+    <string name="testNum">500</string>
+    <string name="bank">Preferred bank:</string>
+    <string name="phone">Phone number:</string>
+    <string name="edit">Edit</string>
+</resources>
