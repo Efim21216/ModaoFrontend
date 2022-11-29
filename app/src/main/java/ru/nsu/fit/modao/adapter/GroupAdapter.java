@@ -1,6 +1,8 @@
 package ru.nsu.fit.modao.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ru.nsu.fit.modao.ExpensesActivity;
+import ru.nsu.fit.modao.GroupInfo;
 import ru.nsu.fit.modao.R;
 import ru.nsu.fit.modao.model.Groups;
 
@@ -31,8 +35,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(groups.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, GroupInfo.class);
+
+                intent.putExtra("nameGroup", groups.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
