@@ -11,4 +11,5 @@
     <string name="bank">Preferred bank:</string>
     <string name="phone">Phone number:</string>
     <string name="edit">Edit</string>
+    <string name="add_group">Add group</string>
 </resources>
