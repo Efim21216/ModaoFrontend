@@ -4,10 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GroupsActivity">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/groups"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutG"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/bottom_menu"
@@ -16,13 +29,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
+            android:id="@+id/itemAccount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/buttonAccountG"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -43,7 +59,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/itemExpense"
+            android:id="@+id/itemExpenses"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -70,7 +86,6 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -100,7 +115,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/someId1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -131,111 +145,31 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/account"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:contentDescription="@string/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:srcCompat="@drawable/profile_man_1" />
-
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupsRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutG"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:text="@string/name" />
-
-        <TextView
-            android:id="@+id/textName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:text="@string/test" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:text="@string/phone" />
-
-        <TextView
-            android:id="@+id/textPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:text="@string/test" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:text="@string/bank" />
-
-        <TextView
-            android:id="@+id/textBank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="40dp"
-            android:text="@string/test" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/group_item" />
 
     <ImageButton
-        android:id="@+id/imageButton11"
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/add_group"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/edit"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutG"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_edit" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupsRecycler"
+        app:srcCompat="@drawable/button_add_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

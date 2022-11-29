@@ -18,6 +18,7 @@ import ru.nsu.fit.modao.model.Expenses;
 
 public class ExpensesActivity extends AppCompatActivity {
     ImageButton account;
+    ImageButton groups;
     RecyclerView expensesRecycler;
     ExpensesAdapter expensesAdapter;
     @Override
@@ -25,19 +26,25 @@ public class ExpensesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
-
-
+        groups = findViewById(R.id.buttonGroups);
         account = findViewById(R.id.buttonAccount);
         List<Expenses> expensesList = new ArrayList<>();
         expensesList.add(new Expenses(-100, "Nikita paid", "Nikita Paid", Currency.RUB));
         expensesList.add(new Expenses(-900, "Nikita paid", "Nikita Paid", Currency.RUB));
         expensesList.add(new Expenses(1200, "You paid", "You paid", Currency.RUB));
         expensesList.add(new Expenses(100, "Olga paid", "Olga Paid", Currency.RUB));
+
         setExpensesRecycler(expensesList);
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity();
+                startNewActivity(MainActivity.class);
+            }
+        });
+        groups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewActivity(GroupsActivity.class);
             }
         });
     }
@@ -54,8 +61,8 @@ public class ExpensesActivity extends AppCompatActivity {
         expensesRecycler.setAdapter(expensesAdapter);
     }
 
-    void startNewActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    void startNewActivity(Class<?> cls){
+        Intent intent = new Intent(this, cls);
         startActivity(intent);
     }
 }
