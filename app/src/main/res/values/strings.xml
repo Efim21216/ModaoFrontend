@@ -16,6 +16,7 @@
     <string name="data_conf">Data confirmation</string>
     <string name="add_group">Add group</string>
     <string name="info_group">Group info</string>
+    <string name="tip_who_prt">Who participated in the event</string>
     <string name="cost_new_expense">Cost of new expense</string>
     <string name="hint_cost">Enter the cost</string>
 </resources>
