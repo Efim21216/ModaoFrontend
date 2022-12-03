@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/imageButtonExpenses"
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         android:src="@drawable/button_data_conf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton8" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonExpenses" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -259,9 +259,9 @@
         android:text="@string/expenses"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-        app:layout_constraintStart_toStartOf="@+id/imageButton8"
-        app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonExpenses"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonExpenses"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonExpenses" />
 
     <TextView
         android:id="@+id/textView7"
