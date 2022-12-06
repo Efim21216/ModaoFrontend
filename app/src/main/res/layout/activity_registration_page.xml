@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthorizationPage">
+    tools:context=".RegistrationPage">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -134,12 +134,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/greeting"
+        android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/inter_bold"
-        android:text="@string/greeting"
+        android:text="@string/sign_up"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="36sp"
@@ -149,63 +149,50 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/createUsername"
         android:layout_width="330dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="@string/enter_username"
+        android:hint="@string/create_username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greeting" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/createLogin"
         android:layout_width="330dp"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:hint="@string/create_login"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-        app:srcCompat="@drawable/login_in"/>
+        app:layout_constraintTop_toBottomOf="@+id/createUsername" />
 
-    <TextView
-        android:id="@+id/textView9"
+    <EditText
+        android:id="@+id/editTextTextPersonName6"
         android:layout_width="330dp"
-        android:layout_height="45sp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/inter_light"
-        android:text="@string/can_sign_up"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="@string/create_password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createLogin" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/sign_up" />
+        app:srcCompat="@drawable/continue_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

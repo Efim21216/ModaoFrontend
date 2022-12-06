@@ -23,4 +23,8 @@
     <string name="enter_username">Enter your username</string>
     <string name="enter_password">Enter your password</string>
     <string name="can_sign_up">If you don\'t have an account yet, you can sign up</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_username">Create a username</string>
+    <string name="create_login">Create a login</string>
+    <string name="create_password">Create a password</string>
 </resources>
