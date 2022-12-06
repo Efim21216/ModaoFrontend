@@ -19,4 +19,8 @@
     <string name="tip_who_prt">Who participated in the event</string>
     <string name="cost_new_expense">Cost of new expense</string>
     <string name="hint_cost">Enter the cost</string>
+    <string name="greeting">Hello!👋</string>
+    <string name="enter_username">Enter your username</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="can_sign_up">If you don\'t have an account yet, you can sign up</string>
 </resources>
