@@ -51,6 +51,7 @@ public class GroupInfo extends AppCompatActivity {
     }
     void startNewActivity(Class<?> cls){
         Intent intent = new Intent(this, cls);
+        intent.putExtra("userID", getIntent().getIntExtra("userID", 0));
         startActivity(intent);
     }
 }

@@ -6,135 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".AuthorizationPage">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/bottom_menu"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/account"
-                app:srcCompat="@drawable/ic_account"
-                tools:ignore="DuplicateSpeakableTextCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/account"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/itemExpense"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/buttonExpenses"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/expenses"
-                app:srcCompat="@drawable/ic_wallet"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/expenses"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/friends"
-                app:srcCompat="@drawable/ic_friends"
-                tools:ignore="DuplicateSpeakableTextCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/friends"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/someId1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/buttonGroups"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/groups"
-                app:srcCompat="@drawable/ic_groups"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/groups"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -159,34 +32,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/greeting"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/personPassword"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="330dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/enter_password"
         android:inputType="textPassword"
-        android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/personLogin"
+        android:importantForAutofill="no" />
 
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="330dp"
         android:layout_height="45sp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/inter_light"
         android:text="@string/can_sign_up"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
@@ -214,18 +88,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personPassword"
-        app:srcCompat="@drawable/login_in" />
+        app:srcCompat="@drawable/login_in"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <ImageButton
         android:id="@+id/buttonSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/app_name"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:srcCompat="@drawable/sign_up" />
 </androidx.constraintlayout.widget.ConstraintLayout>

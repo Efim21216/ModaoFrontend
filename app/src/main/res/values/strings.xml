@@ -7,6 +7,7 @@
     <string name="groups">Groups</string>
     <string name="name">Name:</string>
     <string name="error">Error</string>
+    <string name="alreadyExist">User with this login already exists</string>
     <string name="incorrectLoginOrPassword">Incorrect login or password</string>
     <string name="profile">Profile</string>
     <string name="test">Test string</string>

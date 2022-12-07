@@ -38,6 +38,15 @@ public class AuthorizationPage extends AppCompatActivity {
         login = findViewById(R.id.personLogin);
         message = findViewById(R.id.tipMessage);
         logIn = findViewById(R.id.buttonLogIn);
+        signUp = findViewById(R.id.buttonSignUp);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AuthorizationPage.this, RegistrationPage.class);
+                startActivity(intent);
+            }
+        });
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +65,7 @@ public class AuthorizationPage extends AppCompatActivity {
     void authorization() throws IOException {
         client = new OkHttpClient();
         String ipServer = this.getString(R.string.ipServer);
-        //String url = "http://" + ipServer + ":8080/users/in";
-        String url = "http://192.168.137.1:8080/users/in";
+        String url = "http://" + ipServer + ":8080/user/in";
         String log = login.getText().toString();
         String pass = password.getText().toString();
         if (log.equals("") || pass.equals("")) {
@@ -86,26 +94,25 @@ public class AuthorizationPage extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                runOnUiThread(new Runnable() {
+                if (response.isSuccessful()) {
                     int id = Integer.parseInt(response.body().string());
-
-                    @Override
-                    public void run() {
-                        if (response.isSuccessful()) {
-                            if (id == -1) {
-                                message.setText(R.string.incorrectLoginOrPassword);
-                            } else {
-                                Intent intent = new Intent(AuthorizationPage.this, MainActivity.class);
-                                intent.putExtra("userID", id);
-                                startActivity(intent);
-                            }
-                        } else {
-                            String ans = "Error " + response.code();
-                            message.setText(ans);
+                    Intent intent = new Intent(AuthorizationPage.this, MainActivity.class);
+                    intent.putExtra("userID", id);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent);
                         }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            message.setText(R.string.incorrectLoginOrPassword);
+                        }
+                    });
+                }
 
-                    }
-                });
             }
         });
     }
