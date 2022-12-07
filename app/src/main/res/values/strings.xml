@@ -1,16 +1,22 @@
 <resources>
     <string name="app_name">Modao</string>
+    <string name="ipServer">192.168.137.1</string>
     <string name="expenses">Expenses</string>
     <string name="account">Account</string>
     <string name="friends">Friends</string>
     <string name="groups">Groups</string>
     <string name="name">Name:</string>
+    <string name="error">Error</string>
+    <string name="incorrectLoginOrPassword">Incorrect login or password</string>
     <string name="profile">Profile</string>
     <string name="test">Test string</string>
     <string name="testNum">500</string>
+    <string name="serverProblems">Server problems</string>
     <string name="bank">Preferred bank:</string>
     <string name="phone">Phone number:</string>
     <string name="edit">Edit</string>
+    <string name="wait">Wait…</string>
+    <string name="enterData">Please enter the data</string>
     <string name="members">Members</string>
     <string name="info">Information</string>
     <string name="data_conf">Data confirmation</string>
@@ -19,4 +25,12 @@
     <string name="tip_who_prt">Who participated in the event</string>
     <string name="cost_new_expense">Cost of new expense</string>
     <string name="hint_cost">Enter the cost</string>
+    <string name="greeting">Hello!👋</string>
+    <string name="enter_username">Enter your username</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="can_sign_up">If you don\'t have an account yet, you can sign up</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_username">Create a username</string>
+    <string name="create_login">Create a login</string>
+    <string name="create_password">Create a password</string>
 </resources>
