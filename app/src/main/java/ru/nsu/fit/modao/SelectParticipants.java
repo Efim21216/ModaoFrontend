@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter;
+import ru.nsu.fit.modao.myStorage.HelpFunction;
 
 public class SelectParticipants extends AppCompatActivity {
     ImageButton account;
@@ -34,19 +35,19 @@ public class SelectParticipants extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(MainActivity.class);
+                HelpFunction.startNewActivity(SelectParticipants.this, MainActivity.class);
             }
         });
         groups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupsActivity.class);
+                HelpFunction.startNewActivity(SelectParticipants.this, GroupsActivity.class);
             }
         });
         expenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(ExpensesActivity.class);
+                HelpFunction.startNewActivity(SelectParticipants.this, ExpensesActivity.class);
             }
         });
         List<String> participants = new LinkedList<>();
@@ -62,11 +63,6 @@ public class SelectParticipants extends AppCompatActivity {
             }
         });
 
-    }
-    void startNewActivity(Class<?> cls){
-        Intent intent = new Intent(this, cls);
-        intent.putExtra("userID", getIntent().getIntExtra("userID", 0));
-        startActivity(intent);
     }
     private void setParticipantsRecycler(List<String> list){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

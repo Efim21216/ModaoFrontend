@@ -44,6 +44,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
                 Intent intent = new Intent(context, GroupInfo.class);
 
                 intent.putExtra("nameGroup", groups.get(position).getName());
+                intent.putExtra("groupID", groups.get(position).getId());
                 context.startActivity(intent);
             }
         });

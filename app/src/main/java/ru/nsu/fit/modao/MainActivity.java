@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -21,6 +23,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.myStorage.MyApplication;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     TextView phone;
     TextView bank;
     OkHttpClient client;
+    LinearLayout logOut;
+    final String auto = "auto_authorization";
+    SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +46,30 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.personName);
         phone = findViewById(R.id.personPhone);
         bank = findViewById(R.id.personBank);
+        logOut = findViewById(R.id.logOutLayout);
+        preferences = getSharedPreferences(auto, MODE_PRIVATE);
+
         try {
             getDataPerson();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor edit = preferences.edit();
+                edit.remove("auto_log");
+                edit.remove("auto_pass");
+                edit.apply();
+                HelpFunction.startNewActivity(MainActivity.this, AuthorizationPage.class);
+            }
+        });
+
         expensesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(ExpensesActivity.class);
+                HelpFunction.startNewActivity(MainActivity.this, ExpensesActivity.class);
             }
         });
 
@@ -56,20 +77,14 @@ public class MainActivity extends AppCompatActivity {
         groupsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupsActivity.class);
+                HelpFunction.startNewActivity(MainActivity.this, GroupsActivity.class);
             }
         });
     }
-    void startNewActivity(Class<?> cls){
-        Intent intent = new Intent(this, cls);
-        intent.putExtra("userID", getIntent().getIntExtra("userID", 0));
-        startActivity(intent);
-    }
-
     void getDataPerson() throws IOException {
-        client = new OkHttpClient();
-        String ipServer = this.getString(R.string.ipServer);
-        String url = "http://" + ipServer + ":8080/user/" + getIntent().getIntExtra("userID", 0);
+        MyApplication app = (MyApplication) MainActivity.this.getApplication();
+        client = app.getClient();
+        String url = "http://" + app.getIpServer() + ":8080/user/" + app.getUserID();
         Request request = new Request.Builder()
                 .url(url)
                 .get()

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.myStorage.MyApplication;
 
 public class AuthorizationPage extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class AuthorizationPage extends AppCompatActivity {
     EditText password;
     OkHttpClient client;
     TextView message;
+    final String auto = "auto_authorization";
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +44,12 @@ public class AuthorizationPage extends AppCompatActivity {
         message = findViewById(R.id.tipMessage);
         logIn = findViewById(R.id.buttonLogIn);
         signUp = findViewById(R.id.buttonSignUp);
+        preferences = getSharedPreferences(auto, MODE_PRIVATE);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuthorizationPage.this, RegistrationPage.class);
-                startActivity(intent);
+                HelpFunction.startNewActivity(AuthorizationPage.this, RegistrationPage.class);
             }
         });
 
@@ -52,8 +57,10 @@ public class AuthorizationPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message.setText(R.string.wait);
+                String log = login.getText().toString();
+                String pass = password.getText().toString();
                 try {
-                    authorization();
+                    authorization(log, pass, true);
                 } catch (IOException e){
                     e.printStackTrace();
                 }
@@ -62,14 +69,20 @@ public class AuthorizationPage extends AppCompatActivity {
         });
     }
 
-    void authorization() throws IOException {
-        client = new OkHttpClient();
-        String ipServer = this.getString(R.string.ipServer);
-        String url = "http://" + ipServer + ":8080/user/in";
-        String log = login.getText().toString();
-        String pass = password.getText().toString();
+    private void authorization(String log, String pass, boolean showMessage) throws IOException {
+        MyApplication app = (MyApplication) AuthorizationPage.this.getApplication();
+        if (app.getClient() != null){
+            client = app.getClient();
+        }
+        else {
+            client = new OkHttpClient();
+            app.setClient(client);
+        }
+        String url = "http://" + app.getIpServer() + ":8080/user/in";
         if (log.equals("") || pass.equals("")) {
-            message.setText(R.string.enterData);
+            if (showMessage){
+                message.setText(R.string.enterData);
+            }
             return;
         }
         String json = "{\"login\" : \"" + log + "\"," +
@@ -84,6 +97,9 @@ public class AuthorizationPage extends AppCompatActivity {
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
                 call.cancel();
+                if (!showMessage){
+                    return;
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -95,9 +111,15 @@ public class AuthorizationPage extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    int id = Integer.parseInt(response.body().string());
+                    long id = Integer.parseInt(response.body().string());
+                    if (showMessage){
+                        SharedPreferences.Editor edit = preferences.edit();
+                        edit.putString("auto_log", log);
+                        edit.putString("auto_pass", pass);
+                        edit.apply();
+                    }
+                    app.setUserID(id);
                     Intent intent = new Intent(AuthorizationPage.this, MainActivity.class);
-                    intent.putExtra("userID", id);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -105,6 +127,9 @@ public class AuthorizationPage extends AppCompatActivity {
                         }
                     });
                 } else {
+                    if (!showMessage){
+                        return;
+                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -116,4 +141,5 @@ public class AuthorizationPage extends AppCompatActivity {
             }
         });
     }
+
 }

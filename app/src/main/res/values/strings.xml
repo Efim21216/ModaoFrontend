@@ -5,10 +5,15 @@
     <string name="account">Account</string>
     <string name="friends">Friends</string>
     <string name="groups">Groups</string>
+    <string name="welcome">Welcome!</string>
     <string name="name">Name:</string>
+    <string name="name_no">Name</string>
+    <string name="description">Description</string>
+    <string name="createGroup">Add new group</string>
     <string name="error">Error</string>
     <string name="alreadyExist">User with this login already exists</string>
     <string name="incorrectLoginOrPassword">Incorrect login or password</string>
+    <string name="incorrectData">Incorrect data</string>
     <string name="profile">Profile</string>
     <string name="test">Test string</string>
     <string name="testNum">500</string>
@@ -31,6 +36,7 @@
     <string name="enter_password">Enter your password</string>
     <string name="can_sign_up">If you don\'t have an account yet, you can sign up</string>
     <string name="sign_up">Sign up</string>
+    <string name="log_out">Log out</string>
     <string name="create_username">Create a username</string>
     <string name="create_login">Create a login</string>
     <string name="create_password">Create a password</string>
