@@ -2,27 +2,27 @@ package ru.nsu.fit.modao;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import ru.nsu.fit.modao.myStorage.HelpFunction;
 
-public class EnterCost extends AppCompatActivity {
+public class EnterCostPage extends AppCompatActivity {
+
     ImageButton expensesButton;
     ImageButton groupsButton;
-
+    ImageButton accountButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_enter_cost_page);
 
         expensesButton = findViewById(R.id.buttonExpenses);
         expensesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpFunction.startNewActivity(EnterCost.this, ExpensesActivity.class);
+                HelpFunction.startNewActivity(EnterCostPage.this, ExpensesActivity.class);
             }
         });
 
@@ -30,7 +30,14 @@ public class EnterCost extends AppCompatActivity {
         groupsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HelpFunction.startNewActivity(EnterCost.this, GroupsActivity.class);
+                HelpFunction.startNewActivity(EnterCostPage.this, GroupsActivity.class);
+            }
+        });
+        accountButton = findViewById(R.id.buttonAccount);
+        accountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HelpFunction.startNewActivity(EnterCostPage.this, MainActivity.class);
             }
         });
     }

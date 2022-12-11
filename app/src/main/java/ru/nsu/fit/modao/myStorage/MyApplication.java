@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
     private long userID;
     private OkHttpClient client;
-    private String ipServer = "192.168.137.99";
+    private String ipServer = "192.168.137.1";
 
     public String getIpServer() {
         return ipServer;

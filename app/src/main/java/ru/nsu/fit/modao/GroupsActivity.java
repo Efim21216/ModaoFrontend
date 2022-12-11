@@ -41,11 +41,14 @@ public class GroupsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
+        groups = new LinkedList<>();
+        setGroupsRecycler(groups);
         try {
             getDataPerson();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         addGroup = findViewById(R.id.buttonAddGroup);
         account = findViewById(R.id.buttonAccount);
         expenses = findViewById(R.id.buttonExpenses);
@@ -90,6 +93,7 @@ public class GroupsActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
                 call.cancel();
+
             }
 
             @Override
