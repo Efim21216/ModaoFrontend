@@ -59,7 +59,7 @@ public class SelectParticipants extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HelpFunction.startNewActivity(SelectParticipants.this, EnterCostPage.class);
             }
         });
 
