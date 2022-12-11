@@ -15,6 +15,7 @@ import java.util.List;
 import ru.nsu.fit.modao.adapter.ExpensesAdapter;
 import ru.nsu.fit.modao.model.Currency;
 import ru.nsu.fit.modao.model.Expenses;
+import ru.nsu.fit.modao.myStorage.HelpFunction;
 
 public class ExpensesActivity extends AppCompatActivity {
     ImageButton account;
@@ -38,13 +39,13 @@ public class ExpensesActivity extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(MainActivity.class);
+                HelpFunction.startNewActivity(ExpensesActivity.this, MainActivity.class);
             }
         });
         groups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupsActivity.class);
+                HelpFunction.startNewActivity(ExpensesActivity.this, GroupsActivity.class);
             }
         });
     }
@@ -59,10 +60,5 @@ public class ExpensesActivity extends AppCompatActivity {
         expensesAdapter = new ExpensesAdapter(this, expensesList);
         // Установка адаптера
         expensesRecycler.setAdapter(expensesAdapter);
-    }
-
-    void startNewActivity(Class<?> cls){
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
     }
 }

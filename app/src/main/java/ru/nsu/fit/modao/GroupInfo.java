@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import ru.nsu.fit.modao.myStorage.HelpFunction;
+
 public class GroupInfo extends AppCompatActivity {
     ImageButton account;
     ImageButton groups;
@@ -27,30 +29,26 @@ public class GroupInfo extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(MainActivity.class);
+                HelpFunction.startNewActivity(GroupInfo.this, MainActivity.class);
             }
         });
         groups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupsActivity.class);
+                HelpFunction.startNewActivity(GroupInfo.this, GroupsActivity.class);
             }
         });
         expenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(ExpensesActivity.class);
+                HelpFunction.startNewActivity(GroupInfo.this, ExpensesActivity.class);
             }
         });
         groupExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupExpenses.class);
+                HelpFunction.startNewActivity(GroupInfo.this, GroupExpenses.class);
             }
         });
-    }
-    void startNewActivity(Class<?> cls){
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
     }
 }

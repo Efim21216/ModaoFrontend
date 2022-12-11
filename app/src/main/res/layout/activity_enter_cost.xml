@@ -9,14 +9,13 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@color/bottom_menu"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -24,8 +23,9 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/buttonAccount"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
@@ -38,12 +38,11 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/account"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/itemExpense"
             android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
             <ImageButton
                 android:id="@+id/buttonExpenses"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
@@ -67,7 +66,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/expenses"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -82,7 +81,7 @@
 
             <ImageButton
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
@@ -94,8 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:text="@string/friends"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -111,7 +110,7 @@
             <ImageButton
                 android:id="@+id/buttonGroups"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
@@ -124,7 +123,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/groups"
                 android:textColor="@color/white"
                 android:textSize="16sp" />

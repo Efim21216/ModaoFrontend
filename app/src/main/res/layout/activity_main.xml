@@ -9,13 +9,14 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@color/bottom_menu"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -23,25 +24,27 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/buttonAccount"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/account"
                 app:srcCompat="@drawable/ic_account"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/account"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/itemExpense"
             android:layout_width="wrap_content"
@@ -52,20 +55,20 @@
             <ImageButton
                 android:id="@+id/buttonExpenses"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/expenses"
                 app:srcCompat="@drawable/ic_wallet"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/expenses"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -80,20 +83,20 @@
 
             <ImageButton
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/friends"
                 app:srcCompat="@drawable/ic_friends"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/friends"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -109,20 +112,20 @@
             <ImageButton
                 android:id="@+id/buttonGroups"
                 android:layout_width="48dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/groups"
                 app:srcCompat="@drawable/ic_groups"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="@string/groups"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -156,6 +159,7 @@
         app:srcCompat="@drawable/profile_man_1" />
 
     <LinearLayout
+        android:id="@+id/infoPerson"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -175,7 +179,7 @@
             android:text="@string/name" />
 
         <TextView
-            android:id="@+id/textName"
+            android:id="@+id/personName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_light"
@@ -194,7 +198,7 @@
             android:text="@string/phone" />
 
         <TextView
-            android:id="@+id/textPhone"
+            android:id="@+id/personPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_light"
@@ -213,7 +217,7 @@
             android:text="@string/bank" />
 
         <TextView
-            android:id="@+id/textBank"
+            android:id="@+id/personBank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_light"
@@ -221,6 +225,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="40dp"
             android:text="@string/test" />
+
+
     </LinearLayout>
 
     <ImageButton
@@ -236,6 +242,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit" />
+
+    <LinearLayout
+        android:id="@+id/logOutLayout"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/log_out" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/log_out"
+            android:textColor="@color/loss"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

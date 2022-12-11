@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import ru.nsu.fit.modao.myStorage.HelpFunction;
+
 public class EnterCost extends AppCompatActivity {
     ImageButton expensesButton;
     ImageButton groupsButton;
@@ -20,7 +22,7 @@ public class EnterCost extends AppCompatActivity {
         expensesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(ExpensesActivity.class);
+                HelpFunction.startNewActivity(EnterCost.this, ExpensesActivity.class);
             }
         });
 
@@ -28,12 +30,8 @@ public class EnterCost extends AppCompatActivity {
         groupsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewActivity(GroupsActivity.class);
+                HelpFunction.startNewActivity(EnterCost.this, GroupsActivity.class);
             }
         });
-    }
-    void startNewActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
     }
 }
