@@ -102,7 +102,7 @@ public class GroupsActivity extends AppCompatActivity {
                     try {
                         JSONObject json = new JSONObject(response.body().string());
                         JSONArray arr = json.getJSONArray("groups");
-                        groups = new LinkedList<>();
+                        groups.clear();
                         for (int i = 0; i < arr.length(); i++){
                             JSONObject ob = (JSONObject) arr.get(i);
                             groups.add(new Groups(ob.getString("name"), ob.getLong("id")));
