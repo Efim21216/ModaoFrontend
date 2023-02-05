@@ -71,7 +71,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expens
             sourceImageName.append("dol");
         }
         // Перевод названия картинки в её id
-        int imageId = context.getResources().getIdentifier(sourceImageName.toString(), "drawable", context.getPackageName());
+        @SuppressLint("DiscouragedApi") int imageId = context.getResources().getIdentifier(sourceImageName.toString(), "drawable", context.getPackageName());
         holder.currency.setImageResource(imageId);
         holder.expense.setText(String.format("%.2f", expenses.get(position).getExpense()));
         holder.shortInfo.setText(expenses.get(position).getShortInfo());
