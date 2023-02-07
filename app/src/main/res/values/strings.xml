@@ -40,6 +40,10 @@
     <string name="create_username">Create a username</string>
     <string name="create_login">Create a login</string>
     <string name="create_password">Create a password</string>
+    <string name="information"> Information </string>
+    <string name="date_of_creation">Date of creation:</string>
+    <string name="link">Link:</string>
+    <string name="preferred_bank">Preferred bank:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
