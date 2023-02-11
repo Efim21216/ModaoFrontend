@@ -20,8 +20,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import ru.nsu.fit.modao.myStorage.HelpFunction;
-import ru.nsu.fit.modao.myStorage.MyApplication;
+import ru.nsu.fit.modao.repository.HelpFunction;
+import ru.nsu.fit.modao.repository.MyApplication;
 
 public class AuthorizationPage extends AppCompatActivity {
 

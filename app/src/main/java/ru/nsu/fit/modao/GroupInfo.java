@@ -2,13 +2,12 @@ package ru.nsu.fit.modao;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.repository.HelpFunction;
 
 public class GroupInfo extends AppCompatActivity {
     ImageButton account;

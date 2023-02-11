@@ -10,16 +10,18 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ru.nsu.fit.modao.databinding.ActivityMasterBinding;
+
 public class MasterActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
+    ActivityMasterBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master);
+        binding = ActivityMasterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        bottomNavigationView = findViewById(R.id.bottomMenu);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(binding.bottomMenu, navController);
     }
 }

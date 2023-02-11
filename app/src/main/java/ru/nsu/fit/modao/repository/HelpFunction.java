@@ -1,4 +1,4 @@
-package ru.nsu.fit.modao.myStorage;
+package ru.nsu.fit.modao.repository;
 
 import android.content.Context;
 import android.content.Intent;

@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.nsu.fit.modao.ExpensesActivity;
 import ru.nsu.fit.modao.GroupInfo;
 import ru.nsu.fit.modao.R;
-import ru.nsu.fit.modao.model.Groups;
+import ru.nsu.fit.modao.model.Group;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
     Context context;
-    List<Groups> groups;
+    List<Group> groups;
 
-    public GroupAdapter(Context context, List<Groups> groups) {
+    public GroupAdapter(Context context, List<Group> groups) {
         this.context = context;
         this.groups = groups;
     }

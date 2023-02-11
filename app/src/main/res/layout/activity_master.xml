@@ -18,6 +18,7 @@
         app:itemTextColor="@color/white"
         android:background="@color/bottom_menu"
         app:labelVisibilityMode="labeled"
+        android:visibility="gone"
         app:itemIconTint="@color/white"/>
 
     <androidx.fragment.app.FragmentContainerView

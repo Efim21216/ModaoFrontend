@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter;
-import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.repository.HelpFunction;
 
 public class SelectParticipants extends AppCompatActivity {
     ImageButton account;

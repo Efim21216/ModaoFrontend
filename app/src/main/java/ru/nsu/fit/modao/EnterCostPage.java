@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.repository.HelpFunction;
 
 public class EnterCostPage extends AppCompatActivity {
 

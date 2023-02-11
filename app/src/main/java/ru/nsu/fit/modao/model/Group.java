@@ -1,10 +1,10 @@
 package ru.nsu.fit.modao.model;
 
-public class Groups {
-    String name;
+public class Group {
     Long id;
+    String name;
 
-    public Groups(String name, Long id) {
+    public Group(String name, Long id) {
         this.name = name;
         this.id = id;
     }

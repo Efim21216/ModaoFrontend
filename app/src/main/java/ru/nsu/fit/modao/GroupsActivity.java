@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,9 +23,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import ru.nsu.fit.modao.adapter.GroupAdapter;
-import ru.nsu.fit.modao.model.Groups;
-import ru.nsu.fit.modao.myStorage.HelpFunction;
-import ru.nsu.fit.modao.myStorage.MyApplication;
+import ru.nsu.fit.modao.model.Group;
+import ru.nsu.fit.modao.repository.HelpFunction;
+import ru.nsu.fit.modao.repository.MyApplication;
 
 public class GroupsActivity extends AppCompatActivity {
     RecyclerView groupsRecycler;
@@ -34,7 +33,7 @@ public class GroupsActivity extends AppCompatActivity {
     ImageButton account;
     ImageButton expenses;
     ImageButton addGroup;
-    List<Groups> groups;
+    List<Group> groups;
     OkHttpClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +71,11 @@ public class GroupsActivity extends AppCompatActivity {
         });
     }
 
-    private void setGroupsRecycler(List<Groups> groupsList) {
+    private void setGroupsRecycler(List<Group> groupList) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         groupsRecycler = findViewById(R.id.groupsRecycler);
         groupsRecycler.setLayoutManager(layoutManager);
-        groupAdapter = new GroupAdapter(this, groupsList);
+        groupAdapter = new GroupAdapter(this, groupList);
         groupsRecycler.setAdapter(groupAdapter);
     }
 
@@ -105,7 +104,7 @@ public class GroupsActivity extends AppCompatActivity {
                         groups.clear();
                         for (int i = 0; i < arr.length(); i++){
                             JSONObject ob = (JSONObject) arr.get(i);
-                            groups.add(new Groups(ob.getString("name"), ob.getLong("id")));
+                            groups.add(new Group(ob.getString("name"), ob.getLong("id")));
                         }
                         GroupsActivity.this.runOnUiThread(new Runnable() {
                             @Override

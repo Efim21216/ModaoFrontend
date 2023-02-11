@@ -1,4 +1,4 @@
-package ru.nsu.fit.modao.myStorage;
+package ru.nsu.fit.modao;
 
 import androidx.appcompat.app.AppCompatActivity;
 

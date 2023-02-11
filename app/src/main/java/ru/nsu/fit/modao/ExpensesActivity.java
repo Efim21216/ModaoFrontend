@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,7 +14,7 @@ import java.util.List;
 import ru.nsu.fit.modao.adapter.ExpensesAdapter;
 import ru.nsu.fit.modao.model.Currency;
 import ru.nsu.fit.modao.model.Expenses;
-import ru.nsu.fit.modao.myStorage.HelpFunction;
+import ru.nsu.fit.modao.repository.HelpFunction;
 
 public class ExpensesActivity extends AppCompatActivity {
     ImageButton account;
