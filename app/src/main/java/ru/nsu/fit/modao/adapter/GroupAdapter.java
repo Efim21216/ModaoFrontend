@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import ru.nsu.fit.modao.GroupInfo;
+import ru.nsu.fit.modao.GroupsFragmentDirections;
 import ru.nsu.fit.modao.R;
 import ru.nsu.fit.modao.model.Group;
 
@@ -39,12 +42,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, GroupInfo.class);
-
-                intent.putExtra("nameGroup", groups.get(position).getName());
-                intent.putExtra("groupID", groups.get(position).getId());
-                context.startActivity(intent);
+            public void onClick(View view) {
+                NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToGroupInfoFragment(groups.get(position));
+                Navigation.findNavController(view).navigate(action);
             }
         });
     }

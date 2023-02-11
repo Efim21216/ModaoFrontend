@@ -28,7 +28,11 @@
         android:id="@+id/groups_fragment"
         android:name="ru.nsu.fit.modao.GroupsFragment"
         android:label="fragment_groups"
-        tools:layout="@layout/fragment_groups" />
+        tools:layout="@layout/fragment_groups" >
+        <action
+            android:id="@+id/action_groups_fragment_to_groupInfoFragment"
+            app:destination="@id/groupInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
         android:name="ru.nsu.fit.modao.AuthorizationFragment"
@@ -50,5 +54,14 @@
         <action
             android:id="@+id/action_registrationFragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupInfoFragment"
+        android:name="ru.nsu.fit.modao.GroupInfoFragment"
+        android:label="fragment_group_info"
+        tools:layout="@layout/fragment_group_info" >
+        <argument
+            android:name="group"
+            app:argType="ru.nsu.fit.modao.model.Group" />
     </fragment>
 </navigation>

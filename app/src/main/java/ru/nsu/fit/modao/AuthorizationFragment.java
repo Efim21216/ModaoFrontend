@@ -53,7 +53,7 @@ public class AuthorizationFragment extends Fragment {
         bottomMenu = getActivity().findViewById(R.id.bottomMenu);
         navController = Navigation.findNavController(view);
         app = (MyApplication) getActivity().getApplication();
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
         loginViewModel.getUserIn().observe(getViewLifecycleOwner(), new Observer<Long>() {
             @Override
             public void onChanged(Long id) {
