@@ -161,6 +161,7 @@
 
     </LinearLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/descriptionLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

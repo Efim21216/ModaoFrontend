@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding;
-import ru.nsu.fit.modao.databinding.FragmentGroupsBinding;
 
 
 public class GroupInfoFragment extends Fragment {
@@ -34,6 +33,6 @@ public class GroupInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.nameGroup.setText(GroupInfoFragmentArgs.fromBundle(getArguments()).getGroup().getName());
+        binding.nameGroup.setText(GroupInfoFragmentArgs.fromBundle(getArguments()).getGroup().getGroupName());
     }
 }

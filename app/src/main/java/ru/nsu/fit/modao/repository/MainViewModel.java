@@ -10,10 +10,12 @@ import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import ru.nsu.fit.modao.model.Group;
 import ru.nsu.fit.modao.model.User;
 
 public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<User> user = new MutableLiveData<>();
+    private MutableLiveData<Group> newGroup = new MutableLiveData<>();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public MainViewModel(@NonNull Application application) {
@@ -35,6 +37,30 @@ public class MainViewModel extends AndroidViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((responseUser) -> user.setValue(responseUser),
                         Throwable::printStackTrace)
+        );
+    }
+
+    public MutableLiveData<Group> getNewGroup() {
+        return newGroup;
+    }
+
+    public void createGroup(ApiService questApi, Group group, Long id){
+        compositeDisposable.add(questApi.createGroup(group, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((idGroup) -> {
+                    group.setId(idGroup);
+                    newGroup.setValue(group);
+                }, (e) -> {
+                    if (e.getMessage().equals("HTTP 404 ")) {
+                        group.setId(-1L);
+                        newGroup.setValue(group);
+                    } else {
+                        group.setId(-2L);
+                        newGroup.setValue(group);
+                        e.printStackTrace();
+                    }
+                })
         );
     }
 }

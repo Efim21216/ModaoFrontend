@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_groups_fragment_to_groupInfoFragment"
             app:destination="@id/groupInfoFragment" />
+        <action
+            android:id="@+id/action_groups_fragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
@@ -63,5 +66,19 @@
         <argument
             android:name="group"
             app:argType="ru.nsu.fit.modao.model.Group" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupExpensesFragment"
+        android:name="ru.nsu.fit.modao.GroupExpensesFragment"
+        android:label="fragment_create_group"
+        tools:layout="@layout/fragment_group_expenses" />
+    <fragment
+        android:id="@+id/createGroupFragment"
+        android:name="ru.nsu.fit.modao.CreateGroupFragment"
+        android:label="fragment_create_group"
+        tools:layout="@layout/fragment_create_group" >
+        <action
+            android:id="@+id/action_createGroupFragment_to_groupInfoFragment"
+            app:destination="@id/groupInfoFragment" />
     </fragment>
 </navigation>

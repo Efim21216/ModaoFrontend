@@ -10,7 +10,7 @@ public class User {
     private String phone_number;
     private String bank;
     private Integer idPicture;
-    private List<Group> groups;
+    private List<Group> groupCustomPairIdNameList;
 
     public Integer getId() {
         return id;
@@ -69,10 +69,10 @@ public class User {
     }
 
     public List<Group> getGroups() {
-        return groups;
+        return groupCustomPairIdNameList;
     }
 
     public void setGroups(List<Group> groups) {
-        this.groups = groups;
+        this.groupCustomPairIdNameList = groups;
     }
 }

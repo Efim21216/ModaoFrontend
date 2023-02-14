@@ -33,27 +33,37 @@ import androidx.annotation.NonNull;
  }
 * */
 public class Group implements Parcelable {
-    String name;
+    String groupName;
     Long id;
+    String description;
+    Integer typeGroup;
 
-    public Group(String name, Long id) {
-        this.name = name;
+    public void setId(Long id) {
         this.id = id;
     }
+
+    public Group(String groupName, Long id, String description, Integer typeGroup) {
+        this.groupName = groupName;
+        this.id = id;
+        this.description = description;
+        this.typeGroup = typeGroup;
+    }
     public Group(Parcel in){
-        name = in.readString();
+        groupName = in.readString();
         id = in.readLong();
+        description = in.readString();
+        typeGroup = in.readInt();
     }
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
@@ -63,8 +73,10 @@ public class Group implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(groupName);
         dest.writeLong(id);
+        dest.writeString(description);
+        dest.writeInt(typeGroup);
     }
     public static final Parcelable.Creator<Group> CREATOR =
             new Creator<Group>() {

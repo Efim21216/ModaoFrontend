@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.nsu.fit.modao.GroupInfo;
 import ru.nsu.fit.modao.GroupsFragmentDirections;
 import ru.nsu.fit.modao.R;
 import ru.nsu.fit.modao.model.Group;
@@ -38,7 +36,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GroupViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.name.setText(groups.get(position).getName());
+        holder.name.setText(groups.get(position).getGroupName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -104,7 +104,7 @@ public class GroupsActivity extends AppCompatActivity {
                         groups.clear();
                         for (int i = 0; i < arr.length(); i++){
                             JSONObject ob = (JSONObject) arr.get(i);
-                            groups.add(new Group(ob.getString("name"), ob.getLong("id")));
+                            //groups.add(new Group(ob.getString("name"), ob.getLong("id")));
                         }
                         GroupsActivity.this.runOnUiThread(new Runnable() {
                             @Override

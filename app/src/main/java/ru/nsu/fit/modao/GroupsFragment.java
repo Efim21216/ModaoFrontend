@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +55,7 @@ public class GroupsFragment extends Fragment {
         mainViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         binding.groupsRecycler.setLayoutManager(layoutManager);
-        groups = mainViewModel.getUserLive().getValue().getGroups();;
+        groups = mainViewModel.getUserLive().getValue().getGroups();
         groupAdapter = new GroupAdapter(getContext(), groups);
         binding.groupsRecycler.setAdapter(groupAdapter);
         app = (MyApplication) getActivity().getApplication();
@@ -61,6 +64,13 @@ public class GroupsFragment extends Fragment {
             public void onChanged(User user) {
                 groups = user.getGroups();
                 groupAdapter.notifyDataSetChanged();
+            }
+        });
+        binding.buttonAddGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToCreateGroupFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
     }
