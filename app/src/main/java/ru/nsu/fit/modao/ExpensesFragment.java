@@ -1,12 +1,21 @@
 package ru.nsu.fit.modao;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ru.nsu.fit.modao.adapter.ExpensesAdapter;
+import ru.nsu.fit.modao.databinding.FragmentExpensesBinding;
+import ru.nsu.fit.modao.model.Currency;
+import ru.nsu.fit.modao.model.Expenses;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,9 @@ public class ExpensesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    FragmentExpensesBinding binding;
+    ExpensesAdapter expensesAdapter;
+    List<Expenses> expensesList = new ArrayList<>();
 
     public ExpensesFragment() {
         // Required empty public constructor
@@ -53,12 +65,30 @@ public class ExpensesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        expensesList.add(new Expenses(-100, "Nikita paid", "Nikita Paid", Currency.RUB));
+        expensesList.add(new Expenses(-900, "Nikita paid", "Nikita Paid", Currency.RUB));
+        expensesList.add(new Expenses(1200, "You paid", "You paid", Currency.RUB));
+        expensesList.add(new Expenses(100, "Olga paid", "Olga Paid", Currency.RUB));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentExpensesBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expenses, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        expensesAdapter = new ExpensesAdapter(getContext(), expensesList);
+        binding.expensesRecycler.setAdapter(expensesAdapter);
     }
 }
