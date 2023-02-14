@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MasterActivity">
+    android:visibility="visible"
+    tools:context=".MasterActivity"
+    tools:visibility="visible">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:background="@color/bottom_menu"
+        android:visibility="visible"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"
-        app:itemIconSize="30dp"
-        app:itemTextColor="@color/white"
-        android:background="@color/bottom_menu"
-        app:labelVisibilityMode="labeled"
-        android:visibility="gone"
-        app:itemIconTint="@color/white"/>
+        app:menu="@menu/bottom_menu" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
