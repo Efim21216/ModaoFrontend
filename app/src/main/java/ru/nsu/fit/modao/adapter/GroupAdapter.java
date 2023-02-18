@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.nsu.fit.modao.GroupsFragmentDirections;
 import ru.nsu.fit.modao.R;
-import ru.nsu.fit.modao.model.Group;
+import ru.nsu.fit.modao.fragments.GroupsFragmentDirections;
+import ru.nsu.fit.modao.model.ShortInfoGroup;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
     Context context;
-    List<Group> groups;
+    List<ShortInfoGroup> groups;
 
-    public GroupAdapter(Context context, List<Group> groups) {
+    public GroupAdapter(Context context, List<ShortInfoGroup> groups) {
         this.context = context;
         this.groups = groups;
     }
@@ -38,12 +38,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     public void onBindViewHolder(@NonNull GroupViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(groups.get(position).getGroupName());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToGroupInfoFragment(groups.get(position));
-                Navigation.findNavController(view).navigate(action);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            ShortInfoGroup shortGroup = new ShortInfoGroup(groups.get(position).getGroupName(), groups.get(position).getId());
+            NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToGroupInfoFragment(shortGroup);
+            Navigation.findNavController(view).navigate(action);
         });
     }
 

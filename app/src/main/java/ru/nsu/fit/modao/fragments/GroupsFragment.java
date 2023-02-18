@@ -1,13 +1,11 @@
-package ru.nsu.fit.modao;
+package ru.nsu.fit.modao.fragments;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +20,7 @@ import java.util.List;
 
 import ru.nsu.fit.modao.adapter.GroupAdapter;
 import ru.nsu.fit.modao.databinding.FragmentGroupsBinding;
-import ru.nsu.fit.modao.model.Group;
-import ru.nsu.fit.modao.model.User;
+import ru.nsu.fit.modao.model.ShortInfoGroup;
 import ru.nsu.fit.modao.repository.MainViewModel;
 import ru.nsu.fit.modao.repository.MyApplication;
 
@@ -34,7 +31,7 @@ public class GroupsFragment extends Fragment {
     GroupAdapter groupAdapter;
     MyApplication app;
     MainViewModel mainViewModel;
-    List<Group> groups = new LinkedList<>();
+    List<ShortInfoGroup> groups = new LinkedList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,19 +56,13 @@ public class GroupsFragment extends Fragment {
         groupAdapter = new GroupAdapter(getContext(), groups);
         binding.groupsRecycler.setAdapter(groupAdapter);
         app = (MyApplication) getActivity().getApplication();
-        mainViewModel.getUserLive().observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                groups = user.getGroups();
-                groupAdapter.notifyDataSetChanged();
-            }
+        mainViewModel.getUserLive().observe(getViewLifecycleOwner(), user -> {
+            groups = user.getGroups();
+            groupAdapter.notifyDataSetChanged();
         });
-        binding.buttonAddGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToCreateGroupFragment();
-                Navigation.findNavController(view).navigate(action);
-            }
+        binding.buttonAddGroup.setOnClickListener(v -> {
+            NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToCreateGroupFragment();
+            Navigation.findNavController(view).navigate(action);
         });
     }
 }

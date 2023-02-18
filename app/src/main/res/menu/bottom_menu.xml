@@ -16,5 +16,5 @@
     <item
         android:title="@string/groups"
         android:icon="@drawable/ic_groups"
-        android:id="@+id/groups_fragment"/>
+        android:id="@+id/nested_groups"/>
 </menu>

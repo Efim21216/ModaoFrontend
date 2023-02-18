@@ -10,7 +10,7 @@ public class User {
     private String phone_number;
     private String bank;
     private Integer idPicture;
-    private List<Group> groupCustomPairIdNameList;
+    private List<ShortInfoGroup> groupCustomPairIdNameList;
 
     public Integer getId() {
         return id;
@@ -68,11 +68,11 @@ public class User {
         this.idPicture = idPicture;
     }
 
-    public List<Group> getGroups() {
+    public List<ShortInfoGroup> getGroups() {
         return groupCustomPairIdNameList;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(List<ShortInfoGroup> groups) {
         this.groupCustomPairIdNameList = groups;
     }
 }

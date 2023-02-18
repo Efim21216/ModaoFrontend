@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import ru.nsu.fit.modao.model.Group;
+import ru.nsu.fit.modao.model.ShortInfoGroup;
 import ru.nsu.fit.modao.model.User;
 
 public class MainViewModel extends AndroidViewModel {
@@ -50,6 +51,7 @@ public class MainViewModel extends AndroidViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((idGroup) -> {
                     group.setId(idGroup);
+                    user.getValue().getGroups().add(new ShortInfoGroup(group.getGroupName(), id));
                     newGroup.setValue(group);
                 }, (e) -> {
                     if (e.getMessage().equals("HTTP 404 ")) {

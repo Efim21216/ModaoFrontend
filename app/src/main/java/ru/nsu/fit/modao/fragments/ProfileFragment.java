@@ -1,11 +1,10 @@
-package ru.nsu.fit.modao;
+package ru.nsu.fit.modao.fragments;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -15,8 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ru.nsu.fit.modao.R;
 import ru.nsu.fit.modao.databinding.FragmentProfileBinding;
-import ru.nsu.fit.modao.model.User;
 import ru.nsu.fit.modao.repository.MainViewModel;
 import ru.nsu.fit.modao.repository.MyApplication;
 
@@ -43,23 +42,18 @@ public class ProfileFragment extends Fragment {
 
         app = (MyApplication) getActivity().getApplication();
         mainViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-        mainViewModel.getUserLive().observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                binding.personName.setText(user.getUsername());
-                binding.personBank.setText(user.getBank());
-                binding.personPhone.setText(user.getPhone_number());
-            }
+        mainViewModel.getUserLive().observe(getViewLifecycleOwner(), user -> {
+            binding.personName.setText(user.getUsername());
+            binding.personBank.setText(user.getBank());
+            binding.personPhone.setText(user.getPhone_number());
         });
         mainViewModel.getUser(app.getQuestApi(), app.getUserID());
         navController = Navigation.findNavController(view);
-        binding.logOutLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                app.setUserID(-1L);
-                NavDirections action = ProfileFragmentDirections.actionProfileFragmentToAuthorizationFragment();
-                navController.navigate(action);
-            }
+        binding.logOutLayout.setOnClickListener(v -> {
+            app.setUserID(-1L);
+            NavDirections action = ProfileFragmentDirections.actionProfileFragmentToAuthorizationFragment();
+            getActivity().findViewById(R.id.bottomMenu).setVisibility(View.GONE);
+            navController.navigate(action);
         });
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".GroupInfoFragment">
+    tools:context=".fragments.GroupInfoFragment">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 
     <ImageButton
-        android:id="@+id/imageButtonExpenses"
+        android:id="@+id/buttonGroupExpenses"
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:src="@drawable/button_data_conf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonExpenses" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGroupExpenses" />
     <ImageButton
         android:id="@+id/imageButton10"
         android:layout_width="wrap_content"
@@ -128,9 +128,9 @@
         android:text="@string/expenses"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButtonExpenses"
-        app:layout_constraintStart_toStartOf="@+id/imageButtonExpenses"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonExpenses" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGroupExpenses"
+        app:layout_constraintStart_toStartOf="@+id/buttonGroupExpenses"
+        app:layout_constraintTop_toTopOf="@+id/buttonGroupExpenses" />
 
     <TextView
         android:id="@+id/textView7"

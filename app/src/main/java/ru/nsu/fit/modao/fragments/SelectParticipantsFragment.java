@@ -1,4 +1,4 @@
-package ru.nsu.fit.modao;
+package ru.nsu.fit.modao.fragments;
 
 import android.os.Bundle;
 
@@ -10,16 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding;
+import ru.nsu.fit.modao.R;
+import ru.nsu.fit.modao.databinding.FragmentSelectParticipantsBinding;
 
 
-public class GroupInfoFragment extends Fragment {
-    FragmentGroupInfoBinding binding;
+public class SelectParticipantsFragment extends Fragment {
+
+    FragmentSelectParticipantsBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentGroupInfoBinding.inflate(inflater, container, false);
+        binding = FragmentSelectParticipantsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -33,6 +35,6 @@ public class GroupInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.nameGroup.setText(GroupInfoFragmentArgs.fromBundle(getArguments()).getGroup().getGroupName());
+
     }
 }
