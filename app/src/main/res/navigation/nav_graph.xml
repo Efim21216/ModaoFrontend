@@ -101,6 +101,12 @@
             <argument
                 android:name="cost"
                 app:argType="float" />
+            <action
+                android:id="@+id/action_selectParticipantsFragment_to_enterCoefficientsFragment"
+                app:destination="@id/enterCoefficientsFragment" />
+            <argument
+                android:name="sponsor"
+                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant" />
         </fragment>
         <fragment
             android:id="@+id/enterCostFragment"
@@ -110,6 +116,24 @@
             <action
                 android:id="@+id/action_enterCostFragment_to_selectParticipantsFragment"
                 app:destination="@id/selectParticipantsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/enterCoefficientsFragment"
+            android:name="ru.nsu.fit.modao.fragments.EnterCoefficientsFragment"
+            android:label="fragment_enter_coefficients"
+            tools:layout="@layout/fragment_enter_coefficients" >
+            <argument
+                android:name="participants"
+                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant[]" />
+            <argument
+                android:name="cost"
+                app:argType="float" />
+            <action
+                android:id="@+id/action_enterCoefficientsFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment" />
+            <argument
+                android:name="sponsor"
+                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant" />
         </fragment>
     </navigation>
 </navigation>

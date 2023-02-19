@@ -6,22 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.EnterCostFragment">
 
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cost_new_expense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/field_for_entering_cost" />
-
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="228dp"
-        android:layout_height="78dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/inter"
         android:text="@string/cost_new_expense"
@@ -32,33 +34,62 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/inter"
+        android:text="@string/tip_who_spend"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editCost" />
 
 
     <EditText
         android:id="@+id/editCost"
-        android:layout_width="314dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="62dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="20dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/hint_cost"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@id/imageView2"
         app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <ImageButton
         android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="50dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/participantRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:listitem="@layout/participant_spent_item"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
