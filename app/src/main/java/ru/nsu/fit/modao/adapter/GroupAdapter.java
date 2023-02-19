@@ -2,27 +2,27 @@ package ru.nsu.fit.modao.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.nsu.fit.modao.ExpensesActivity;
-import ru.nsu.fit.modao.GroupInfo;
 import ru.nsu.fit.modao.R;
-import ru.nsu.fit.modao.model.Groups;
+import ru.nsu.fit.modao.fragments.GroupsFragmentDirections;
+import ru.nsu.fit.modao.model.ShortInfoGroup;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
     Context context;
-    List<Groups> groups;
+    List<ShortInfoGroup> groups;
 
-    public GroupAdapter(Context context, List<Groups> groups) {
+    public GroupAdapter(Context context, List<ShortInfoGroup> groups) {
         this.context = context;
         this.groups = groups;
     }
@@ -36,17 +36,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GroupViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.name.setText(groups.get(position).getName());
+        holder.name.setText(groups.get(position).getGroupName());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, GroupInfo.class);
-
-                intent.putExtra("nameGroup", groups.get(position).getName());
-                intent.putExtra("groupID", groups.get(position).getId());
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            ShortInfoGroup shortGroup = new ShortInfoGroup(groups.get(position).getGroupName(), groups.get(position).getId());
+            NavDirections action = GroupsFragmentDirections.actionGroupsFragmentToGroupInfoFragment(shortGroup);
+            Navigation.findNavController(view).navigate(action);
         });
     }
 

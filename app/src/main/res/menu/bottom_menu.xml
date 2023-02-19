@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/account"
+        android:icon="@drawable/ic_account"
+        android:id="@+id/profile_fragment"/>
+    <item
+        android:title="@string/expenses"
+        android:icon="@drawable/ic_wallet"
+        android:id="@+id/expenses_fragment"/>
+    <item
+        android:title="@string/friends"
+        android:icon="@drawable/ic_friends"
+        android:id="@+id/friends_fragment"/>
+    <item
+        android:title="@string/groups"
+        android:icon="@drawable/ic_groups"
+        android:id="@+id/nested_groups"/>
+</menu>
