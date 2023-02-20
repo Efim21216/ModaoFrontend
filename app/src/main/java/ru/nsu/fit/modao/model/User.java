@@ -3,20 +3,39 @@ package ru.nsu.fit.modao.model;
 import java.util.List;
 
 public class User {
-    private Integer id;
+    private Long id;
     private String username;
     private String login;
     private String password;
     private String phone_number;
     private String bank;
     private Integer idPicture;
+    private Float coefficient;
     private List<ShortInfoGroup> groupCustomPairIdNameList;
 
-    public Integer getId() {
+    public User(String username, long id){
+        this.username = username;
+        this.id = id;
+    }
+    public User(String username, long id, float coefficient){
+        this.username = username;
+        this.id = id;
+        this.coefficient = coefficient;
+    }
+
+    public Float getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(Float coefficient) {
+        this.coefficient = coefficient;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -16,13 +16,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.nsu.fit.modao.R;
+import ru.nsu.fit.modao.fragments.EnterCoefficientsFragment;
+import ru.nsu.fit.modao.model.CreateExpenseParticipant;
+import ru.nsu.fit.modao.model.User;
 
 public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapter.ParticipantsViewHolder> {
     Context context;
-    List<String> participants;
-    List<String> selected;
+    List<CreateExpenseParticipant> participants;
+    List<CreateExpenseParticipant> selected;
 
-    public ParticipantsAdapter(Context context, List<String> participants) {
+    public ParticipantsAdapter(Context context, List<CreateExpenseParticipant> participants) {
         this.context = context;
         this.participants = participants;
         selected = new LinkedList<>();
@@ -37,7 +40,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ParticipantsViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.nameParticipant.setText(participants.get(position));
+        holder.nameParticipant.setText(participants.get(position).getUsername());
         holder.checkName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,5 +70,8 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
             nameParticipant = itemView.findViewById(R.id.nameParticipant);
             checkName = itemView.findViewById(R.id.checkParticipant);
         }
+    }
+    public List<CreateExpenseParticipant> getSelected(){
+        return selected;
     }
 }

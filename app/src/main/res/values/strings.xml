@@ -29,6 +29,9 @@
     <string name="add_group">Add group</string>
     <string name="info_group">Group info</string>
     <string name="tip_who_prt">Who participated in the event</string>
+    <string name="tip_who_spend">Who spent</string>
+    <string name="enterCoefficientP">Enter the coefficients of the participants</string>
+    <string name="enterCoefficient">Enter coefficient</string>
     <string name="cost_new_expense">Cost of new expense</string>
     <string name="hint_cost">Enter the cost</string>
     <string name="greeting">Hello!👋</string>
