@@ -29,22 +29,21 @@ public class CoefficientAdapter extends RecyclerView.Adapter<CoefficientAdapter.
         this.listener = listener;
     }
 
-    @NonNull
-    @Override
-    public CoefficientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View coefficientItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.coefficient_item, parent, false);
-        return new CoefficientViewHolder(coefficientItem);
-    }
-
     public void setParticipants(List<CreateExpenseParticipant> participants) {
         this.participants = participants;
         notifyDataSetChanged();
     }
 
+    @NonNull
+    @Override
+    public CoefficientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View coefficientItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.coefficient_item, parent, false);
+        return new CoefficientViewHolder(coefficientItem, listener);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull CoefficientViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.bind(participants.get(position), listener);
+        holder.bind(participants.get(position));
     }
 
     @Override
@@ -55,14 +54,16 @@ public class CoefficientAdapter extends RecyclerView.Adapter<CoefficientAdapter.
     public static final class CoefficientViewHolder extends RecyclerView.ViewHolder {
         TextView username;
         EditText editCoefficient;
+        Listener listener;
 
-        public CoefficientViewHolder(@NonNull View itemView) {
+        public CoefficientViewHolder(@NonNull View itemView, Listener listener) {
             super(itemView);
             username = itemView.findViewById(R.id.nameParticipant);
             editCoefficient = itemView.findViewById(R.id.editCoefficient);
+            this.listener = listener;
         }
 
-        public void bind(CreateExpenseParticipant participant, Listener listener) {
+        public void bind(CreateExpenseParticipant participant) {
             username.setText(participant.getUsername());
             editCoefficient.setText(participant.getCoefficient().toString());
             editCoefficient.addTextChangedListener(new TextWatcher() {

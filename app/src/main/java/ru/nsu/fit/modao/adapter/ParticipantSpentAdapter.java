@@ -30,13 +30,14 @@ public class ParticipantSpentAdapter extends RecyclerView.Adapter<ParticipantSpe
     @NonNull
     @Override
     public ParticipantSpentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View participantItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.participant_spent_item, parent, false);
-        return new ParticipantSpentViewHolder(participantItem);
+        View participantItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.participant_spent_item,
+                parent, false);
+        return new ParticipantSpentViewHolder(participantItem, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ParticipantSpentViewHolder holder, int position) {
-        holder.bind(participants.get(position), listener);
+        holder.bind(participants.get(position));
     }
 
 
@@ -48,13 +49,14 @@ public class ParticipantSpentAdapter extends RecyclerView.Adapter<ParticipantSpe
     public static final class ParticipantSpentViewHolder extends RecyclerView.ViewHolder{
         TextView userName;
         RadioButton button;
-        public ParticipantSpentViewHolder(@NonNull View itemView) {
+        Listener listener;
+        public ParticipantSpentViewHolder(@NonNull View itemView, Listener listener) {
             super(itemView);
-
+            this.listener = listener;
             userName = itemView.findViewById(R.id.nameParticipant);
             button = itemView.findViewById(R.id.selectParticipant);
         }
-        public void bind(CreateExpenseParticipant participant,Listener listener){
+        public void bind(CreateExpenseParticipant participant){
             userName.setText(participant.getUsername());
             button.setOnClickListener((v) -> listener.onClick((RadioButton) v, participant));
         }
