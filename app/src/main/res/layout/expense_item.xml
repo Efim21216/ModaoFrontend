@@ -37,12 +37,12 @@
         android:text="@string/testNum"
         android:textColor="@color/profit"
         android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/currency"
-        app:layout_constraintEnd_toStartOf="@+id/currency"
-        app:layout_constraintTop_toTopOf="@+id/currency" />
+        app:layout_constraintBottom_toBottomOf="@+id/currencyImage"
+        app:layout_constraintEnd_toStartOf="@+id/currencyImage"
+        app:layout_constraintTop_toTopOf="@+id/currencyImage" />
 
     <ImageView
-        android:id="@+id/currency"
+        android:id="@+id/currencyImage"
         android:layout_width="22dp"
         android:layout_height="26dp"
         android:layout_marginEnd="10dp"
