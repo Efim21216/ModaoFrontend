@@ -24,6 +24,7 @@ class SelectAdapter: RecyclerView.Adapter<SelectAdapter.SelectHolder>() {
         val binding = ParticipantItemBinding.bind(item)
         fun bind(elem: ParticipantEvent, listener: CustomListener){
             binding.nameParticipant.text = elem.username
+            binding.checkParticipant.isChecked = elem.selected
             binding.checkParticipant.setOnClickListener(){
                 listener.onClickItem(it as CheckBox, elem)
             }

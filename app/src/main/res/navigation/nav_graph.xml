@@ -128,12 +128,14 @@
             <argument
                 android:name="cost"
                 app:argType="float" />
-            <action
-                android:id="@+id/action_enterCoefficientsFragment_to_groupExpensesFragment"
-                app:destination="@id/groupExpensesFragment" />
             <argument
                 android:name="sponsor"
                 app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
         </fragment>
+        <fragment
+            android:id="@+id/createExpenseFragment"
+            android:name="ru.nsu.fit.modao.CreateExpenseFragment"
+            android:label="fragment_create_expense"
+            tools:layout="@layout/fragment_create_expense" />
     </navigation>
 </navigation>

@@ -19,7 +19,6 @@ class GroupInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("MyTag", "HERE2")
         _binding = FragmentGroupInfoBinding.inflate(inflater, container, false)
         return binding.root
     }

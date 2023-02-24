@@ -21,6 +21,7 @@ class SelectParticipantsFragment: Fragment(), SelectAdapter.CustomListener {
     private val binding get() = _binding!!
     private val participants: ArrayList<ParticipantEvent> = ArrayList()
     private val participantsEvent: ArrayList<ParticipantEvent> = ArrayList()
+    private var isInit = false
 
     private val adapter = SelectAdapter()
     private val args by navArgs<SelectParticipantsFragmentArgs>()
@@ -35,13 +36,9 @@ class SelectParticipantsFragment: Fragment(), SelectAdapter.CustomListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        participants.add(ParticipantEvent(username = "Efim", id = 1, coefficient = 1f))
-        participants.add(ParticipantEvent(username = "Nikita", id = 2, coefficient = 1f))
-        participants.add(ParticipantEvent(username = "Peter", id = 3, coefficient = 1f))
-        participants.add(ParticipantEvent(username = "Olga", id = 4, coefficient = 1f))
-
-        adapter.attachListener(this)
-        adapter.setList(participants)
+        if (!isInit){
+            initRecycler()
+        }
         binding.participantRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.participantRecycler.adapter = adapter
 
@@ -52,12 +49,23 @@ class SelectParticipantsFragment: Fragment(), SelectAdapter.CustomListener {
         }
     }
 
-    override fun onClickItem(button: CheckBox, participantEvent: ParticipantEvent) {
+    override fun onClickItem(button: CheckBox, user: ParticipantEvent) {
         if (button.isChecked){
-            participantsEvent.add(participantEvent)
+            participantsEvent.add(user)
+            user.selected = true
         } else {
-            participantsEvent.remove(participantEvent)
+            participantsEvent.remove(user)
+            user.selected = false
         }
+    }
+    private fun initRecycler(){
+        isInit = true
+        participants.add(ParticipantEvent(username = "Efim", id = 1, coefficient = 1f))
+        participants.add(ParticipantEvent(username = "Nikita", id = 2, coefficient = 1f))
+        participants.add(ParticipantEvent(username = "Peter", id = 3, coefficient = 1f))
+        participants.add(ParticipantEvent(username = "Olga", id = 4, coefficient = 1f))
+        adapter.attachListener(this)
+        adapter.setList(participants)
     }
 
 }

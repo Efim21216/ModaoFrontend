@@ -26,6 +26,7 @@ class ParticipantsAdapter: RecyclerView.Adapter<ParticipantsAdapter.Participants
         val binding = ParticipantSpentItemBinding.bind(item)
         fun bind(user: ParticipantEvent, listener: CustomListener){
             binding.nameParticipant.text = user.username
+            binding.selectParticipant.isChecked = user.selected
             binding.selectParticipant.setOnClickListener(){
                 listener.onClickItem(it as RadioButton, user)
             }
