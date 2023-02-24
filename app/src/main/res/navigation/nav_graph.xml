@@ -79,7 +79,7 @@
             tools:layout="@layout/fragment_group_info">
             <argument
                 android:name="group"
-                app:argType="ru.nsu.fit.modao.model.ShortInfoGroup" />
+                app:argType="ru.nsu.fit.modao.models.Group" />
             <action
                 android:id="@+id/action_groupInfoFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
@@ -106,7 +106,7 @@
                 app:destination="@id/enterCoefficientsFragment" />
             <argument
                 android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant" />
+                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
         </fragment>
         <fragment
             android:id="@+id/enterCostFragment"
@@ -124,16 +124,18 @@
             tools:layout="@layout/fragment_enter_coefficients" >
             <argument
                 android:name="participants"
-                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant[]" />
+                app:argType="ru.nsu.fit.modao.models.ParticipantEvent[]" />
             <argument
                 android:name="cost"
                 app:argType="float" />
-            <action
-                android:id="@+id/action_enterCoefficientsFragment_to_groupExpensesFragment"
-                app:destination="@id/groupExpensesFragment" />
             <argument
                 android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.model.CreateExpenseParticipant" />
+                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
         </fragment>
+        <fragment
+            android:id="@+id/createExpenseFragment"
+            android:name="ru.nsu.fit.modao.CreateExpenseFragment"
+            android:label="fragment_create_expense"
+            tools:layout="@layout/fragment_create_expense" />
     </navigation>
 </navigation>
