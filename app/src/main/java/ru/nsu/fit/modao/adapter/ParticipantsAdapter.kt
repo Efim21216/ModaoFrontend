@@ -13,22 +13,29 @@ import ru.nsu.fit.modao.models.ParticipantEvent
 
 class ParticipantsAdapter: RecyclerView.Adapter<ParticipantsAdapter.ParticipantsHolder>() {
     private var listener: CustomListener? = null
-    private var list = ArrayList<ParticipantEvent>()
+    private lateinit var list: Array<ParticipantEvent>
+    private var initListener: InitListener? = null
 
     fun attachListener(listener: CustomListener){
         this.listener = listener
     }
-    fun setList(list: ArrayList<ParticipantEvent>){
+    fun attachInitListener(initListener: InitListener){
+        this.initListener = initListener
+    }
+    fun setList(list: Array<ParticipantEvent>){
         this.list = list
         notifyDataSetChanged()
     }
     class ParticipantsHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ParticipantSpentItemBinding.bind(item)
-        fun bind(user: ParticipantEvent, listener: CustomListener){
+        fun bind(user: ParticipantEvent, listener: CustomListener, initListener: InitListener){
             binding.nameParticipant.text = user.username
-            binding.selectParticipant.isChecked = user.selected
             binding.selectParticipant.setOnClickListener(){
                 listener.onClickItem(it as RadioButton, user)
+            }
+            binding.selectParticipant.isChecked = user.isSponsor
+            if (user.isSponsor){
+                initListener.initItem(binding.selectParticipant, user)
             }
         }
     }
@@ -39,7 +46,7 @@ class ParticipantsAdapter: RecyclerView.Adapter<ParticipantsAdapter.Participants
     }
 
     override fun onBindViewHolder(holder: ParticipantsHolder, position: Int) {
-        holder.bind(list[position], listener!!)
+        holder.bind(list[position], listener!!, initListener!!)
     }
 
     override fun getItemCount(): Int {
@@ -47,5 +54,8 @@ class ParticipantsAdapter: RecyclerView.Adapter<ParticipantsAdapter.Participants
     }
     interface CustomListener{
         fun onClickItem(button: RadioButton, user: ParticipantEvent)
+    }
+    interface InitListener{
+        fun initItem(button: RadioButton, user: ParticipantEvent)
     }
 }

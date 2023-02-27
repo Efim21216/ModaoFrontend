@@ -11,13 +11,13 @@ import ru.nsu.fit.modao.models.Currency
 import ru.nsu.fit.modao.models.Expense
 
 class ExpensesAdapter: RecyclerView.Adapter<ExpensesAdapter.ExpensesHolder>() {
-    private var expensesList = ArrayList<Expense>()
+    private lateinit var expensesList: Array<Expense>
     class ExpensesHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ExpenseItemBinding.bind(item)
         fun bind(expense: Expense) = with(binding){
-            shortInfo.text = expense.shortInfo
-            amountExpense.text = expense.expense.toString()
-            if (expense.expense > 0){
+            shortInfo.text = expense.name
+            amountExpense.text = expense.price.toString()
+            if (expense.price!! > 0){
                 if (expense.currency == Currency.RUB){
                     currencyImage.setImageResource(R.drawable.ic_profit_rub)
                 }
@@ -42,7 +42,7 @@ class ExpensesAdapter: RecyclerView.Adapter<ExpensesAdapter.ExpensesHolder>() {
     override fun getItemCount(): Int {
         return expensesList.size
     }
-    fun setList(list: ArrayList<Expense>){
+    fun setList(list: Array<Expense>){
         expensesList = list
         notifyDataSetChanged()
     }

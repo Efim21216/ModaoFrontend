@@ -8,6 +8,7 @@ data class ParticipantEvent(
     val username: String? = null,
     val id: Long? = null,
     var selected: Boolean = false,
+    var isSponsor: Boolean = false,
     var coefficient: Float? = null,
     var assumedCoefficient: String? = null
 ) : Parcelable

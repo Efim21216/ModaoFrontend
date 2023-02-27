@@ -12,13 +12,17 @@ import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentAuthorizationBinding
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.utils.Constants.Companion.ACCESS_TOKEN
+import ru.nsu.fit.modao.utils.Constants.Companion.ID_USER
 import ru.nsu.fit.modao.viewmodels.LoginViewModel
-import ru.nsu.fit.modao.viewmodels.LoginViewModelFactory
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
+
+
 
 class AuthorizationFragment : Fragment() {
     private var _binding: FragmentAuthorizationBinding? = null
     private val binding get() = _binding!!
-    private var app: App? = null
+    private lateinit var app: App
     private lateinit var loginViewModel: LoginViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,15 +42,19 @@ class AuthorizationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        app = activity?.application as App
-        val repository = Repository(app!!)
-        val viewModelFactory = LoginViewModelFactory(repository)
+        app = requireActivity().application as App
+        val repository = Repository(app)
+        val viewModelFactory = RepositoryViewModelFactory(repository)
         loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
         loginViewModel.message.observe(viewLifecycleOwner) {
             binding.tipMessage.text = it
         }
-        loginViewModel.userId.observe(viewLifecycleOwner) {
-            app!!.userId = it
+        loginViewModel.token.observe(viewLifecycleOwner) {
+            app.userId = it.id
+            app.accessToken = it.accessToken
+            app.refreshToken = it.refreshToken
+            val edit = app.encryptedSharedPreferences.edit()
+            edit.putString(ACCESS_TOKEN, it.accessToken).putLong(ID_USER, it.id).apply()
             activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.VISIBLE
             findNavController().navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToProfileFragment())
         }

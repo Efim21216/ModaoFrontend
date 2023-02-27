@@ -7,6 +7,7 @@
     <string name="groups">Groups</string>
     <string name="welcome">Welcome!</string>
     <string name="name">Name:</string>
+    <string name="createExpense">Create expense</string>
     <string name="name_no">Name</string>
     <string name="description">Description</string>
     <string name="createGroup">Add new group</string>

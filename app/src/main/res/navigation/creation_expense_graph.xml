@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/creation_expense_graph"
+    app:startDestination="@id/enterCostFragment">
+    <fragment
+        android:id="@+id/enterCoefficientsFragment"
+        android:name="ru.nsu.fit.modao.fragments.EnterCoefficientsFragment"
+        android:label="fragment_enter_coefficients"
+        tools:layout="@layout/fragment_enter_coefficients" >
+    </fragment>
+    <fragment
+        android:id="@+id/selectParticipantsFragment"
+        android:name="ru.nsu.fit.modao.fragments.SelectParticipantsFragment"
+        android:label="fragment_select_participants"
+        tools:layout="@layout/fragment_select_participants" >
+    </fragment>
+    <fragment
+        android:id="@+id/enterCostFragment"
+        android:name="ru.nsu.fit.modao.fragments.EnterCostFragment"
+        android:label="fragment_enter_cost"
+        tools:layout="@layout/fragment_enter_cost" >
+    </fragment>
+
+</navigation>

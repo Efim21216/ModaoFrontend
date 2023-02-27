@@ -38,7 +38,10 @@ class GroupInfoFragment : Fragment() {
         }
 
         binding.buttonGroupExpenses.setOnClickListener() {
-            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment())
+            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(args.group))
+        }
+        binding.buttonDataConfirmation.setOnClickListener(){
+            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToDataConfirmationFragment())
         }
     }
 }

@@ -15,7 +15,7 @@ import ru.nsu.fit.modao.databinding.FragmentGroupsBinding
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
-import ru.nsu.fit.modao.viewmodels.LoginViewModelFactory
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 
 class GroupsFragment : Fragment(), AdapterListener<Group> {
@@ -43,7 +43,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
 
         app = activity?.application as App
         val repository = Repository(app!!)
-        val viewModelFactory = LoginViewModelFactory(repository)
+        val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
         adapter.attachListener(this)
         mainViewModel.user.observe(viewLifecycleOwner){

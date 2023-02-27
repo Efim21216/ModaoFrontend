@@ -7,11 +7,13 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.nsu.fit.modao.models.Authorization
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.repository.Repository
 import java.net.SocketTimeoutException
 
 class LoginViewModel(private val repository: Repository): ViewModel() {
+    val token = MutableLiveData<Authorization>()
     val userId = MutableLiveData<Long>()
     val message = MutableLiveData<String>()
     private val handler = CoroutineExceptionHandler { _, _ ->  message.value = "Server problems"}
@@ -24,7 +26,7 @@ class LoginViewModel(private val repository: Repository): ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.login(user)
             if (response.isSuccessful){
-                userId.value = response.body()
+                token.value = response.body()
                 return@launch
             }
             message.value = "Incorrect login or password"

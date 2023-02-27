@@ -1,6 +1,10 @@
 package ru.nsu.fit.modao.utils
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,5 +29,19 @@ class App: Application() {
     val api: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
-    var userId: Long = -1;
+    val encryptedSharedPreferences by lazy {
+        val masterKey: MasterKey = MasterKey.Builder(applicationContext)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        EncryptedSharedPreferences.create(
+            applicationContext,
+            "secret_shared_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+    var userId: Long = -1
+    var accessToken: String? = null
+    var refreshToken: String? = null
 }

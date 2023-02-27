@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/startFragment">
 
     <fragment
         android:id="@+id/profile_fragment"
@@ -83,6 +83,9 @@
             <action
                 android:id="@+id/action_groupInfoFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
+            <action
+                android:id="@+id/action_groupInfoFragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment" />
         </fragment>
         <fragment
             android:id="@+id/groupExpensesFragment"
@@ -90,52 +93,40 @@
             android:label="fragment_create_group"
             tools:layout="@layout/fragment_group_expenses" >
             <action
-                android:id="@+id/action_groupExpensesFragment_to_enterCostFragment"
-                app:destination="@id/enterCostFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/selectParticipantsFragment"
-            android:name="ru.nsu.fit.modao.fragments.SelectParticipantsFragment"
-            android:label="fragment_select_participants"
-            tools:layout="@layout/fragment_select_participants" >
+                android:id="@+id/action_groupExpensesFragment_to_createExpenseFragment"
+                app:destination="@id/createExpenseFragment" />
             <argument
-                android:name="cost"
-                app:argType="float" />
-            <action
-                android:id="@+id/action_selectParticipantsFragment_to_enterCoefficientsFragment"
-                app:destination="@id/enterCoefficientsFragment" />
-            <argument
-                android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
-        </fragment>
-        <fragment
-            android:id="@+id/enterCostFragment"
-            android:name="ru.nsu.fit.modao.fragments.EnterCostFragment"
-            android:label="fragment_enter_cost"
-            tools:layout="@layout/fragment_enter_cost" >
-            <action
-                android:id="@+id/action_enterCostFragment_to_selectParticipantsFragment"
-                app:destination="@id/selectParticipantsFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/enterCoefficientsFragment"
-            android:name="ru.nsu.fit.modao.fragments.EnterCoefficientsFragment"
-            android:label="fragment_enter_coefficients"
-            tools:layout="@layout/fragment_enter_coefficients" >
-            <argument
-                android:name="participants"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent[]" />
-            <argument
-                android:name="cost"
-                app:argType="float" />
-            <argument
-                android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
         </fragment>
         <fragment
             android:id="@+id/createExpenseFragment"
-            android:name="ru.nsu.fit.modao.CreateExpenseFragment"
+            android:name="ru.nsu.fit.modao.fragments.CreateExpenseFragment"
             android:label="fragment_create_expense"
-            tools:layout="@layout/fragment_create_expense" />
+            tools:layout="@layout/fragment_create_expense" >
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_createExpenseFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/dataConfirmationFragment"
+            android:name="ru.nsu.fit.modao.fragments.DataConfirmationFragment"
+            android:label="fragment_data_confirmation"
+            tools:layout="@layout/fragment_data_confirmation" />
     </navigation>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="ru.nsu.fit.modao.fragments.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+    </fragment>
 </navigation>

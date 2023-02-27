@@ -13,7 +13,7 @@ import ru.nsu.fit.modao.databinding.FragmentCreateGroupBinding
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
-import ru.nsu.fit.modao.viewmodels.LoginViewModelFactory
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 
 class CreateGroupFragment: Fragment() {
@@ -38,11 +38,10 @@ class CreateGroupFragment: Fragment() {
 
         app = activity?.application as App
         val repository = Repository(app!!)
-        val viewModelFactory = LoginViewModelFactory(repository)
+        val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
         mainViewModel.groupId.observe(viewLifecycleOwner) {
-            mainViewModel.getUser(app!!.userId)
-            Log.d("MyTag", "HERE")
+            mainViewModel.getUser()
             findNavController().navigate(CreateGroupFragmentDirections.actionCreateGroupFragmentToGroupInfoFragment(group!!))
         }
         binding.buttonNext.setOnClickListener(){
@@ -53,7 +52,7 @@ class CreateGroupFragment: Fragment() {
             }
             group = Group(typeGroup = 0, groupName = name,
                 description = binding.descriptionText.text.toString())
-            mainViewModel.createGroup(app!!.userId, group!!)
+            mainViewModel.createGroup(group!!)
         }
     }
 }
