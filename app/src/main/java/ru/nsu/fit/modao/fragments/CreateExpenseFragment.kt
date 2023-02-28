@@ -2,13 +2,11 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,7 +16,6 @@ import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.MenuAdapter
 import ru.nsu.fit.modao.databinding.FragmentCreateExpenseBinding
-import ru.nsu.fit.modao.databinding.FragmentExpensesBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -68,7 +65,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
 
         mainViewModel.getUsersInGroup(args.group.id!!)
 
-        binding.createExpense.setOnClickListener() {
+        binding.createExpense.setOnClickListener {
             createExpenseViewModel.createExpense(
                 binding.descriptionExpense.text.toString(),
                 binding.editCost.text.toString(),

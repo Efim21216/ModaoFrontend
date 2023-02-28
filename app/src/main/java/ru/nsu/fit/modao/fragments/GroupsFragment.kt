@@ -52,7 +52,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         binding.groupsRecycler.layoutManager = LinearLayoutManager(this.context,
             RecyclerView.VERTICAL, false)
         binding.groupsRecycler.adapter = adapter
-        binding.buttonAddGroup.setOnClickListener(){
+        binding.buttonAddGroup.setOnClickListener {
             findNavController().navigate(GroupsFragmentDirections.actionGroupsFragmentToCreateGroupFragment())
         }
     }

@@ -1,7 +1,6 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,8 @@ import ru.nsu.fit.modao.databinding.FragmentCreateGroupBinding
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
 class CreateGroupFragment: Fragment() {
     private var _binding: FragmentCreateGroupBinding? = null
@@ -44,7 +43,7 @@ class CreateGroupFragment: Fragment() {
             mainViewModel.getUser()
             findNavController().navigate(CreateGroupFragmentDirections.actionCreateGroupFragmentToGroupInfoFragment(group!!))
         }
-        binding.buttonNext.setOnClickListener(){
+        binding.buttonNext.setOnClickListener {
             val name = binding.nameText.text.toString()
             if (name == ""){
                 binding.tipMessage.setText(R.string.enterData)

@@ -50,7 +50,7 @@ class RegistrationFragment: Fragment() {
             activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.VISIBLE
             findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToProfileFragment())
         }
-        binding.buttonContinue.setOnClickListener(){
+        binding.buttonContinue.setOnClickListener {
             binding.tipMessage.setText(R.string.wait)
             password = binding.createPassword.text.toString()
             login = binding.createLogin.text.toString()

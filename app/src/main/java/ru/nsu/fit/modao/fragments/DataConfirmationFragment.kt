@@ -1,14 +1,11 @@
 package ru.nsu.fit.modao.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import ru.nsu.fit.modao.databinding.FragmentDataConfirmationBinding
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -47,7 +44,7 @@ class DataConfirmationFragment : Fragment() {
             binding.tipMessage.text = it
         }
 
-        binding.buttonDataConfirmation.setOnClickListener(){
+        binding.buttonDataConfirmation.setOnClickListener {
             val id = binding.editIdEvent.text?.toString()
             if (id != ""){
                 mainViewModel.confirmEvent(id!!.toLong())

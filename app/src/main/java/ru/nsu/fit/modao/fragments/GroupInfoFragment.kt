@@ -1,7 +1,6 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +36,10 @@ class GroupInfoFragment : Fragment() {
             binding.nameGroup.text = args.group.groupName
         }
 
-        binding.buttonGroupExpenses.setOnClickListener() {
+        binding.buttonGroupExpenses.setOnClickListener {
             findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(args.group))
         }
-        binding.buttonDataConfirmation.setOnClickListener(){
+        binding.buttonDataConfirmation.setOnClickListener {
             findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToDataConfirmationFragment())
         }
     }

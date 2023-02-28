@@ -1,16 +1,13 @@
 package ru.nsu.fit.modao.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentStartBinding

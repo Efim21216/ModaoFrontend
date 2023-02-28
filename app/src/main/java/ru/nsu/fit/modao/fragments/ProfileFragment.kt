@@ -1,7 +1,6 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,8 @@ import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentProfileBinding
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
 class ProfileFragment: Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -42,7 +41,7 @@ class ProfileFragment: Fragment() {
             binding.personPhone.text = it.phone_number
         }
         mainViewModel.getUser()
-        binding.logOutLayout.setOnClickListener(){
+        binding.logOutLayout.setOnClickListener {
             activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.GONE
             val sharedPreferences = app.encryptedSharedPreferences
             sharedPreferences.edit().clear().apply()

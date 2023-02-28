@@ -58,14 +58,14 @@ class AuthorizationFragment : Fragment() {
             activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.VISIBLE
             findNavController().navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToProfileFragment())
         }
-        binding.buttonLogIn.setOnClickListener(){
+        binding.buttonLogIn.setOnClickListener {
             binding.tipMessage.setText(R.string.wait)
             loginViewModel.login(
                 login = binding.personLogin.text.toString(),
                 password = binding.personPassword.text.toString()
             )
         }
-        binding.buttonSignUp.setOnClickListener(){
+        binding.buttonSignUp.setOnClickListener {
             findNavController().navigate(AuthorizationFragmentDirections
                 .actionAuthorizationFragmentToRegistrationFragment())
         }

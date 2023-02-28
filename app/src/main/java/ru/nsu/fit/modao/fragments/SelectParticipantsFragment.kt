@@ -1,18 +1,14 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.SelectAdapter
 import ru.nsu.fit.modao.databinding.FragmentSelectParticipantsBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
@@ -53,15 +49,15 @@ class SelectParticipantsFragment: Fragment(), SelectAdapter.CustomListener {
         createExpenseViewModel.participants.observe(viewLifecycleOwner){
             adapter.setList(it)
         }
-        binding.buttonSelect.setOnClickListener(){
+        binding.buttonSelect.setOnClickListener {
             adapter.selectAllParticipants()
         }
-        binding.buttonUnselect.setOnClickListener(){
+        binding.buttonUnselect.setOnClickListener {
             adapter.unselectAllParticipants()
         }
     }
 
-    override fun onClickItem(button: CheckBox, user: ParticipantEvent) {
-        user.selected = button.isChecked
+    override fun onClickItem(button: CheckBox, participantEvent: ParticipantEvent) {
+        participantEvent.selected = button.isChecked
     }
 }

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FragmentGroupExpensesBinding
-import ru.nsu.fit.modao.models.Currency
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -48,7 +47,7 @@ class GroupExpensesFragment: Fragment() {
         }
         binding.expensesRecycler.layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
-        binding.buttonAddExpense.setOnClickListener(){
+        binding.buttonAddExpense.setOnClickListener {
             findNavController().navigate(GroupExpensesFragmentDirections
                 .actionGroupExpensesFragmentToCreateExpenseFragment(args.group))
         }
