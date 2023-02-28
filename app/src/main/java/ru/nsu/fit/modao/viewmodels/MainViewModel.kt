@@ -5,13 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.repository.Repository
-import java.net.SocketTimeoutException
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
     val user = MutableLiveData<User>()
@@ -72,6 +70,14 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                 tipMessageData.value = "OK"
             } else {
                 tipMessageData.value = "Fail"
+            }
+        }
+    }
+    fun addUserToGroup(orgId: Long, groupId: Long, userId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.addUserToGroup(orgId, groupId, userId)
+            if (response.isSuccessful){
+                getUsersInGroup(groupId)
             }
         }
     }

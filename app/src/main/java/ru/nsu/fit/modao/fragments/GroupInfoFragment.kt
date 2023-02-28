@@ -42,5 +42,8 @@ class GroupInfoFragment : Fragment() {
         binding.buttonDataConfirmation.setOnClickListener {
             findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToDataConfirmationFragment())
         }
+        binding.buttonMembers.setOnClickListener{
+            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupMembersFragment(args.group))
+        }
     }
 }

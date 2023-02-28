@@ -1,11 +1,10 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,7 +37,6 @@ class StartFragment : Fragment() {
         val repository = Repository(app)
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        Log.d("MyTag", "HERE")
         val sharedPreferences = app.encryptedSharedPreferences
         val accessToken: String? = sharedPreferences.getString(ACCESS_TOKEN, null)
         if (accessToken == null){

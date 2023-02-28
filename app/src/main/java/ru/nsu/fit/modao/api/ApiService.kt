@@ -49,7 +49,7 @@ interface ApiService {
     suspend fun confirmEvent(
         @Header("Authorization") token: String,
         @Path("eventId") eventId: Long
-    ): Response<Long>
+    ): Response<Unit>
 
     @GET("/group/listUsers/{groupId}")
     suspend fun getUsersInGroup(

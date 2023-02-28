@@ -12,12 +12,6 @@ import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-/*
-
-
- // use the shared preferences and editor as you normally would
- SharedPreferences.Editor editor = sharedPreferences.edit();
- */
 
 class DataConfirmationFragment : Fragment() {
     private var _binding: FragmentDataConfirmationBinding? = null

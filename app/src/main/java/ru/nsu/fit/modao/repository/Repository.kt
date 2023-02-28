@@ -30,7 +30,7 @@ class Repository(private val app: App) {
     suspend fun addUserToGroup(userOrgId: Long, groupId: Long, userId: Long): Response<Long>{
         return app.api.addUserToGroup(AUTH + app.accessToken, userOrgId, groupId, userId)
     }
-    suspend fun confirmEvent(eventId: Long): Response<Long>{
+    suspend fun confirmEvent(eventId: Long): Response<Unit>{
         return app.api.confirmEvent(AUTH + app.accessToken, eventId)
     }
     suspend fun getUsersInGroup(groupId: Long): Response<Array<User>> {

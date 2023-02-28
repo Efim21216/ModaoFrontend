@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nameGroup" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/buttonMembers"
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:src="@drawable/button_expenses_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonMembers" />
 
     <ImageButton
         android:id="@+id/buttonDataConfirmation"
@@ -115,9 +115,9 @@
         android:text="@string/members"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton7"
-        app:layout_constraintStart_toStartOf="@+id/imageButton7"
-        app:layout_constraintTop_toTopOf="@+id/imageButton7" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonMembers"
+        app:layout_constraintStart_toStartOf="@+id/buttonMembers"
+        app:layout_constraintTop_toTopOf="@+id/buttonMembers" />
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
