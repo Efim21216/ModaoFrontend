@@ -2,6 +2,7 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         binding.recyclerMembers.adapter = adapter
         mainViewModel.usersInGroup.observe(viewLifecycleOwner){
             adapter.setFriendsList(it)
+            Log.d("MyTag", "Members")
         }
         mainViewModel.getUsersInGroup(args.group.id!!)
         binding.buttonAdd.setOnClickListener {

@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding
+import ru.nsu.fit.modao.repository.Repository
+import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
 class GroupInfoFragment : Fragment() {
     private var _binding: FragmentGroupInfoBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<GroupInfoFragmentArgs>()
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var app: App
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,15 +42,42 @@ class GroupInfoFragment : Fragment() {
         } else {
             binding.nameGroup.text = args.group.groupName
         }
+        app = requireActivity().application as App
+        val repository = Repository(app)
+        mainViewModel = ViewModelProvider(
+            requireActivity(),
+            RepositoryViewModelFactory(repository)
+        )[MainViewModel::class.java]
+
+        mainViewModel.getListOrganizers(args.group.id!!)
+        mainViewModel.organizers.observe(viewLifecycleOwner) {
+            val isOrganizer = it.any { org -> org.id == app.userId }
+            if (isOrganizer) {
+                binding.buttonDataConfirmation.visibility = View.VISIBLE
+                binding.textDataConfirmation.visibility = View.VISIBLE
+            }
+        }
 
         binding.buttonGroupExpenses.setOnClickListener {
-            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(args.group))
+            findNavController().navigate(
+                GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(
+                    args.group
+                )
+            )
         }
         binding.buttonDataConfirmation.setOnClickListener {
-            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToDataConfirmationFragment())
+            findNavController().navigate(
+                GroupInfoFragmentDirections.actionGroupInfoFragmentToDataConfirmationFragment(
+                    args.group
+                )
+            )
         }
-        binding.buttonMembers.setOnClickListener{
-            findNavController().navigate(GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupMembersFragment(args.group))
+        binding.buttonMembers.setOnClickListener {
+            findNavController().navigate(
+                GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupMembersFragment(
+                    args.group
+                )
+            )
         }
     }
 }

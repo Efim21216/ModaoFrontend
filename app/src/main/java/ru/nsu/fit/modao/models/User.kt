@@ -9,5 +9,5 @@ data class User(
     val idPicture: Int? = null,
     val id: Long? = null,
     val coefficient: Float? = null,
-    val groupCustomPairIdNameList: ArrayList<Group>? = null,
+    val groupCustomPairIdNameList: ArrayList<Group>? = null
 )

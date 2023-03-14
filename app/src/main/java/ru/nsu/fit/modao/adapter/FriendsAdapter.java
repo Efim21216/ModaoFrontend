@@ -29,6 +29,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
 
     public void setFriendsList(User[] friendsList) {
         this.friendsList = friendsList;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.models.User
+import ru.nsu.fit.modao.models.UserDebt
 import ru.nsu.fit.modao.repository.Repository
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
@@ -16,9 +17,12 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val groupId = MutableLiveData<Long>()
     val expenses = MutableLiveData<Array<Expense>>()
     val usersInGroup = MutableLiveData<Array<User>>()
-    val tipMessageData = MutableLiveData<String>()
     val tipMessageStart = MutableLiveData<String>()
+    val userExpenses = MutableLiveData<Array<UserDebt>>()
     val messageHandler = MutableLiveData<String>()
+    val organizers = MutableLiveData<Array<User>>()
+    val infoEvent = MutableLiveData<Expense>()
+    val unconfirmedExpenses = MutableLiveData<Array<Expense>>()
     private val handler = CoroutineExceptionHandler { _, throwable -> messageHandler.value = throwable.message}
     fun getUser() {
         viewModelScope.launch(handler) {
@@ -63,13 +67,23 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
-    fun confirmEvent(eventId: Long){
+    fun confirmEvent(eventId: Long, groupId: Long){
         viewModelScope.launch(handler) {
             val response = repository.confirmEvent(eventId)
-            if (response.isSuccessful){
-                tipMessageData.value = "OK"
+            if (!response.isSuccessful) {
+                Log.d("MyTag", response.message())
             } else {
-                tipMessageData.value = "Fail"
+                getGroupUnconfirmedExpenses(groupId)
+            }
+        }
+    }
+    fun notConfirmEvent(eventId: Long, groupId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.notConfirmEvent(eventId)
+            if (!response.isSuccessful) {
+                Log.d("MyTag", response.message())
+            } else {
+                getGroupUnconfirmedExpenses(groupId)
             }
         }
     }
@@ -78,6 +92,47 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             val response = repository.addUserToGroup(orgId, groupId, userId)
             if (response.isSuccessful){
                 getUsersInGroup(groupId)
+            }
+        }
+    }
+    fun getUserDebtInGroup(userId: Long, groupId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.getUserDebtInGroup(userId, groupId)
+            if (response.isSuccessful){
+                userExpenses.value = response.body()
+            } else {
+                Log.e("MyTag", response.message())
+            }
+        }
+    }
+    fun getListOrganizers(groupId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.getListOrganizers(groupId)
+            if (response.isSuccessful){
+                organizers.value = response.body()
+            } else {
+                organizers.value = arrayOf()
+            }
+        }
+    }
+
+    fun getEventInfo(eventId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.getEventInfo(eventId)
+            if (response.isSuccessful){
+                infoEvent.value = response.body()
+            } else {
+                Log.e("MyTag", response.message())
+            }
+        }
+    }
+    fun getGroupUnconfirmedExpenses(groupId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.getGroupUnconfirmedExpenses(groupId)
+            if (response.isSuccessful){
+                unconfirmedExpenses.value = response.body()
+            } else {
+                Log.e("MyTag", response.message())
             }
         }
     }

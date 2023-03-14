@@ -9,7 +9,8 @@ data class Expense (
     val userPayingId: Long? = null,
     val usernamePaying: String? = null,
     val customPairIdCoefficientList: Array<ParticipantEvent>? = null,
-    val customPairIdCoefficientPaying: ParticipantEvent? = null
+    val customPairIdCoefficientPaying: ParticipantEvent? = null,
+    val expenseDtoList: Array<ParticipantEvent>? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

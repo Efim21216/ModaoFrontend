@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class ParticipantEvent(
     val username: String? = null,
     val id: Long? = null,
+    val userId: Long? = null,
     var selected: Boolean = false,
     var isSponsor: Boolean = false,
     var coefficient: Float? = null,

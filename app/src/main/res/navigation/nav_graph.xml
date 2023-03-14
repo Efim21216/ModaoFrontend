@@ -101,6 +101,9 @@
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_groupExpensesFragment_to_userExpensesInGroupFragment"
+                app:destination="@id/userExpensesInGroupFragment" />
         </fragment>
         <fragment
             android:id="@+id/createExpenseFragment"
@@ -118,12 +121,25 @@
             android:id="@+id/dataConfirmationFragment"
             android:name="ru.nsu.fit.modao.fragments.DataConfirmationFragment"
             android:label="fragment_data_confirmation"
-            tools:layout="@layout/fragment_data_confirmation" />
+            tools:layout="@layout/fragment_data_confirmation" >
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </fragment>
         <fragment
             android:id="@+id/groupMembersFragment"
             android:name="ru.nsu.fit.modao.fragments.GroupMembersFragment"
             android:label="fragment_group_members"
             tools:layout="@layout/fragment_group_members" >
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </fragment>
+        <fragment
+            android:id="@+id/userExpensesInGroupFragment"
+            android:name="ru.nsu.fit.modao.fragments.UserExpensesInGroupFragment"
+            android:label="fragment_user_expenses_in_group"
+            tools:layout="@layout/fragment_user_expenses_in_group" >
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
