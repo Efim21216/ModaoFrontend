@@ -10,12 +10,12 @@ import ru.nsu.fit.modao.models.Group
 
 class GroupAdapter: RecyclerView.Adapter<GroupAdapter.GroupHolder>() {
     private var listener: AdapterListener<Group>? = null
-    private var groupsList = ArrayList<Group>()
+    private var groupsList: Array<Group> = arrayOf()
 
     fun attachListener(listener: AdapterListener<Group>){
         this.listener = listener
     }
-    fun setGroups(groupsList: ArrayList<Group>){
+    fun setGroups(groupsList: Array<Group>){
         this.groupsList = groupsList
         notifyDataSetChanged()
     }
@@ -23,7 +23,7 @@ class GroupAdapter: RecyclerView.Adapter<GroupAdapter.GroupHolder>() {
         val binding = GroupItemBinding.bind(item)
         val view = item
         fun bind(group: Group, listener: AdapterListener<Group>){
-            binding.nameGroup.text = group.name
+            binding.nameGroup.text = group.groupName
             view.setOnClickListener(){
                 listener.onClickItem(group)
             }

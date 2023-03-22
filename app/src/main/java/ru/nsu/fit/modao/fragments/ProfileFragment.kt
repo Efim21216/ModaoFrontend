@@ -39,6 +39,7 @@ class ProfileFragment: Fragment() {
             binding.personName.text = it.username
             binding.personBank.text = it.bank
             binding.personPhone.text = it.phone_number
+            binding.personUuid.text = it.uuid
         }
         mainViewModel.getUser()
         binding.logOutLayout.setOnClickListener {

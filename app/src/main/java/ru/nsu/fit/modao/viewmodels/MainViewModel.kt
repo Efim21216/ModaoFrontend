@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
-import ru.nsu.fit.modao.models.Expense
-import ru.nsu.fit.modao.models.Group
-import ru.nsu.fit.modao.models.User
-import ru.nsu.fit.modao.models.UserDebt
+import ru.nsu.fit.modao.models.*
 import ru.nsu.fit.modao.repository.Repository
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
@@ -23,6 +20,10 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val organizers = MutableLiveData<Array<User>>()
     val infoEvent = MutableLiveData<Expense>()
     val unconfirmedExpenses = MutableLiveData<Array<Expense>>()
+    val userGroups = MutableLiveData<Array<Group>>()
+    val groupInfo = MutableLiveData<Group>()
+    val invitationUser = MutableLiveData<Array<Notification>>()
+    val listFriends = MutableLiveData<Array<User>>()
     private val handler = CoroutineExceptionHandler { _, throwable -> messageHandler.value = throwable.message}
     fun getUser() {
         viewModelScope.launch(handler) {
@@ -32,6 +33,16 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             } else {
                 tipMessageStart.value = "error"
                 Log.e("MyError", response.message())
+            }
+        }
+    }
+    fun getUserGroups(){
+        viewModelScope.launch(handler) {
+            val response = repository.getUserGroups()
+            if (response.isSuccessful){
+                userGroups.value = response.body()
+            } else {
+                Log.e("MyTag", response.message())
             }
         }
     }
@@ -87,9 +98,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
-    fun addUserToGroup(orgId: Long, groupId: Long, userId: Long){
+    fun addUserToGroup(groupId: Long, userId: Long){
         viewModelScope.launch(handler) {
-            val response = repository.addUserToGroup(orgId, groupId, userId)
+            val response = repository.addUserToGroup(groupId, userId)
             if (response.isSuccessful){
                 getUsersInGroup(groupId)
             }
@@ -133,6 +144,96 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                 unconfirmedExpenses.value = response.body()
             } else {
                 Log.e("MyTag", response.message())
+            }
+        }
+    }
+    fun getGroupInfo(groupId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.getGroupInfo(groupId)
+            if (response.isSuccessful){
+                groupInfo.value = response.body()
+            } else {
+                Log.e("MyTag", response.message())
+            }
+        }
+    }
+    fun addFriend(userUuid: String){
+        viewModelScope.launch(handler) {
+            val response = repository.addFriend(userUuid)
+            if (response.isSuccessful){
+                Log.d("MyTag", "Success")
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun getInvitationsFriend() {
+        viewModelScope.launch(handler) {
+            val response = repository.getInvitationsFriend()
+            if (response.isSuccessful){
+                invitationUser.value = response.body()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun getInvitationsGroup() {
+        viewModelScope.launch(handler) {
+            val response = repository.getInvitationsGroup()
+            if (response.isSuccessful){
+                invitationUser.value = response.body()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun acceptInvitationFriend(invitationId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.acceptInvitationFriend(invitationId)
+            if (response.isSuccessful){
+                getInvitationsFriend()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun denyInvitationFriend(invitationId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.denyInvitationFriend(invitationId)
+            if (response.isSuccessful){
+                getInvitationsFriend()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun acceptInvitationGroup(invitationId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.acceptInvitationGroup(invitationId)
+            if (response.isSuccessful){
+                getInvitationsGroup()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun denyInvitationGroup(invitationId: Long){
+        viewModelScope.launch(handler) {
+            val response = repository.denyInvitationGroup(invitationId)
+            if (response.isSuccessful){
+                getInvitationsGroup()
+            } else {
+                Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun getListFriends(){
+        viewModelScope.launch(handler) {
+            val response = repository.getListFriends()
+            if (response.isSuccessful){
+                listFriends.value = response.body()
+            } else {
+                Log.d("MyTag", "Fail")
             }
         }
     }

@@ -6,37 +6,67 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.FriendsAdapter
 import ru.nsu.fit.modao.databinding.FragmentFriendsBinding
 import ru.nsu.fit.modao.models.User
+import ru.nsu.fit.modao.repository.Repository
+import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-class FriendsFragment: Fragment(), AdapterListener<User> {
+class FriendsFragment : Fragment(), AdapterListener<User> {
     private var _binding: FragmentFriendsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var app: App
+    private lateinit var mainViewModel: MainViewModel
+
     private val friends: Array<User> = arrayOf(
-            User(username = "Olga", phone_number = "89009001010", bank = "Bank1"),
-            User(username = "Efim", phone_number = "89009001020", bank = "Bank2"),
-            User(username = "Petr", phone_number = "89009001030", bank = "Bank1"),
-            User(username = "Nikita", phone_number = "89009001040", bank = "Bank2")
-    )
+           User(username = "Olga", phone_number = "89009001010", bank = "Bank1"),
+           User(username = "Efim", phone_number = "89009001020", bank = "Bank2"),
+           User(username = "Petr", phone_number = "89009001030", bank = "Bank1"),
+           User(username = "Nikita", phone_number = "89009001040", bank = "Bank2")
+   )
     private val adapter = FriendsAdapter()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentFriendsBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter.setListener(this)
+
         adapter.setFriendsList(friends)
-        binding.friendsRecycler.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        app = requireActivity().application as App
+        adapter.setListener(this)
+        binding.friendsRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.friendsRecycler.adapter = adapter
+        val repository = Repository(app)
+        mainViewModel = ViewModelProvider(
+            requireActivity(),
+            RepositoryViewModelFactory(repository)
+        )[MainViewModel::class.java]
+        binding.buttonAddFriend.setOnClickListener {
+            val uuid = binding.editUuid.text.toString()
+            mainViewModel.addFriend(uuid)
+        }
+        mainViewModel.listFriends.observe(viewLifecycleOwner) {
+            adapter.setFriendsList(it)
+        }
+        mainViewModel.getListFriends()
     }
 
     override fun onClickItem(item: User) {

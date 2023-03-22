@@ -14,7 +14,7 @@ import ru.nsu.fit.modao.models.User;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsHolder> {
     private AdapterListener<User> listener;
-    private User[] friendsList;
+    private User[] friendsList = {};
 
     @NonNull
     @Override

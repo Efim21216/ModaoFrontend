@@ -89,6 +89,9 @@
             <action
                 android:id="@+id/action_groupInfoFragment_to_groupMembersFragment"
                 app:destination="@id/groupMembersFragment" />
+            <action
+                android:id="@+id/action_groupInfoFragment_to_groupInformationFragment"
+                app:destination="@id/groupInformationFragment" />
         </fragment>
         <fragment
             android:id="@+id/groupExpensesFragment"
@@ -144,6 +147,15 @@
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
         </fragment>
+        <fragment
+            android:id="@+id/groupInformationFragment"
+            android:name="ru.nsu.fit.modao.fragments.GroupInformationFragment"
+            android:label="fragment_group_information"
+            tools:layout="@layout/fragment_group_information" >
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </fragment>
     </navigation>
     <fragment
         android:id="@+id/startFragment"
@@ -157,4 +169,9 @@
             android:id="@+id/action_startFragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notification_fragment"
+        android:name="ru.nsu.fit.modao.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

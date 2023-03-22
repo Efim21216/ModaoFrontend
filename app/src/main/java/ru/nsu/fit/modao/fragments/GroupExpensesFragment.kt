@@ -49,7 +49,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         val repository = Repository(app)
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+            ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         adapter.setList(expenses)
         adapter.attachListener(this)
         mainViewModel.expenses.observe(viewLifecycleOwner) {

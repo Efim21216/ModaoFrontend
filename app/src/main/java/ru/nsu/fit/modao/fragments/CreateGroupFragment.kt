@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,8 @@ class CreateGroupFragment: Fragment() {
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
         mainViewModel.groupId.observe(viewLifecycleOwner) {
-            mainViewModel.getUser()
+            mainViewModel.getUserGroups()
+            group?.id = it
             findNavController().navigate(CreateGroupFragmentDirections.actionCreateGroupFragmentToGroupInfoFragment(group!!))
         }
         binding.buttonNext.setOnClickListener {
@@ -51,6 +53,7 @@ class CreateGroupFragment: Fragment() {
             }
             group = Group(typeGroup = 0, groupName = name,
                 description = binding.descriptionText.text.toString())
+            Log.d("MyTag", "In button")
             mainViewModel.createGroup(group!!)
         }
     }

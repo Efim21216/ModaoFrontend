@@ -66,7 +66,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
                 builder.create().show()
                 return@setOnClickListener
             }
-            mainViewModel.addUserToGroup(app.userId, args.group.id!!, id)
+            mainViewModel.addUserToGroup(args.group.id!!, id)
         }
 
 

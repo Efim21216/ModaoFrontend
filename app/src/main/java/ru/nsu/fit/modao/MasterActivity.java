@@ -35,6 +35,5 @@ public class MasterActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //NavigationUI.setupWithNavController(binding.bottomMenu, navController);
     }
 }

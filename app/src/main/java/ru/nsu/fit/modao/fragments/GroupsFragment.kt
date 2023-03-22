@@ -45,9 +45,10 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+        mainViewModel.getUserGroups()
         adapter.attachListener(this)
-        mainViewModel.user.observe(viewLifecycleOwner){
-            adapter.setGroups(it.groupCustomPairIdNameList!!)
+        mainViewModel.userGroups.observe(viewLifecycleOwner){
+            adapter.setGroups(it)
         }
         binding.groupsRecycler.layoutManager = LinearLayoutManager(this.context,
             RecyclerView.VERTICAL, false)

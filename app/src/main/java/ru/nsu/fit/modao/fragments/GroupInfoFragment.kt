@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,11 +38,7 @@ class GroupInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (args.group.groupName == null) {
-            binding.nameGroup.text = args.group.name
-        } else {
-            binding.nameGroup.text = args.group.groupName
-        }
+        binding.nameGroup.text = args.group.groupName
         app = requireActivity().application as App
         val repository = Repository(app)
         mainViewModel = ViewModelProvider(
@@ -61,6 +58,13 @@ class GroupInfoFragment : Fragment() {
         binding.buttonGroupExpenses.setOnClickListener {
             findNavController().navigate(
                 GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(
+                    args.group
+                )
+            )
+        }
+        binding.groupInformation.setOnClickListener {
+            findNavController().navigate(
+                GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupInformationFragment(
                     args.group
                 )
             )
