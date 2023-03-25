@@ -126,7 +126,7 @@
         android:layout_marginStart="65dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/inter"
-        android:text="@string/expenses"
+        android:text="@string/events"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGroupExpenses"

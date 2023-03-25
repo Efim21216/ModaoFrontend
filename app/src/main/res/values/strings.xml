@@ -9,8 +9,9 @@
     <string name="name">Name:</string>
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
-    <string name="myExpenses">My expenses</string>
-    <string name="createExpense">Create expense</string>
+    <string name="my_debt"> MY DEBT </string>
+    <string name="add_event">ADD EVENT</string>
+    <string name="create_expense">Create expense</string>
     <string name="name_no">Name</string>
     <string name="description">Description</string>
     <string name="createGroup">Add new group</string>
@@ -55,6 +56,15 @@
     <string name="date_of_creation">Date of creation:</string>
     <string name="link">Link:</string>
     <string name="preferred_bank">Preferred bank:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_expense_head">Create an expense picture</string>
+    <string name="new_expense">  New expense  </string>
+    <string name="all_in_button">All in</string>
+    <string name="two_button">Two</string>
+    <string name="more_options_button">More options</string>
+    <string name="finish_button">Finish</string>
+    <string name="enter_cost">Enter cost</string>
+    <string name="enter_description">Enter description</string>
+    <string name="events">Events</string>
+    <string name="filter_events">Filter events</string>
+    <string name="continue_button">Continue registration</string>
 </resources>
