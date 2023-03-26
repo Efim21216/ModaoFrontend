@@ -3,6 +3,7 @@ package ru.nsu.fit.modao.models
 data class Expense (
     val currency: Currency? = null,
     val id: Long? = null,
+    val type: Int = 0,
     val name: String? = null,
     val groupId: Long? = null,
     val price: Float? = null,

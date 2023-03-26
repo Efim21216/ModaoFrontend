@@ -28,6 +28,11 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var app: App
     private var expenses: Array<Expense> = arrayOf()
+    private var showEvent = true
+    private var showTransfer = true
+    private var showOnlyMy = false
+    val Boolean.intValue
+        get() = if (this) 1 else 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +55,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel =
             ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
         adapter.setList(expenses)
         adapter.attachListener(this)
         mainViewModel.expenses.observe(viewLifecycleOwner) {
@@ -58,30 +64,90 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         binding.expensesRecycler.layoutManager =
             LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
-        binding.buttonAddExpense.setOnClickListener {
+
+        binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
                 GroupExpensesFragmentDirections
-                    .actionGroupExpensesFragmentToCreateExpenseFragment(args.group)
+                    .actionGroupExpensesFragmentToCreateAnExpenseFragment(args.group)
             )
         }
-        mainViewModel.getGroupExpenses(args.group.id!!)
-        binding.buttonMyExpenses.setOnClickListener {
-            findNavController().navigate(GroupExpensesFragmentDirections
-                .actionGroupExpensesFragmentToUserExpensesInGroupFragment(args.group))
+
+        binding.buttonMyDebt.setOnClickListener {
+            findNavController().navigate(
+                GroupExpensesFragmentDirections
+                    .actionGroupExpensesFragmentToUserExpensesInGroupFragment(args.group)
+            )
         }
+
+        binding.buttonEvent.isChecked = true
+        binding.buttonTransfer.isChecked = true
+        setButton()
+
+        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
+
         mainViewModel.infoEvent.observe(viewLifecycleOwner) {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(it.name)
             val info: StringBuilder = java.lang.StringBuilder()
-            it.expenseDtoList?.forEach { participantEvent -> info.append(participantEvent.username + ": "
-                    + participantEvent.coefficient?.toString()
-                    + "\n") }
+            it.expenseDtoList?.forEach { participantEvent ->
+                info.append(
+                    participantEvent.username + ": "
+                            + participantEvent.coefficient?.toString()
+                            + "\n"
+                )
+            }
             builder.setMessage(info.toString())
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+
     }
 
+    private fun setButton(){
+        binding.buttonTransfer.setOnClickListener {
+            if (showTransfer){
+                if (binding.buttonEvent.isChecked){
+                    showTransfer = false
+                    binding.buttonTransfer.isChecked = false
+                }
+            } else {
+                showTransfer = true
+                binding.buttonTransfer.isChecked = true
+            }
+            getGroupExpenses()
+        }
+
+        binding.buttonEvent.setOnClickListener {
+            if (showEvent) {
+                if (binding.buttonTransfer.isChecked) {
+                    binding.buttonEvent.isChecked = false
+                    showEvent = false
+                }
+            } else {
+                binding.buttonEvent.isChecked = true
+                showEvent = true
+            }
+            getGroupExpenses()
+        }
+        binding.buttonOnlyMy.setOnClickListener {
+            showOnlyMy = !showOnlyMy
+            binding.buttonOnlyMy.isChecked = showOnlyMy
+            getGroupExpenses()
+        }
+    }
+    private fun getGroupExpenses(){
+        if (binding.buttonTransfer.isChecked){
+            if (binding.buttonEvent.isChecked) {
+                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
+            } else {
+                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 1)
+            }
+        } else {
+            if (binding.buttonEvent.isChecked) {
+                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 0)
+            }
+        }
+    }
     override fun onClickItem(item: Expense) {
         mainViewModel.getEventInfo(item.id!!)
     }

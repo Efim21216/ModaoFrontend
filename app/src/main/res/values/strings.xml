@@ -7,9 +7,12 @@
     <string name="groups">Groups</string>
     <string name="welcome">Welcome!</string>
     <string name="name">Name:</string>
+    <string name="groupNotification">Group notification</string>
+    <string name="friendNotification">Friend notification</string>
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
-    <string name="my_debt"> MY DEBT </string>
+    <string name="my_debt_caps"> MY DEBT </string>
+    <string name="my_debt"> My debt </string>
     <string name="add_event">ADD EVENT</string>
     <string name="create_expense">Create expense</string>
     <string name="name_no">Name</string>

@@ -10,13 +10,14 @@ import ru.nsu.fit.modao.models.*
 import ru.nsu.fit.modao.repository.Repository
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
+    val tipMessage = MutableLiveData<String>()
+    val messageHandler = MutableLiveData<String>()
+
     val user = MutableLiveData<User>()
     val groupId = MutableLiveData<Long>()
     val expenses = MutableLiveData<Array<Expense>>()
     val usersInGroup = MutableLiveData<Array<User>>()
-    val tipMessageStart = MutableLiveData<String>()
     val userExpenses = MutableLiveData<Array<UserDebt>>()
-    val messageHandler = MutableLiveData<String>()
     val organizers = MutableLiveData<Array<User>>()
     val infoEvent = MutableLiveData<Expense>()
     val unconfirmedExpenses = MutableLiveData<Array<Expense>>()
@@ -24,6 +25,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val groupInfo = MutableLiveData<Group>()
     val invitationUser = MutableLiveData<Array<Notification>>()
     val listFriends = MutableLiveData<Array<User>>()
+
     private val handler = CoroutineExceptionHandler { _, throwable -> messageHandler.value = throwable.message}
     fun getUser() {
         viewModelScope.launch(handler) {
@@ -31,7 +33,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             if (response.isSuccessful) {
                 user.value = response.body()
             } else {
-                tipMessageStart.value = "error"
+                tipMessage.value = "error"
                 Log.e("MyError", response.message())
             }
         }
@@ -57,9 +59,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
-    fun getGroupExpenses(id: Long){
+    fun getGroupExpenses(id: Long, mode: Int, filter: Int){
         viewModelScope.launch(handler) {
-            val response = repository.getGroupExpenses(id)
+            val response = repository.getGroupExpenses(id, mode, filter)
             if (response.isSuccessful){
                 expenses.value = response.body()
             }
@@ -78,9 +80,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
-    fun confirmEvent(eventId: Long, groupId: Long){
+    fun confirmEvent(groupId: Long, eventId: Long){
         viewModelScope.launch(handler) {
-            val response = repository.confirmEvent(eventId)
+            val response = repository.confirmEvent(groupId, eventId)
             if (!response.isSuccessful) {
                 Log.d("MyTag", response.message())
             } else {
@@ -101,8 +103,12 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     fun addUserToGroup(groupId: Long, userId: Long){
         viewModelScope.launch(handler) {
             val response = repository.addUserToGroup(groupId, userId)
+            Log.d("MyTag", "HERE1")
             if (response.isSuccessful){
-                getUsersInGroup(groupId)
+                Log.d("MyTag", "HERE2")
+                tipMessage.value = "Success"
+            } else {
+                tipMessage.value = "Fail"
             }
         }
     }
@@ -161,9 +167,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.addFriend(userUuid)
             if (response.isSuccessful){
-                Log.d("MyTag", "Success")
+                tipMessage.value = "Success"
             } else {
-                Log.d("MyTag", "Fail")
+                tipMessage.value = "Incorrect data"
             }
         }
     }
@@ -191,9 +197,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.acceptInvitationFriend(invitationId)
             if (response.isSuccessful){
-                getInvitationsFriend()
+                tipMessage.value = "Success"
             } else {
-                Log.d("MyTag", "Fail")
+                tipMessage.value = "Fail"
             }
         }
     }
@@ -201,9 +207,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.denyInvitationFriend(invitationId)
             if (response.isSuccessful){
-                getInvitationsFriend()
+                tipMessage.value = "Success"
             } else {
-                Log.d("MyTag", "Fail")
+                tipMessage.value = "Fail"
             }
         }
     }
@@ -211,9 +217,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.acceptInvitationGroup(invitationId)
             if (response.isSuccessful){
-                getInvitationsGroup()
+                tipMessage.value = "Success"
             } else {
-                Log.d("MyTag", "Fail")
+                tipMessage.value = "Fail"
             }
         }
     }
@@ -221,9 +227,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch(handler) {
             val response = repository.denyInvitationGroup(invitationId)
             if (response.isSuccessful){
-                getInvitationsGroup()
+                tipMessage.value = "Success"
             } else {
-                Log.d("MyTag", "Fail")
+                tipMessage.value = "Fail"
             }
         }
     }
@@ -234,6 +240,17 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                 listFriends.value = response.body()
             } else {
                 Log.d("MyTag", "Fail")
+            }
+        }
+    }
+    fun addToGroup(groupUUID: String){
+        viewModelScope.launch(handler) {
+            val response = repository.addToGroup(groupUUID)
+            if (response.isSuccessful){
+                tipMessage.value = "Success"
+                getUserGroups()
+            } else {
+                tipMessage.value = "Incorrect uuid"
             }
         }
     }

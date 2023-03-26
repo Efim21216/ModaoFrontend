@@ -61,6 +61,21 @@
                 app:destination="@id/createGroupFragment" />
         </fragment>
         <fragment
+            android:id="@+id/createAnExpenseFragment"
+            android:name="ru.nsu.fit.modao.fragments.CreateAnExpenseFragment"
+            android:label="fragment_create_an_expense"
+            tools:layout="@layout/fragment_create_an_expense" >
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_createExpenseFragment"
+                app:destination="@id/createExpenseFragment" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment" />
+        </fragment>
+        <fragment
             android:id="@+id/createGroupFragment"
             android:name="ru.nsu.fit.modao.fragments.CreateGroupFragment"
             android:label="fragment_create_group"
@@ -98,15 +113,15 @@
             android:name="ru.nsu.fit.modao.fragments.GroupExpensesFragment"
             android:label="fragment_create_group"
             tools:layout="@layout/fragment_group_expenses" >
-            <action
-                android:id="@+id/action_groupExpensesFragment_to_createExpenseFragment"
-                app:destination="@id/createExpenseFragment" />
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
             <action
                 android:id="@+id/action_groupExpensesFragment_to_userExpensesInGroupFragment"
                 app:destination="@id/userExpensesInGroupFragment" />
+            <action
+                android:id="@+id/action_groupExpensesFragment_to_createAnExpenseFragment"
+                app:destination="@id/createAnExpenseFragment" />
         </fragment>
         <fragment
             android:id="@+id/createExpenseFragment"
@@ -174,4 +189,5 @@
         android:name="ru.nsu.fit.modao.fragments.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+
 </navigation>

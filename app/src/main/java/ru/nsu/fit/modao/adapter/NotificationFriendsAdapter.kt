@@ -13,7 +13,7 @@ class NotificationFriendsAdapter: RecyclerView.Adapter<NotificationFriendsAdapte
     private var denyFriend: AdapterListener<Notification>? = null
     private var acceptGroup: AdapterListener<Notification>? = null
     private var denyGroup: AdapterListener<Notification>? = null
-    private var list: Array<Notification> = arrayOf()
+    private var list: MutableList<Notification> = mutableListOf()
 
     fun attachListenerAcceptFriend(listener: AdapterListener<Notification>){
         this.acceptFriend = listener
@@ -28,8 +28,18 @@ class NotificationFriendsAdapter: RecyclerView.Adapter<NotificationFriendsAdapte
         this.denyGroup = listener
     }
     fun setList(list: Array<Notification>){
-        this.list = list
+        this.list = list.toMutableList()
         notifyDataSetChanged()
+    }
+    fun addToList(list: Array<Notification>){
+        val start = this.list.size - 1
+        this.list.addAll(list)
+        notifyItemRangeChanged(start, list.size)
+    }
+    fun removeItem(item: Notification){
+        val id = list.indexOf(item)
+        list.remove(item)
+        notifyItemRemoved(id)
     }
     class NotificationHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = NotificationItemBinding.bind(item)

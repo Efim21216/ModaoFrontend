@@ -49,7 +49,8 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
-            android:text="@string/add_event"/>
+            android:text="@string/add_event"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/buttonMyDebt"
@@ -59,7 +60,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="25dp"
             android:layout_weight="1"
-            android:text="@string/my_debt"/>
+            android:text="@string/my_debt_caps"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
     <ImageButton
@@ -78,6 +80,37 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/buttonEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/buttonTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Transfers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEvent" />
+
+    <RadioButton
+        android:id="@+id/buttonOnlyMy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="Only my"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

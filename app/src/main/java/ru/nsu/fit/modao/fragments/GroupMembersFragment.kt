@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +42,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         app = requireActivity().application as App
         val repository = Repository(app)
         val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         adapter.setListener(this)
         binding.recyclerMembers.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -52,9 +51,10 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         binding.recyclerMembers.adapter = adapter
         mainViewModel.usersInGroup.observe(viewLifecycleOwner){
             adapter.setFriendsList(it)
-            Log.d("MyTag", "Members")
         }
+
         mainViewModel.getUsersInGroup(args.group.id!!)
+
         binding.buttonAdd.setOnClickListener {
             val id: Long
             try {
@@ -68,7 +68,12 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
             }
             mainViewModel.addUserToGroup(args.group.id!!, id)
         }
-
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(it)
+            builder.setPositiveButton("OK") { _, _ -> }
+            builder.create().show()
+        }
 
     }
     override fun onClickItem(item: User) {

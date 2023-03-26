@@ -39,7 +39,7 @@ class CreateGroupFragment: Fragment() {
         app = activity?.application as App
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         mainViewModel.groupId.observe(viewLifecycleOwner) {
             mainViewModel.getUserGroups()
             group?.id = it

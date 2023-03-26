@@ -23,13 +23,6 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
     private val binding get() = _binding!!
     private lateinit var app: App
     private lateinit var mainViewModel: MainViewModel
-
-    private val friends: Array<User> = arrayOf(
-           User(username = "Olga", phone_number = "89009001010", bank = "Bank1"),
-           User(username = "Efim", phone_number = "89009001020", bank = "Bank2"),
-           User(username = "Petr", phone_number = "89009001030", bank = "Bank1"),
-           User(username = "Nikita", phone_number = "89009001040", bank = "Bank2")
-   )
     private val adapter = FriendsAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +41,6 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter.setFriendsList(friends)
         app = requireActivity().application as App
         adapter.setListener(this)
         binding.friendsRecycler.layoutManager =
@@ -56,9 +48,10 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
         binding.friendsRecycler.adapter = adapter
         val repository = Repository(app)
         mainViewModel = ViewModelProvider(
-            requireActivity(),
+            this,
             RepositoryViewModelFactory(repository)
         )[MainViewModel::class.java]
+
         binding.buttonAddFriend.setOnClickListener {
             val uuid = binding.editUuid.text.toString()
             mainViewModel.addFriend(uuid)
@@ -67,6 +60,12 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
             adapter.setFriendsList(it)
         }
         mainViewModel.getListFriends()
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(it)
+            builder.setPositiveButton("OK") { _, _ -> }
+            builder.create().show()
+        }
     }
 
     override fun onClickItem(item: User) {

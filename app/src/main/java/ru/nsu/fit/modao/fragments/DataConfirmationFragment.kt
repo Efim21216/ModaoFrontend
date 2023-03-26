@@ -60,7 +60,7 @@ class DataConfirmationFragment : Fragment(), AdapterListener<Expense> {
         builder.setMessage(item.usernamePaying + ": " + item.price)
         builder.setPositiveButton("Confirm") { _, _ ->
             val id = item.id
-            mainViewModel.confirmEvent(id!!.toLong(), args.group.id!!)
+            mainViewModel.confirmEvent( args.group.id!!, id!!.toLong())
         }
         builder.setNegativeButton("Cancel") { _, _ ->
             val id = item.id

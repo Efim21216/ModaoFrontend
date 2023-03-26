@@ -17,7 +17,11 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
     var sponsor: ParticipantEvent? = null
     private val handler = CoroutineExceptionHandler { _, throwable -> throwable.printStackTrace() }
     fun createExpense(description: String, cost: String, id: Long) {
-        var sum: Float
+        if (participants.value == null) {
+            message.value = "Server problems..."
+        }
+        participants.value?.forEach { participantEvent -> participantEvent.coefficient = 1f }
+        val sum: Float
         try {
             sum = cost.toFloat()
         } catch (e: NumberFormatException) {
@@ -40,7 +44,7 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
             val expense = Expense(
                 name = description, price = sum,
                 customPairIdCoefficientList = participantsEvent,
-                groupId = id,
+                groupId = id, type = 0,
                 customPairIdCoefficientPaying = sponsor
             )
             val response = repository.createExpense(expense)

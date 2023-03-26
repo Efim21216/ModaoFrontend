@@ -1,5 +1,6 @@
 package ru.nsu.fit.modao.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         app = activity?.application as App
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         mainViewModel.getUserGroups()
         adapter.attachListener(this)
         mainViewModel.userGroups.observe(viewLifecycleOwner){
@@ -55,6 +56,16 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         binding.groupsRecycler.adapter = adapter
         binding.buttonAddGroup.setOnClickListener {
             findNavController().navigate(GroupsFragmentDirections.actionGroupsFragmentToCreateGroupFragment())
+        }
+        binding.buttonAddByUUID.setOnClickListener {
+            val uuid = binding.editGroupUUID.text.toString()
+            mainViewModel.addToGroup(uuid)
+        }
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(it)
+            builder.setPositiveButton("OK") { _, _ -> }
+            builder.create().show()
         }
     }
 

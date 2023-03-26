@@ -1,7 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,6 @@ import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.NotificationFriendsAdapter
 import ru.nsu.fit.modao.databinding.FragmentNotificationBinding
 import ru.nsu.fit.modao.models.Notification
-import ru.nsu.fit.modao.models.UserDebt
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
@@ -40,21 +39,25 @@ class NotificationFragment : Fragment() {
         val acceptFriend = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
                 mainViewModel.acceptInvitationFriend(item.id!!)
+                adapter.removeItem(item)
             }
         }
         val denyFriend = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
                 mainViewModel.denyInvitationFriend(item.id!!)
+                adapter.removeItem(item)
             }
         }
         val acceptGroup = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
                 mainViewModel.acceptInvitationGroup(item.id!!)
+                adapter.removeItem(item)
             }
         }
         val denyGroup = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
                 mainViewModel.denyInvitationGroup(item.id!!)
+                adapter.removeItem(item)
             }
         }
         adapter.attachListenerAcceptFriend(acceptFriend)
@@ -68,15 +71,23 @@ class NotificationFragment : Fragment() {
         app = requireActivity().application as App
         val repository = Repository(app)
         mainViewModel = ViewModelProvider(
-            requireActivity(),
+            this,
             RepositoryViewModelFactory(repository)
         )[MainViewModel::class.java]
 
+        mainViewModel.getInvitationsFriend()
         mainViewModel.getInvitationsGroup()
 
         mainViewModel.invitationUser.observe(viewLifecycleOwner) {
-            adapter.setList(it)
+            adapter.addToList(it)
         }
-
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            if (it == "Fail"){
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Server problems...")
+                builder.setPositiveButton("OK") { _, _ -> }
+                builder.create().show()
+            }
+        }
     }
 }

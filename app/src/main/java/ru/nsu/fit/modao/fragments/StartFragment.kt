@@ -47,7 +47,7 @@ class StartFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
             mainViewModel.getUser()
         }
-        mainViewModel.tipMessageStart.observe(viewLifecycleOwner){
+        mainViewModel.tipMessage.observe(viewLifecycleOwner){
             app.accessToken = null
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToAuthorizationFragment())
         }

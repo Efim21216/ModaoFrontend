@@ -1,6 +1,5 @@
 package ru.nsu.fit.modao.repository
 
-import android.util.Log
 import retrofit2.Response
 import ru.nsu.fit.modao.models.*
 import ru.nsu.fit.modao.utils.App
@@ -23,20 +22,20 @@ class Repository(private val app: App) {
         return app.api.createUser(user)
     }
 
-    suspend fun getGroupExpenses(id: Long): Response<Array<Expense>> {
-        return app.api.getGroupExpenses(AUTH + app.accessToken, id)
+    suspend fun getGroupExpenses(id: Long, mode: Int, type: Int): Response<Array<Expense>> {
+        return app.api.getGroupExpenses(AUTH + app.accessToken, id, mode, type)
     }
 
     suspend fun createExpense(expense: Expense): Response<Long> {
         return app.api.createExpense(AUTH + app.accessToken, expense)
     }
 
-    suspend fun addUserToGroup(groupId: Long, userId: Long): Response<Long> {
+    suspend fun addUserToGroup(groupId: Long, userId: Long): Response<Unit> {
         return app.api.addUserToGroup(AUTH + app.accessToken, groupId, userId)
     }
 
-    suspend fun confirmEvent(eventId: Long): Response<Unit> {
-        return app.api.confirmEvent(AUTH + app.accessToken, eventId)
+    suspend fun confirmEvent(groupId: Long, eventId: Long): Response<Unit> {
+        return app.api.confirmEvent(AUTH + app.accessToken, groupId, eventId)
     }
 
     suspend fun getUsersInGroup(groupId: Long): Response<Array<User>> {
@@ -90,5 +89,8 @@ class Repository(private val app: App) {
     }
     suspend fun getListFriends(): Response<Array<User>> {
         return app.api.getListFriends(AUTH + app.accessToken)
+    }
+    suspend fun addToGroup(groupUUID: String): Response<Unit> {
+        return app.api.addToGroup(AUTH + app.accessToken, groupUUID)
     }
 }

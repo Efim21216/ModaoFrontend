@@ -22,6 +22,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body group: Group
     ): Response<Long>
+    @PUT("/group/addUserInGroup/{groupUUID}")
+    suspend fun addToGroup(
+        @Header("Authorization") token: String,
+        @Path("groupUUID") groupUUID: String
+    ): Response<Unit>
 
     @POST("/user/reg")
     suspend fun createUser(@Body user: User): Response<Long>
@@ -32,10 +37,12 @@ interface ApiService {
         @Path("eventId") eventId: Long
     ): Response<Expense>
 
-    @GET("/event/listEventsConfirmed/{groupId}")
+    @GET("/event/listEventsConfirmed/{mode}/{groupId}/{type}")
     suspend fun getGroupExpenses(
         @Header("Authorization") token: String,
-        @Path("groupId") id: Long
+        @Path("groupId") id: Long,
+        @Path("mode") mode: Int,
+        @Path("type") type: Int
     ): Response<Array<Expense>>
 
     @GET("/event/listEventsUnconfirmed/{groupId}")
@@ -55,12 +62,14 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("groupId") groupId: Long,
         @Path("userId") userId: Long
-    ): Response<Long>
+    ): Response<Unit>
 
-    @PUT("/event/confirmation/{eventId}")
+    @PUT("/event/confirmation/{groupId}/{eventId}")
     suspend fun confirmEvent(
         @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long,
         @Path("eventId") eventId: Long
+
     ): Response<Unit>
 
     @PUT("/event/unconfirmation/{eventId}")
