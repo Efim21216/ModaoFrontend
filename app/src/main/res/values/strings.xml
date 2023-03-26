@@ -70,4 +70,8 @@
     <string name="events">Events</string>
     <string name="filter_events">Filter events</string>
     <string name="continue_button">Continue registration</string>
+    <string name="new_friend_notification">New friend notification</string>
+    <string name="new_group_notification">New group notification</string>
+    <string name="new_expense_notification">New expense notification</string>
+    <string name="my_expenses">My expenses</string>
 </resources>
