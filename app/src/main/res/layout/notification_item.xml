@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
+    android:layout_height="90dp"
     tools:ignore="TextSizeCheck">
 
     <ImageView
@@ -13,6 +13,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:contentDescription="@string/new_friend_notification"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,16 +23,32 @@
         android:id="@+id/nameNewFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/inter_medium"
         android:text="@string/test"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/frame_new_friend"
         app:layout_constraintEnd_toEndOf="@+id/frame_new_friend"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/new_friend"
+        app:layout_constraintTop_toTopOf="@+id/frame_new_friend"
+        app:layout_constraintVertical_bias="0.435" />
+
+    <TextView
+        android:id="@+id/new_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/new_friend"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_new_friend"
         app:layout_constraintStart_toStartOf="@+id/frame_new_friend"
         app:layout_constraintTop_toTopOf="@+id/frame_new_friend"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.435" />
 
     <ImageView
         android:id="@+id/frame_new_group"
@@ -40,6 +57,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:contentDescription="@string/new_group_notification"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_new_friend"
@@ -49,16 +67,32 @@
         android:id="@+id/nameNewGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/inter_medium"
         android:text="@string/test"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/frame_new_group"
         app:layout_constraintEnd_toEndOf="@+id/frame_new_group"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/new_group"
+        app:layout_constraintTop_toTopOf="@+id/frame_new_group"
+        app:layout_constraintVertical_bias="0.435" />
+
+    <TextView
+        android:id="@+id/new_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/new_group"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_new_group"
         app:layout_constraintStart_toStartOf="@+id/frame_new_group"
         app:layout_constraintTop_toTopOf="@+id/frame_new_group"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.435" />
 
     <ImageView
         android:id="@+id/frame_new_expense"
@@ -67,6 +101,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:contentDescription="@string/new_expense_notification"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_new_group"
@@ -76,15 +111,32 @@
         android:id="@+id/nameNewExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/inter_medium"
         android:text="@string/test"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/frame_new_expense"
         app:layout_constraintEnd_toEndOf="@+id/frame_new_expense"
         app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/new_group"
+        app:layout_constraintTop_toTopOf="@+id/frame_new_expense"
+        app:layout_constraintVertical_bias="0.435" />
+
+    <TextView
+        android:id="@+id/new_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/new_expense_notify"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_new_expense"
         app:layout_constraintStart_toStartOf="@+id/frame_new_expense"
         app:layout_constraintTop_toTopOf="@+id/frame_new_expense"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.435"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

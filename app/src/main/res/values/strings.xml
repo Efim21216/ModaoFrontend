@@ -74,4 +74,7 @@
     <string name="new_group_notification">New group notification</string>
     <string name="new_expense_notification">New expense notification</string>
     <string name="my_expenses">My expenses</string>
+    <string name="new_friend">New friend: </string>
+    <string name="new_group">New Group: </string>
+    <string name="new_expense_notify">New expense: </string>
 </resources>
