@@ -19,7 +19,7 @@
     <string name="description">Description</string>
     <string name="createGroup">Add new group</string>
     <string name="error">Error</string>
-    <string name="findByUuid">Find by UUID</string>
+    <string name="findByUuid">🔍 Find by UUID</string>
     <string name="notification">Notification</string>
     <string name="groupUuid">Group UUID</string>
     <string name="uuidShow">Your UUID</string>
@@ -77,4 +77,6 @@
     <string name="new_friend">New friend:</string>
     <string name="new_group">New Group:</string>
     <string name="new_expense_notify">New expense:</string>
+    <string name="add_new_friend">Add new friend</string>
+    <string name="add_by_uuid">🔍   Add by uuid</string>
 </resources>
