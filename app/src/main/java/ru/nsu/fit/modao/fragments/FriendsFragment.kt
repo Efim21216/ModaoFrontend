@@ -53,7 +53,7 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
         )[MainViewModel::class.java]
 
         binding.buttonAddFriend.setOnClickListener {
-            val uuid = binding.editUuid.text.toString()
+            val uuid = binding.AddByUUID.text.toString()
             mainViewModel.addFriend(uuid)
         }
         mainViewModel.listFriends.observe(viewLifecycleOwner) {

@@ -2,6 +2,7 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,34 +37,19 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val acceptFriend = object: AdapterListener<Notification> {
+        val friendListener = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
-                mainViewModel.acceptInvitationFriend(item.id!!)
-                adapter.removeItem(item)
+                listenerFriend(item)
             }
         }
-        val denyFriend = object: AdapterListener<Notification> {
+        val groupListener = object: AdapterListener<Notification> {
             override fun onClickItem(item: Notification) {
-                mainViewModel.denyInvitationFriend(item.id!!)
-                adapter.removeItem(item)
+                Log.d("MyTag", "Notification group")
+                listenerGroup(item)
             }
         }
-        val acceptGroup = object: AdapterListener<Notification> {
-            override fun onClickItem(item: Notification) {
-                mainViewModel.acceptInvitationGroup(item.id!!)
-                adapter.removeItem(item)
-            }
-        }
-        val denyGroup = object: AdapterListener<Notification> {
-            override fun onClickItem(item: Notification) {
-                mainViewModel.denyInvitationGroup(item.id!!)
-                adapter.removeItem(item)
-            }
-        }
-        adapter.attachListenerAcceptFriend(acceptFriend)
-        adapter.attachListenerDenyFriend(denyFriend)
-        adapter.attachListenerAcceptGroup(acceptGroup)
-        adapter.attachListenerDenyGroup(denyGroup)
+        adapter.attachListenerFriend(friendListener)
+        adapter.attachListenerGroup(groupListener)
         binding.recyclerNotification.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.recyclerNotification.adapter = adapter
@@ -89,5 +75,34 @@ class NotificationFragment : Fragment() {
                 builder.create().show()
             }
         }
+    }
+    private fun listenerFriend(item: Notification){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("New friend")
+        builder.setMessage(item.username + " wants to add you to the friends")
+        builder.setNegativeButton("Deny") {_, _ ->
+            mainViewModel.denyInvitationFriend(item.id!!)
+            adapter.removeItem(item)
+        }
+        builder.setPositiveButton("Accept") { _, _ ->
+            mainViewModel.acceptInvitationFriend(item.id!!)
+            adapter.removeItem(item)
+        }
+        builder.create().show()
+    }
+    private fun listenerGroup(item: Notification){
+        Log.d("MyTag", "Notification listener")
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Invitation to a group")
+        builder.setMessage(item.username + " invites you to the group " + item.nameGroup)
+        builder.setNegativeButton("Deny") {_, _ ->
+            mainViewModel.denyInvitationGroup(item.id!!)
+            adapter.removeItem(item)
+        }
+        builder.setPositiveButton("Accept") { _, _ ->
+            mainViewModel.acceptInvitationGroup(item.id!!)
+            adapter.removeItem(item)
+        }
+        builder.create().show()
     }
 }
