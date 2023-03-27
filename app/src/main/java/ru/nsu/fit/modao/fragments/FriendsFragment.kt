@@ -1,16 +1,21 @@
 package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.FriendsAdapter
+import ru.nsu.fit.modao.databinding.FilterExpensesBinding
 import ru.nsu.fit.modao.databinding.FragmentFriendsBinding
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.repository.Repository
@@ -66,6 +71,7 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+
     }
 
     override fun onClickItem(item: User) {

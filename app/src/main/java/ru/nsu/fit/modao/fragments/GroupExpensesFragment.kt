@@ -2,17 +2,21 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
+import ru.nsu.fit.modao.databinding.FilterExpensesBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupExpensesBinding
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.repository.Repository
@@ -31,6 +35,8 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var showEvent = true
     private var showTransfer = true
     private var showOnlyMy = false
+    private lateinit var window: PopupWindow
+    private lateinit var bindingPopupWindow: FilterExpensesBinding
     val Boolean.intValue
         get() = if (this) 1 else 0
     override fun onCreateView(
@@ -78,11 +84,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
                     .actionGroupExpensesFragmentToUserExpensesInGroupFragment(args.group)
             )
         }
-
-        binding.buttonEvent.isChecked = true
-        binding.buttonTransfer.isChecked = true
-        setButton()
-
+        setPopupWindow()
         mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
 
         mainViewModel.infoEvent.observe(viewLifecycleOwner) {
@@ -100,50 +102,63 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+        binding.filterIcon.setOnClickListener {
+            window.showAsDropDown(binding.filterIcon, -250, 0)
+        }
 
     }
 
+    private fun setPopupWindow(){
+        window = PopupWindow(context)
+        val view = LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
+        bindingPopupWindow = FilterExpensesBinding.bind(view)
+        window.contentView = bindingPopupWindow.root
+        window.isFocusable = true
+        bindingPopupWindow.event.isChecked = true
+        bindingPopupWindow.transfer.isChecked = true
+        setButton()
+    }
     private fun setButton(){
-        binding.buttonTransfer.setOnClickListener {
+        bindingPopupWindow.transfer.setOnClickListener {
             if (showTransfer){
-                if (binding.buttonEvent.isChecked){
+                if (bindingPopupWindow.event.isChecked){
                     showTransfer = false
-                    binding.buttonTransfer.isChecked = false
+                    bindingPopupWindow.transfer.isChecked = false
                 }
             } else {
                 showTransfer = true
-                binding.buttonTransfer.isChecked = true
+                bindingPopupWindow.transfer.isChecked = true
             }
             getGroupExpenses()
         }
 
-        binding.buttonEvent.setOnClickListener {
+        bindingPopupWindow.event.setOnClickListener {
             if (showEvent) {
-                if (binding.buttonTransfer.isChecked) {
-                    binding.buttonEvent.isChecked = false
+                if (bindingPopupWindow.transfer.isChecked) {
+                    bindingPopupWindow.event.isChecked = false
                     showEvent = false
                 }
             } else {
-                binding.buttonEvent.isChecked = true
+                bindingPopupWindow.event.isChecked = true
                 showEvent = true
             }
             getGroupExpenses()
         }
-        binding.buttonOnlyMy.setOnClickListener {
+        bindingPopupWindow.onlyMy.setOnClickListener {
             showOnlyMy = !showOnlyMy
-            binding.buttonOnlyMy.isChecked = showOnlyMy
+            bindingPopupWindow.onlyMy.isChecked = showOnlyMy
             getGroupExpenses()
         }
     }
     private fun getGroupExpenses(){
-        if (binding.buttonTransfer.isChecked){
-            if (binding.buttonEvent.isChecked) {
+        if (bindingPopupWindow.transfer.isChecked){
+            if (bindingPopupWindow.event.isChecked) {
                 mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
             } else {
                 mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 1)
             }
         } else {
-            if (binding.buttonEvent.isChecked) {
+            if (bindingPopupWindow.event.isChecked) {
                 mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 0)
             }
         }

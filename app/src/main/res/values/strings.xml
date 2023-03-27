@@ -11,6 +11,9 @@
     <string name="friendNotification">Friend notification</string>
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
+    <string name="onlyMy">Only my</string>
+    <string name="event">Events</string>
+    <string name="transfer">Transfers</string>
     <string name="my_debt_caps"> MY DEBT </string>
     <string name="my_debt"> My debt </string>
     <string name="add_event">ADD EVENT</string>
