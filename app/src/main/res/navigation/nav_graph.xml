@@ -152,6 +152,9 @@
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_groupMembersFragment_to_addMemberFragment"
+                app:destination="@id/addMemberFragment" />
         </fragment>
         <fragment
             android:id="@+id/userExpensesInGroupFragment"
@@ -171,6 +174,11 @@
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
         </fragment>
+        <fragment
+            android:id="@+id/addMemberFragment"
+            android:name="ru.nsu.fit.modao.AddMemberFragment"
+            android:label="fragment_add_member"
+            tools:layout="@layout/fragment_add_member" />
     </navigation>
     <fragment
         android:id="@+id/startFragment"

@@ -54,8 +54,8 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         }
 
         mainViewModel.getUsersInGroup(args.group.id!!)
-
-        binding.buttonAdd.setOnClickListener {
+        /*
+        binding.buttonAddMember.setOnClickListener {
             val id: Long
             try {
                 id = binding.editIdUser.text?.toString()?.toLong()!!
@@ -68,6 +68,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
             }
             mainViewModel.addUserToGroup(args.group.id!!, id)
         }
+        */
         mainViewModel.tipMessage.observe(viewLifecycleOwner) {
             val builder = AlertDialog.Builder(context)
             builder.setMessage(it)

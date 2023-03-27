@@ -12,8 +12,8 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="onlyMy">Only my</string>
-    <string name="event">Events</string>
-    <string name="transfer">Transfers</string>
+    <string name="only_expenses">Only expenses</string>
+    <string name="transfer">Only transfers</string>
     <string name="my_debt_caps"> MY DEBT </string>
     <string name="my_debt"> My debt </string>
     <string name="add_event">ADD EVENT</string>
@@ -82,4 +82,9 @@
     <string name="new_expense_notify">New expense:</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="add_by_uuid">🔍   Add by uuid</string>
+    <string name="add_member_to_the_group">Add member to the group</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_new_member">Select new member</string>
+    <string name="completed_the_selection">Completed the selection</string>
 </resources>
