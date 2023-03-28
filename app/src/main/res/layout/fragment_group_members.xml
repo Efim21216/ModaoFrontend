@@ -42,6 +42,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonAddMember"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:listitem="@layout/member_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
