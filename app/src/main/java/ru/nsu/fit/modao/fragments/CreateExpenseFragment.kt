@@ -63,12 +63,12 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
         mainViewModel =
             ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
 
-        mainViewModel.getUsersInGroup(args.group.id!!)
+        mainViewModel.getUsersInGroup(args.dataExpense.group.id!!)
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
             findNavController().navigate(
                 CreateExpenseFragmentDirections
-                    .actionCreateExpenseFragmentToGroupExpensesFragment(args.group)
+                    .actionCreateExpenseFragmentToGroupExpensesFragment(args.dataExpense.group)
             )
         }
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
@@ -95,6 +95,13 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
             builder.setMessage(it)
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
+        }
+        binding.buttonFinish.setOnClickListener {
+            createExpenseViewModel.createExpense(
+                args.dataExpense.description,
+                args.dataExpense.cost.toString(),
+                args.dataExpense.group.id!!
+            )
         }
     }
 

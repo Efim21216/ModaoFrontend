@@ -8,7 +8,7 @@ data class User(
     val bank: String? = null,
     val idPicture: Int? = null,
     val id: Long? = null,
-    val coefficient: Float? = null,
+
     val uuid: String? = null
     //val groupCustomPairIdNameList: ArrayList<Group>? = null
 )

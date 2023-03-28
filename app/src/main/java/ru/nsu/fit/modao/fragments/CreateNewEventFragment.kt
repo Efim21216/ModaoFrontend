@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.nsu.fit.modao.databinding.FragmentCreateNewEventBinding
+import ru.nsu.fit.modao.models.CreationExpense
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -44,6 +46,7 @@ class CreateNewEventFragment : Fragment() {
         initService()
 
         binding.buttonFinish.setOnClickListener {
+
             createExpenseViewModel.createExpense(
                 binding.enterDescription.text.toString(),
                 binding.enterCost.text.toString(),
@@ -83,6 +86,32 @@ class CreateNewEventFragment : Fragment() {
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group))
         }
+
+        binding.buttonMoreOptions.setOnClickListener {
+            val description = binding.enterDescription.text.toString()
+            val builder = AlertDialog.Builder(context)
+            builder.setPositiveButton("OK") { _, _ -> }
+            if (description == "") {
+                builder.setTitle("Enter description")
+                builder.create().show()
+                return@setOnClickListener
+            }
+            var cost: Float = 0f
+            try {
+                 cost = binding.enterCost.text.toString().toFloat()
+            } catch (e: NumberFormatException) {
+                builder.setTitle("Enter cost")
+                builder.create().show()
+                return@setOnClickListener
+            }
+
+            findNavController().navigate(CreateNewEventFragmentDirections
+                .actionCreateAnExpenseFragmentToCreateExpenseFragment(CreationExpense(args.group, cost, description)))
+        }
+        binding.buttonAll.setOnClickListener {
+            createExpenseViewModel.participants.value?.forEach { user -> user.selected = true }
+            Toast.makeText(context, "All members are selected", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initService() {
@@ -92,6 +121,6 @@ class CreateNewEventFragment : Fragment() {
         createExpenseViewModel =
             ViewModelProvider(this, viewModelFactory)[CreateExpenseViewModel::class.java]
         mainViewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
+            ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 }

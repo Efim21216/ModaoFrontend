@@ -61,6 +61,18 @@
                 app:destination="@id/createGroupFragment" />
         </fragment>
         <fragment
+            android:id="@+id/addMemberFragment"
+            android:name="ru.nsu.fit.modao.fragments.AddMemberFragment"
+            android:label="fragment_add_member"
+            tools:layout="@layout/fragment_add_member" >
+            <action
+                android:id="@+id/action_addMemberFragment_to_groupMembersFragment"
+                app:destination="@id/groupMembersFragment" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </fragment>
+        <fragment
             android:id="@+id/createAnExpenseFragment"
             android:name="ru.nsu.fit.modao.fragments.CreateNewEventFragment"
             android:label="fragment_create_an_expense"
@@ -128,12 +140,11 @@
             android:name="ru.nsu.fit.modao.fragments.CreateExpenseFragment"
             android:label="fragment_create_expense"
             tools:layout="@layout/fragment_create_expense" >
-            <argument
-                android:name="group"
-                app:argType="ru.nsu.fit.modao.models.Group" />
             <action
                 android:id="@+id/action_createExpenseFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
+            <argument android:name="dataExpense"
+                app:argType="ru.nsu.fit.modao.models.CreationExpense" />
         </fragment>
         <fragment
             android:id="@+id/dataConfirmationFragment"
@@ -155,6 +166,7 @@
             <action
                 android:id="@+id/action_groupMembersFragment_to_addMemberFragment"
                 app:destination="@id/addMemberFragment" />
+
         </fragment>
         <fragment
             android:id="@+id/userExpensesInGroupFragment"
@@ -174,11 +186,6 @@
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
         </fragment>
-        <fragment
-            android:id="@+id/addMemberFragment"
-            android:name="ru.nsu.fit.modao.AddMemberFragment"
-            android:label="fragment_add_member"
-            tools:layout="@layout/fragment_add_member" />
     </navigation>
     <fragment
         android:id="@+id/startFragment"
@@ -197,5 +204,6 @@
         android:name="ru.nsu.fit.modao.fragments.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+
 
 </navigation>

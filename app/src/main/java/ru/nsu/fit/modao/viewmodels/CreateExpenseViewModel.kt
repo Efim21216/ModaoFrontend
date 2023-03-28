@@ -19,6 +19,11 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
     fun createExpense(description: String, cost: String, id: Long) {
         if (participants.value == null) {
             message.value = "Server problems..."
+            return
+        }
+        if (description == "") {
+            message.value = "Enter the description"
+            return
         }
         participants.value?.forEach { participantEvent -> participantEvent.coefficient = 1f }
         val sum: Float
