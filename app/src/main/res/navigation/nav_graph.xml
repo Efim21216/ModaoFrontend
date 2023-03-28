@@ -140,12 +140,11 @@
             android:name="ru.nsu.fit.modao.fragments.CreateExpenseFragment"
             android:label="fragment_create_expense"
             tools:layout="@layout/fragment_create_expense" >
-            <argument
-                android:name="group"
-                app:argType="ru.nsu.fit.modao.models.Group" />
             <action
                 android:id="@+id/action_createExpenseFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
+            <argument android:name="dataExpense"
+                app:argType="ru.nsu.fit.modao.models.CreationExpense" />
         </fragment>
         <fragment
             android:id="@+id/dataConfirmationFragment"

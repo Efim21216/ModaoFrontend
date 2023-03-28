@@ -19,7 +19,6 @@ class SelectAdapter: RecyclerView.Adapter<SelectAdapter.SelectHolder>() {
     }
     fun setList(list: Array<ParticipantEvent>){
         this.list = list
-        Log.d("MyTag", "Set list")
         notifyDataSetChanged()
     }
     fun unselectAllParticipants(){
@@ -33,7 +32,6 @@ class SelectAdapter: RecyclerView.Adapter<SelectAdapter.SelectHolder>() {
     class SelectHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ParticipantItemBinding.bind(item)
         fun bind(elem: ParticipantEvent, listener: CustomListener){
-            Log.d("MyTag", "Select holder")
             binding.nameParticipant.text = elem.username
             binding.checkParticipant.isChecked = elem.selected
             binding.checkParticipant.setOnClickListener(){
@@ -48,7 +46,6 @@ class SelectAdapter: RecyclerView.Adapter<SelectAdapter.SelectHolder>() {
     }
 
     override fun onBindViewHolder(holder: SelectHolder, position: Int) {
-        Log.d("MyTag", "Select bind")
         holder.bind(list[position], listener!!)
     }
 
