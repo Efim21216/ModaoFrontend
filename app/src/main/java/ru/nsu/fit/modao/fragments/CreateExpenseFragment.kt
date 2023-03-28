@@ -65,13 +65,6 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
 
         mainViewModel.getUsersInGroup(args.group.id!!)
 
-        binding.createExpense.setOnClickListener {
-            createExpenseViewModel.createExpense(
-                binding.descriptionExpense.text.toString(),
-                binding.editCost.text.toString(),
-                args.group.id!!
-            )
-        }
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
             findNavController().navigate(
                 CreateExpenseFragmentDirections
