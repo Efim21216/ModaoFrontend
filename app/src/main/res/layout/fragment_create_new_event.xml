@@ -87,6 +87,7 @@
         android:background="#FFFFFF"
         android:fontFamily="@font/inter_bold"
         android:text="@string/new_event"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
