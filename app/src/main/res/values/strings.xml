@@ -90,4 +90,6 @@
     <string name="it_s_a_new_expense">It\'s a new expense</string>
     <string name="it_s_a_new_transfer">It\'s a new transfer</string>
     <string name="select_participant">Select participant</string>
+    <string name="not_an_expense">not an expense</string>
+    <string name="not_a_transfer">not a transfer</string>
 </resources>

@@ -8,6 +8,36 @@
     tools:context=".fragments.CreateNewEventFragment">
 
     <ImageButton
+        android:id="@+id/gray_new_transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/not_a_transfer"
+        android:src="@drawable/gray_new_transfer"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createExpenseHead" />
+
+    <ImageButton
+        android:id="@+id/gray_new_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/not_an_expense"
+        android:src="@drawable/gray_new_expense"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createExpenseHead" />
+
+    <ImageButton
         android:id="@+id/selectParticipant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,10 +62,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/new_expense"
         android:contentDescription="@string/it_s_a_new_expense"
+        android:src="@drawable/new_expense"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createExpenseHead" />
@@ -46,10 +77,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:src="@drawable/new_transfer"
         android:contentDescription="@string/it_s_a_new_transfer"
+        android:src="@drawable/new_transfer"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createExpenseHead" />
 
