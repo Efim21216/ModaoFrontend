@@ -8,20 +8,23 @@
     tools:context=".fragments.CreateNewEventFragment">
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/selectParticipant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="130dp"
         android:layout_marginBottom="119dp"
-        android:contentDescription="@string/select_participant"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/select_participant"
         android:src="@drawable/button_select_participant"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/new_expense_button"
@@ -62,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#4DFFFFFF" />
+        app:tint="#33FFFFFF" />
 
     <TextView
         android:id="@+id/new_expense"
@@ -83,29 +86,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="47dp"
-        android:layout_marginBottom="13dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/all_in_button"
         android:minHeight="48dp"
         android:src="@drawable/button_all_in"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMoreOptions"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/buttonTwo"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
 
     <ImageButton
         android:id="@+id/buttonTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="23dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/two_button"
         android:minHeight="48dp"
         android:src="@drawable/button_two"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/buttonMoreOptions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
@@ -116,12 +119,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="53dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="41dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/more_options_button"
         android:minHeight="48dp"
         android:src="@drawable/button_more_options"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
