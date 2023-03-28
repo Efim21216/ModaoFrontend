@@ -43,9 +43,9 @@
     <string name="data_conf">Data confirmation</string>
     <string name="add_group">Add group</string>
     <string name="info_group">Group info</string>
-    <string name="tip_who_prt">Who participated in the event</string>
+    <string name="participants">Participants</string>
     <string name="tip_who_spend">Who spent</string>
-    <string name="enterCoefficientP">Enter the coefficients of the participants</string>
+    <string name="enterCoefficientP">Coefficients</string>
     <string name="enterCoefficient">Enter coefficient</string>
     <string name="cost_new_expense">Cost of new expense</string>
     <string name="hint_cost">Enter the cost</string>
@@ -92,4 +92,7 @@
     <string name="select_participant">Select participant</string>
     <string name="not_an_expense">not an expense</string>
     <string name="not_a_transfer">not a transfer</string>
+    <string name="select_all">Select all</string>
+    <string name="unselect_all">Unselect all</string>
+    <string name="_1_0">1.0</string>
 </resources>

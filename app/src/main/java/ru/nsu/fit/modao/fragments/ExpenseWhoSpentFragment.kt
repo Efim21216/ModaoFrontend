@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter
-import ru.nsu.fit.modao.databinding.FragmentEnterCostBinding
+import ru.nsu.fit.modao.databinding.FragmentExpenseWhoSpentBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -18,9 +18,9 @@ import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
 
-class EnterCostFragment : Fragment(), ParticipantsAdapter.CustomListener,
+class ExpenseWhoSpentFragment : Fragment(), ParticipantsAdapter.CustomListener,
     ParticipantsAdapter.InitListener {
-    private var _binding: FragmentEnterCostBinding? = null
+    private var _binding: FragmentExpenseWhoSpentBinding? = null
     private val binding get() = _binding!!
     private var lastSelected: RadioButton? = null
     private val adapter: ParticipantsAdapter = ParticipantsAdapter()
@@ -31,7 +31,7 @@ class EnterCostFragment : Fragment(), ParticipantsAdapter.CustomListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEnterCostBinding.inflate(inflater, container, false)
+        _binding = FragmentExpenseWhoSpentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

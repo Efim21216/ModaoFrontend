@@ -1,5 +1,6 @@
 package ru.nsu.fit.modao.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuHolder>() {
     fun attachListener(listener: AdapterListener<String>){
         this.listener = listener
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<String>){
         this.list = list
         notifyDataSetChanged()
@@ -23,7 +25,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuHolder>() {
         val binding = MenuItemBinding.bind(item)
         fun bind(elem: String, listener: AdapterListener<String>){
             binding.menuItem.text = elem
-            view.setOnClickListener(){
+            view.setOnClickListener {
                 listener.onClickItem(elem)
             }
         }
