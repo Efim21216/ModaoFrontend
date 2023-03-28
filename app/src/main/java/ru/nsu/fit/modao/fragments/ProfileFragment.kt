@@ -1,6 +1,8 @@
 package ru.nsu.fit.modao.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.nsu.fit.modao.R
+import ru.nsu.fit.modao.adapter.AdapterListener
+import ru.nsu.fit.modao.adapter.MenuAdapter
 import ru.nsu.fit.modao.adapter.SelectAdapter
 import ru.nsu.fit.modao.databinding.FragmentAddMemberBinding
 import ru.nsu.fit.modao.databinding.FragmentProfileBinding
@@ -58,8 +62,6 @@ class ProfileFragment: Fragment() {
             findNavController().navigate(ProfileFragmentDirections
                 .actionProfileFragmentToAuthorizationFragment())
         }
-
-
     }
 
 }

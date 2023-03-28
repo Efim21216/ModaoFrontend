@@ -3,15 +3,11 @@ package ru.nsu.fit.modao;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import ru.nsu.fit.modao.databinding.ActivityMasterBinding;
@@ -19,6 +15,7 @@ import ru.nsu.fit.modao.databinding.ActivityMasterBinding;
 public class MasterActivity extends AppCompatActivity {
     ActivityMasterBinding binding;
     NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,4 +33,5 @@ public class MasterActivity extends AppCompatActivity {
             }
         });
     }
+
 }

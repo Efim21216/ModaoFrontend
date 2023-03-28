@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <RadioButton
-        android:id="@+id/event"
+        android:id="@+id/onlyMy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/onlyMy"
@@ -24,10 +24,10 @@
         android:textSize="18sp"
         android:fontFamily="@font/inter_medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event" />
+        app:layout_constraintTop_toBottomOf="@+id/onlyMy" />
 
     <RadioButton
-        android:id="@+id/onlyMy"
+        android:id="@+id/event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/only_expenses"
