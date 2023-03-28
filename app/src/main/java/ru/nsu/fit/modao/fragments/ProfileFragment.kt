@@ -1,16 +1,24 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.nsu.fit.modao.R
+import ru.nsu.fit.modao.adapter.SelectAdapter
+import ru.nsu.fit.modao.databinding.FragmentAddMemberBinding
 import ru.nsu.fit.modao.databinding.FragmentProfileBinding
+import ru.nsu.fit.modao.databinding.TestPopupBinding
+import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
@@ -50,5 +58,8 @@ class ProfileFragment: Fragment() {
             findNavController().navigate(ProfileFragmentDirections
                 .actionProfileFragmentToAuthorizationFragment())
         }
+
+
     }
+
 }
