@@ -63,7 +63,7 @@
     <string name="link">Link:</string>
     <string name="preferred_bank">Preferred bank:</string>
     <string name="create_expense_head">Create an expense picture</string>
-    <string name="new_expense">  New expense  </string>
+    <string name="new_event">    New event    </string>
     <string name="all_in_button">All in</string>
     <string name="two_button">Two</string>
     <string name="more_options_button">More options</string>
@@ -87,4 +87,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_new_member">Select new member</string>
     <string name="completed_the_selection">Completed the selection</string>
+    <string name="it_s_a_new_expense">It\'s a new expense</string>
+    <string name="it_s_a_new_transfer">It\'s a new transfer</string>
 </resources>

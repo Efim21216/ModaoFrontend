@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import ru.nsu.fit.modao.databinding.FragmentCreateAnExpenseBinding
+import ru.nsu.fit.modao.databinding.FragmentCreateNewEventBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -17,19 +17,19 @@ import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-class CreateAnExpenseFragment : Fragment() {
-    private var _binding: FragmentCreateAnExpenseBinding? = null
+class CreateNewEventFragment : Fragment() {
+    private var _binding: FragmentCreateNewEventBinding? = null
     private val binding get() = _binding!!
     private var app: App? = null
     private lateinit var createExpenseViewModel: CreateExpenseViewModel
     private lateinit var mainViewModel: MainViewModel
-    private val args by navArgs<CreateAnExpenseFragmentArgs>()
+    private val args by navArgs<CreateNewEventFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCreateAnExpenseBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateNewEventBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -80,7 +80,7 @@ class CreateAnExpenseFragment : Fragment() {
         }
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
-            findNavController().navigate(CreateAnExpenseFragmentDirections
+            findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group))
         }
     }

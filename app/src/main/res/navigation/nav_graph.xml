@@ -62,9 +62,9 @@
         </fragment>
         <fragment
             android:id="@+id/createAnExpenseFragment"
-            android:name="ru.nsu.fit.modao.fragments.CreateAnExpenseFragment"
+            android:name="ru.nsu.fit.modao.fragments.CreateNewEventFragment"
             android:label="fragment_create_an_expense"
-            tools:layout="@layout/fragment_create_an_expense" >
+            tools:layout="@layout/fragment_create_new_event" >
             <action
                 android:id="@+id/action_createAnExpenseFragment_to_createExpenseFragment"
                 app:destination="@id/createExpenseFragment" />
