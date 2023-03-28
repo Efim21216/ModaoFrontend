@@ -49,8 +49,6 @@ class ProfileFragment: Fragment() {
             findNavController().navigate(ProfileFragmentDirections
                 .actionProfileFragmentToAuthorizationFragment())
         }
-
-
     }
 
 }
