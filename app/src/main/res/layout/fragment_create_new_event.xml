@@ -8,6 +8,22 @@
     tools:context=".fragments.CreateNewEventFragment">
 
     <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="119dp"
+        android:contentDescription="@string/select_participant"
+        android:background="@android:color/transparent"
+        android:src="@drawable/button_select_participant"
+        app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+
+    <ImageButton
         android:id="@+id/new_expense_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +89,7 @@
         android:contentDescription="@string/all_in_button"
         android:minHeight="48dp"
         android:src="@drawable/button_all_in"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonMoreOptions"
         app:layout_constraintEnd_toStartOf="@+id/buttonTwo"
         app:layout_constraintStart_toStartOf="parent" />
@@ -88,6 +105,7 @@
         android:contentDescription="@string/two_button"
         android:minHeight="48dp"
         android:src="@drawable/button_two"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonMoreOptions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
@@ -103,6 +121,7 @@
         android:contentDescription="@string/more_options_button"
         android:minHeight="48dp"
         android:src="@drawable/button_more_options"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
