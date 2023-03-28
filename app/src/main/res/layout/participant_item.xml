@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/inter_light"
         android:text="@string/test"
         android:textColor="@color/black"
         android:textSize="24sp"

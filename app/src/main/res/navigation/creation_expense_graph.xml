@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/creation_expense_graph"
-    app:startDestination="@id/selectParticipantsFragment">
+    app:startDestination="@id/enterCoefficientsFragment">
     <fragment
         android:id="@+id/enterCoefficientsFragment"
         android:name="ru.nsu.fit.modao.fragments.EnterCoefficientsFragment"
