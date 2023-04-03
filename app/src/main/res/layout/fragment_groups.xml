@@ -11,13 +11,13 @@
         android:id="@+id/buttonAddByUUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/white"
         android:contentDescription="@string/add_new_friend"
         android:src="@drawable/add_friend_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/editGroupUUID"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/editGroupUUID" />
 
     <TextView
         android:id="@+id/groups"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonAddGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/editGroupUUID"
         tools:listitem="@layout/group_item" />
 
     <ImageButton
@@ -57,26 +57,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/button_add_group" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+    <EditText
+        android:id="@+id/editGroupUUID"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
+        android:autofillHints="phone"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="@string/add_by_uuid"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/buttonAddByUUID"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groups">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editGroupUUID"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:fontFamily="@font/inter_light"
-            android:hint="@string/findByUuid"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/groups" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

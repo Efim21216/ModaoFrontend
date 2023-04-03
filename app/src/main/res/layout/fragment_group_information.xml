@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:fontFamily="@font/inter_medium"
             android:text="@string/date_of_creation"
             android:textColor="@color/black"
@@ -60,26 +61,46 @@
 
         <TextView
             android:id="@+id/dataCreation"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/inter_light"
             android:textSize="20sp" />
-
-
         <TextView
+            android:id="@+id/titleGroupUuid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:fontFamily="@font/inter_medium"
             android:text="@string/groupUuid"
             android:textColor="@color/black"
             android:textSize="25sp" />
-
         <TextView
             android:id="@+id/groupUuid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:fontFamily="@font/inter_light"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/titleDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/groupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"

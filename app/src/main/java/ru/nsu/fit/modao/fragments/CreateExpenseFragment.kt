@@ -77,6 +77,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
                     ParticipantEvent(
                         username = user.username,
                         id = user.id,
+                        coefficient = 1f,
                         selected = true,
                         isSponsor = true
                     )
@@ -84,6 +85,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
                     ParticipantEvent(
                         username = user.username,
                         id = user.id,
+                        coefficient = 1f,
                         selected = true,
                         isSponsor = false
                     )

@@ -43,6 +43,15 @@ class GroupInformationFragment : Fragment() {
         mainViewModel.groupInfo.observe(viewLifecycleOwner) {
             binding.groupName.text = it.groupName
             binding.groupUuid.text = it.uuid
+            binding.groupDescription.text = it.description
+        }
+        mainViewModel.getListOrganizers(args.group.id!!)
+        mainViewModel.organizers.observe(viewLifecycleOwner) {
+            val isOrganizer = it.any { org -> org.id == app.userId }
+            if (isOrganizer) {
+                binding.titleGroupUuid.visibility = View.VISIBLE
+                binding.groupUuid.visibility = View.VISIBLE
+            }
         }
     }
 }

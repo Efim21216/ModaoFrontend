@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.NewMemberAdapter
 import ru.nsu.fit.modao.adapter.SelectAdapter
@@ -23,7 +24,7 @@ import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-class AddMemberFragment : Fragment(), AdapterListener<ParticipantEvent> {
+class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<ParticipantEvent> {
     private var _binding: FragmentAddMemberBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<AddMemberFragmentArgs>()
@@ -62,6 +63,7 @@ class AddMemberFragment : Fragment(), AdapterListener<ParticipantEvent> {
             mainViewModel.getListFriends()
             members = mainViewModel.usersInGroup.value?.toList()!!
         }
+        adapter.setList(arrayOf(ParticipantEvent(username = "Efim", id = 1, selected = false)))
         mainViewModel.listFriends.observe(viewLifecycleOwner) {
             listFriends = it.filter{ user -> !members.contains(user)}.map { user ->
                 ParticipantEvent(
@@ -74,9 +76,10 @@ class AddMemberFragment : Fragment(), AdapterListener<ParticipantEvent> {
         }
 
         adapter.attachListener(this)
+        binding.newMemberRecycler.adapter = adapter
         binding.newMemberRecycler.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.newMemberRecycler.adapter = adapter
+
         binding.buttonDone.setOnClickListener {
             val list = listFriends.filter { friend -> friend.selected }
             count = list.size

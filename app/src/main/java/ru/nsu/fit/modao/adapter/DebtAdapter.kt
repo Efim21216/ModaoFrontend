@@ -26,11 +26,12 @@ class DebtAdapter: RecyclerView.Adapter<DebtAdapter.DebtHolder>() {
             shortInfo.text = expense.username
             amountExpense.text = expense.debt
             // TODO check currency
-            if (expense.debt!!.replaceFirst(',','.').toDouble() <= 0){
-                currencyImage.setImageResource(R.drawable.ic_profit_rub)
-            } else {
+            if (expense.debt!!.replaceFirst(',','.').toDouble() < 0){
                 currencyImage.setImageResource(R.drawable.ic_loss_rub)
                 amountExpense.setTextColor(Color.parseColor("#D46E6E"))
+            } else {
+                currencyImage.setImageResource(R.drawable.ic_profit_rub)
+                amountExpense.setTextColor(Color.parseColor("#6ED4AB"))
             }
         }
     }

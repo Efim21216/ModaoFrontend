@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="400dp"
     tools:context=".fragments.AddMemberFragment">
 
 
@@ -25,20 +25,19 @@
         android:id="@+id/buttonDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:contentDescription="@string/completed_the_selection"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/completed_the_selection"
         android:src="@drawable/done_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newMemberRecycler"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_max ="290dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="30dp"

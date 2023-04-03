@@ -1,5 +1,6 @@
 package ru.nsu.fit.modao.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import ru.nsu.fit.modao.models.User
 
 class NewMemberAdapter: RecyclerView.Adapter<NewMemberAdapter.NewMemberHolder>() {
     private var listener: AdapterListener<ParticipantEvent>? = null
-    private var list: Array<ParticipantEvent> = arrayOf()
+    private var list: Array<ParticipantEvent> = arrayOf(ParticipantEvent(username = "Efim", id = 1, selected = false))
 
     fun attachListener(listener: AdapterListener<ParticipantEvent>){
         this.listener = listener

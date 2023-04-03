@@ -25,6 +25,7 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
             message.value = "Enter the description"
             return
         }
+
         participants.value?.forEach { participantEvent -> participantEvent.coefficient = 1f }
         val sum: Float
         try {
@@ -43,6 +44,19 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
             ?.filter { it.selected && !it.isSponsor }?.toTypedArray()
         if (participantsEvent!!.isEmpty()) {
             message.value = "Select participants"
+            return
+        }
+        try {
+            participantsEvent.forEach { user ->
+                if (user.assumedCoefficient != null){
+                    user.coefficient = user.assumedCoefficient?.toFloat()
+                } else {
+                    user.coefficient = 1f
+                }
+
+            }
+        } catch (e: NumberFormatException) {
+            message.value = "Enter coefficient"
             return
         }
         viewModelScope.launch(handler) {
