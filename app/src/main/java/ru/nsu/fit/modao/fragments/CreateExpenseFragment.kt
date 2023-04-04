@@ -26,7 +26,7 @@ import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 class CreateExpenseFragment : Fragment(), AdapterListener<String> {
     private var _binding: FragmentCreateExpenseBinding? = null
     private val binding get() = _binding!!
-    private var menuList = listOf("Who spent", "Participants", "Coefficient", "More option")
+    private var menuList = listOf("Who spent", "Participants", "Coefficient")
     private val adapter = MenuAdapter()
     private var app: App? = null
     private val args by navArgs<CreateExpenseFragmentArgs>()
@@ -102,7 +102,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
             createExpenseViewModel.createExpense(
                 args.dataExpense.description,
                 args.dataExpense.cost.toString(),
-                args.dataExpense.group.id!!
+                args.dataExpense.group.id!!, 0
             )
         }
     }

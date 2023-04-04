@@ -4,20 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="420dp"
-    tools:context=".fragments.AddMemberFragment">
+    android:layout_height="430dp"
+    tools:context=".fragments.SelectSecondParticipantFragment">
 
 
     <TextView
         android:id="@+id/tipDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="130dp"
         android:fontFamily="@font/inter_medium"
-        android:text="@string/select_new_member"
+        android:text="@string/selectSecond"
         android:textColor="@color/gray"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,24 +28,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="1dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/completed_the_selection"
         android:src="@drawable/done_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tipDialog"
         app:layout_constraintStart_toEndOf="@+id/tipDialog"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tipDialog" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newMemberRecycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintHeight_max ="290dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:minHeight="100dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="290dp"
+        app:layout_constraintHeight_min="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipDialog"
         tools:listitem="@layout/participant_item" />

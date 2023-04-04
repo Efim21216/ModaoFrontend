@@ -19,6 +19,9 @@
     <string name="add_event">ADD EVENT</string>
     <string name="create_expense">Create expense</string>
     <string name="name_no">Name</string>
+    <string name="addMoreMember">Add more members to the group</string>
+    <string name="addMoreFriend">Add more friends</string>
+    <string name="selectSecond">Select the second participant</string>
     <string name="description">Description</string>
     <string name="createGroup">Add new group</string>
     <string name="error">Error</string>

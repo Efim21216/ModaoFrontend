@@ -1,21 +1,18 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.NewMemberAdapter
-import ru.nsu.fit.modao.adapter.SelectAdapter
 import ru.nsu.fit.modao.databinding.FragmentAddMemberBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
@@ -72,6 +69,10 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
                     selected = false
                 )
             }.toTypedArray()
+            if (listFriends.isEmpty()) {
+                binding.buttonDone.visibility = View.GONE
+                binding.tipDialog.text = getString(R.string.addMoreFriend)
+            }
             adapter.setList(listFriends)
         }
 

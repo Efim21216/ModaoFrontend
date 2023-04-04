@@ -3,17 +3,15 @@ package ru.nsu.fit.modao.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.modao.R
-import ru.nsu.fit.modao.databinding.ParticipantItemBinding
 import ru.nsu.fit.modao.databinding.ParticipantSpentItemBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 
 class ParticipantsAdapter: RecyclerView.Adapter<ParticipantsAdapter.ParticipantsHolder>() {
     private var listener: CustomListener? = null
-    private lateinit var list: Array<ParticipantEvent>
+    private var list: Array<ParticipantEvent> = arrayOf()
     private var initListener: InitListener? = null
 
     fun attachListener(listener: CustomListener){

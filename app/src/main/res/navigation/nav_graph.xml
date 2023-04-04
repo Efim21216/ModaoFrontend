@@ -86,6 +86,14 @@
             <action
                 android:id="@+id/action_createAnExpenseFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_selectSecondParticipantFragment"
+                app:destination="@id/selectSecondParticipantFragment" />
+            <argument
+                android:name="second"
+                app:argType="ru.nsu.fit.modao.models.ParticipantEvent"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </fragment>
         <fragment
             android:id="@+id/createGroupFragment"
@@ -186,6 +194,18 @@
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
         </fragment>
+        <dialog
+            android:id="@+id/selectSecondParticipantFragment"
+            android:name="ru.nsu.fit.modao.fragments.SelectSecondParticipantFragment"
+            android:label="fragment_select_second_participant"
+            tools:layout="@layout/fragment_select_second_participant" >
+            <action
+                android:id="@+id/action_selectSecondParticipantFragment_to_createAnExpenseFragment"
+                app:destination="@id/createAnExpenseFragment" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </dialog>
     </navigation>
     <fragment
         android:id="@+id/startFragment"

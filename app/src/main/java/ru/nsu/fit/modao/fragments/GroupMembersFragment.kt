@@ -2,29 +2,19 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.nsu.fit.modao.NewMemberPopup
-import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.FriendsAdapter
-import ru.nsu.fit.modao.adapter.NewMemberAdapter
 import ru.nsu.fit.modao.adapter.SelectAdapter
-import ru.nsu.fit.modao.databinding.FilterExpensesBinding
-import ru.nsu.fit.modao.databinding.FragmentAddMemberBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupMembersBinding
-import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -38,7 +28,6 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
     private lateinit var app: App
     private val args by navArgs<GroupMembersFragmentArgs>()
     private val adapter = FriendsAdapter()
-    private val adapterFriends = SelectAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

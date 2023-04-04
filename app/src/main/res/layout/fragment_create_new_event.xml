@@ -25,21 +25,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="40dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/not_an_expense"
         android:src="@drawable/gray_new_expense"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_expense" />
 
     <ImageButton
         android:id="@+id/selectParticipant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="130dp"
         android:layout_marginBottom="119dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/select_participant"
@@ -47,10 +44,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/new_expense_button"
@@ -69,15 +63,15 @@
         android:id="@+id/new_transfer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:contentDescription="@string/it_s_a_new_transfer"
         android:src="@drawable/new_transfer"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_expense" />
 
     <TextView
         android:id="@+id/new_expense"
@@ -142,10 +136,8 @@
 
     <ImageButton
         android:id="@+id/buttonFinish"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginEnd="118dp"
         android:layout_marginBottom="30dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/finish_button"
@@ -181,11 +173,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="24dp"
         android:maxWidth="488dp"
+        android:layout_marginTop="110dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gray_new_transfer">
+        app:layout_constraintTop_toBottomOf="@+id/new_expense">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/enterCost"

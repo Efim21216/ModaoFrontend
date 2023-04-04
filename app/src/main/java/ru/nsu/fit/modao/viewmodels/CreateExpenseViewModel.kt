@@ -16,7 +16,7 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
     val eventId = MutableLiveData<Long>()
     var sponsor: ParticipantEvent? = null
     private val handler = CoroutineExceptionHandler { _, throwable -> throwable.printStackTrace() }
-    fun createExpense(description: String, cost: String, id: Long) {
+    fun createExpense(description: String, cost: String, id: Long, type: Int) {
         if (participants.value == null) {
             message.value = "Server problems..."
             return
@@ -63,7 +63,7 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
             val expense = Expense(
                 name = description, price = sum,
                 customPairIdCoefficientList = participantsEvent,
-                groupId = id, type = 0,
+                groupId = id, type = type,
                 customPairIdCoefficientPaying = sponsor
             )
             val response = repository.createExpense(expense)
