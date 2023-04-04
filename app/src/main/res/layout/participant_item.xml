@@ -9,20 +9,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/inter_light"
+        android:fontFamily="@font/roboto"
         android:text="@string/test"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/checkParticipant"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/nameParticipant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/nameParticipant" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

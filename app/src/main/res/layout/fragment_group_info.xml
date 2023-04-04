@@ -5,15 +5,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.GroupInfoFragment">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_medium"
+        android:fontFamily="@font/roboto"
         android:text="@string/name"
-        android:textSize="20sp"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
@@ -23,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/roboto_slab_bold"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/subtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -98,10 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginBottom="12dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/info"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:fontFamily="@font/inter"
+        android:textSize="@dimen/subtitle"
         app:layout_constraintBottom_toBottomOf="@+id/groupInformation"
         app:layout_constraintStart_toStartOf="@+id/groupInformation"
         app:layout_constraintTop_toTopOf="@+id/groupInformation" />
@@ -112,23 +113,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginBottom="12dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/roboto"
         android:text="@string/members"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="@dimen/subtitle"
         app:layout_constraintBottom_toBottomOf="@+id/buttonMembers"
         app:layout_constraintStart_toStartOf="@+id/buttonMembers"
         app:layout_constraintTop_toTopOf="@+id/buttonMembers" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginBottom="12dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/roboto"
         android:text="@string/events"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="@dimen/subtitle"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGroupExpenses"
         app:layout_constraintStart_toStartOf="@+id/buttonGroupExpenses"
         app:layout_constraintTop_toTopOf="@+id/buttonGroupExpenses" />

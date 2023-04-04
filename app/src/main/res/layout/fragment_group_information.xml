@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="@font/roboto_slab_bold"
         android:text="@string/information"
         android:textColor="@color/black"
-        android:textSize="36sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,10 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/roboto"
             android:text="@string/name"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="@dimen/subtitle" />
 
         <TextView
             android:id="@+id/groupName"
@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/subtitle" />
 
         <TextView
             android:layout_width="match_parent"
@@ -93,20 +93,21 @@
             android:id="@+id/titleDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/description"
-            android:textColor="@color/black"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:textSize="25sp" />
+            android:fontFamily="@font/roboto"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/subtitle" />
+
         <TextView
             android:id="@+id/groupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/subtitle" />
 
 
     </LinearLayout>

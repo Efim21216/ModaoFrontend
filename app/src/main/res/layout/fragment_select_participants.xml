@@ -25,11 +25,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
-        android:fontFamily="@font/inter_light"
+        android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
         android:text="@string/participants"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,11 +53,11 @@
             android:layout_marginHorizontal="20dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/roboto"
             android:text="@string/select_all"
             android:textAllCaps="false"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:textSize="@dimen/plain_text" />
 
         <Button
             android:id="@+id/buttonUnselect"
@@ -67,11 +67,11 @@
             android:layout_marginHorizontal="20dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/roboto"
             android:text="@string/unselect_all"
             android:textAllCaps="false"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:textSize="@dimen/plain_text" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

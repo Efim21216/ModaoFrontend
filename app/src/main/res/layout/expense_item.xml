@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp">
@@ -11,6 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:contentDescription="@string/money"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_money" />
@@ -20,10 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:fontFamily="@font/inter"
+        android:fontFamily="@font/roboto"
         android:text="@string/test"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
@@ -32,23 +32,26 @@
         android:id="@+id/amountExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/inter"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/testNum"
+        android:textAlignment="viewEnd"
         android:textColor="@color/profit"
-        android:textSize="25dp"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintBottom_toBottomOf="@+id/currencyImage"
         app:layout_constraintEnd_toStartOf="@+id/currencyImage"
         app:layout_constraintTop_toTopOf="@+id/currencyImage" />
 
     <ImageView
         android:id="@+id/currencyImage"
-        android:layout_width="22dp"
-        android:layout_height="26dp"
+        android:layout_width="16sp"
+        android:layout_height="16dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="@string/ruble"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:srcCompat="@drawable/ic_profit_rub" />
+        app:srcCompat="@drawable/ruble_sign" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

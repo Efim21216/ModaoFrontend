@@ -79,11 +79,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="#FFFFFF"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="@font/roboto_slab_bold"
         android:text="@string/new_event"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -162,10 +162,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto"
             android:gravity="top"
             android:hint="@string/enter_description"
             android:maxLength="150"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:textSize="@dimen/plain_text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -184,10 +186,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto"
             android:hint="@string/enter_cost"
             android:inputType="numberSigned"
             android:maxWidth="488dp"
-            android:maxLength="150" />
+            android:maxLength="150"
+            android:textSize="@dimen/plain_text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

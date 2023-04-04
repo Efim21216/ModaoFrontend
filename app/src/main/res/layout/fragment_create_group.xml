@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="@font/roboto_slab_bold"
         android:text="@string/createGroup"
         android:textColor="@color/black"
-        android:textSize="36sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,12 +64,14 @@
             android:id="@+id/descriptionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
             android:gravity="top"
             android:hint="@string/description"
             android:inputType="textMultiLine"
             android:lines="3"
             android:maxLength="150"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:textSize="@dimen/plain_text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -87,8 +89,10 @@
             android:id="@+id/nameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/name_no"
             android:maxLength="15"
-            android:hint="@string/name_no" />
+            android:textSize="@dimen/plain_text" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

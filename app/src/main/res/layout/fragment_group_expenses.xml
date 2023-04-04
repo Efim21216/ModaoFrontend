@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="@font/roboto_slab_bold"
         android:text="@string/events"
         android:textColor="@color/black"
-        android:textSize="36sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,40 +43,43 @@
 
         <Button
             android:id="@+id/buttonAddEvent"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
+            android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/add_event"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/buttonMyDebt"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="25dp"
             android:layout_weight="1"
+            android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/my_debt_caps"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/filterIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="33dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/filter_events"
         android:minWidth="50dp"
         android:minHeight="50dp"
         android:src="@drawable/filter_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/groups"
+        app:layout_constraintEnd_toEndOf="@+id/expensesRecycler"
+        app:layout_constraintTop_toTopOf="@+id/groups" />
 
 
 

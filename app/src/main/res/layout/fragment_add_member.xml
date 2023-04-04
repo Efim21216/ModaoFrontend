@@ -12,26 +12,27 @@
         android:id="@+id/tipDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="37dp"
-        android:fontFamily="@font/inter_medium"
+        android:fontFamily="@font/roboto"
         android:text="@string/select_new_member"
         android:textColor="@color/gray"
-        android:textSize="24sp"
+        android:textSize="@dimen/subtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageButton
         android:id="@+id/buttonDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/completed_the_selection"
         android:src="@drawable/done_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tipDialog"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tipDialog"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tipDialog" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newMemberRecycler"

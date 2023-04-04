@@ -26,7 +26,7 @@
     <string name="createGroup">Add new group</string>
     <string name="error">Error</string>
     <string name="findByUuid">🔍 Find by group code</string>
-    <string name="notification">Notification</string>
+    <string name="notification">Notifications</string>
     <string name="groupUuid">Group code:</string>
     <string name="uuidShow">Your code:</string>
     <string name="alreadyExist">User with this login already exists</string>
@@ -98,4 +98,7 @@
     <string name="select_all">Select all</string>
     <string name="unselect_all">Unselect all</string>
     <string name="_1_0">1.0</string>
+    <string name="money">money</string>
+    <string name="ruble">ruble</string>
+    <string name="finish_the_creation">finish the creation</string>
 </resources>

@@ -10,9 +10,9 @@
         android:id="@+id/onlyMy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="@string/onlyMy"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter_medium"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +20,9 @@
         android:id="@+id/transfer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="@string/transfer"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter_medium"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/onlyMy" />
 
@@ -30,9 +30,9 @@
         android:id="@+id/event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="@string/only_expenses"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter_medium"
+        android:textSize="@dimen/plain_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/transfer" />
 
