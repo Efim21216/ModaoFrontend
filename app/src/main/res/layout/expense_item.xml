@@ -52,6 +52,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:srcCompat="@drawable/ruble_sign" />
+        app:srcCompat="@drawable/ic_profit_rub" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

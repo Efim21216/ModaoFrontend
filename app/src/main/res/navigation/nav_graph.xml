@@ -90,8 +90,8 @@
                 android:id="@+id/action_createAnExpenseFragment_to_selectSecondParticipantFragment"
                 app:destination="@id/selectSecondParticipantFragment" />
             <argument
-                android:name="second"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent"
+                android:name="infoExpense"
+                app:argType="ru.nsu.fit.modao.models.CreationExpenseViaBottom"
                 app:nullable="true"
                 android:defaultValue="@null" />
         </fragment>
@@ -205,6 +205,9 @@
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
+            <argument
+                android:name="infoExpense"
+                app:argType="ru.nsu.fit.modao.models.CreationExpenseViaBottom" />
         </dialog>
     </navigation>
     <fragment

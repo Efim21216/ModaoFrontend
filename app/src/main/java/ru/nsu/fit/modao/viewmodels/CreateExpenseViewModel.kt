@@ -59,6 +59,9 @@ class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
             message.value = "Enter coefficient"
             return
         }
+        if (type == 1) {
+            sponsor.coefficient = 0f
+        }
         viewModelScope.launch(handler) {
             val expense = Expense(
                 name = description, price = sum,
