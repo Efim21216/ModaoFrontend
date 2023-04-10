@@ -72,6 +72,7 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
             if (listFriends.isEmpty()) {
                 binding.buttonDone.visibility = View.GONE
                 binding.tipDialog.text = getString(R.string.addMoreFriend)
+                binding.buttonGo.visibility = View.VISIBLE
             }
             adapter.setList(listFriends)
         }
@@ -87,6 +88,9 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
             list.forEach { friend -> mainViewModel.addUserToGroup(args.group.id!!, friend.id!!) }
             findNavController().navigate(AddMemberFragmentDirections
                 .actionAddMemberFragmentToGroupMembersFragment(args.group))
+        }
+        binding.buttonGo.setOnClickListener {
+            findNavController().navigate(R.id.action_global_friends_fragment)
         }
     }
 

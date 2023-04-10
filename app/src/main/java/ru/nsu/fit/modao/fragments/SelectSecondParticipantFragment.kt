@@ -65,6 +65,7 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
             if (list.isEmpty()) {
                 binding.buttonDone.visibility = View.GONE
                 binding.tipDialog.text = getString(R.string.addMoreMember)
+                binding.buttonGo.visibility = View.VISIBLE
             }
             adapter.setList(list)
         }
@@ -81,6 +82,10 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
             description = args.infoExpense.description)
             action.infoExpense = arg
             findNavController().navigate(action)
+        }
+        binding.buttonGo.setOnClickListener {
+            findNavController().navigate(SelectSecondParticipantFragmentDirections
+                .actionSelectSecondParticipantFragmentToGroupMembersFragment(args.group))
         }
     }
 
