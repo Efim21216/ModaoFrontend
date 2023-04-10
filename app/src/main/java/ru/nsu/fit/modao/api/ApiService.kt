@@ -31,10 +31,11 @@ interface ApiService {
     @POST("/user/reg")
     suspend fun createUser(@Body user: User): Response<Long>
 
-    @GET("/event/info/{eventId}")
+    @GET("/event/info/{groupId}/{eventId}")
     suspend fun getEventInfo(
         @Header("Authorization") token: String,
-        @Path("eventId") eventId: Long
+        @Path("eventId") eventId: Long,
+        @Path("groupId") groupId: Long
     ): Response<Expense>
 
     @GET("/event/listEventsConfirmed/{mode}/{groupId}/{type}")

@@ -132,9 +132,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getEventInfo(eventId: Long){
+    fun getEventInfo(eventId: Long, groupId: Long){
         viewModelScope.launch(handler) {
-            val response = repository.getEventInfo(eventId)
+            val response = repository.getEventInfo(eventId, groupId)
             if (response.isSuccessful){
                 infoEvent.value = response.body()
             } else {
