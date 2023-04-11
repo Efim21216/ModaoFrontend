@@ -7,17 +7,17 @@
     tools:context=".fragments.FriendsFragment">
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/addByUserCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="@string/add_by_uuid"
+        android:contentDescription="@string/add_by_user_code_field"
         android:src="@drawable/gray_background"
         app:layout_constraintEnd_toStartOf="@+id/buttonAddFriend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groups" />
+        app:layout_constraintTop_toBottomOf="@+id/information_title" />
 
     <EditText
         android:id="@+id/AddByUUID"
@@ -31,10 +31,10 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="@dimen/plain_text"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-        app:layout_constraintEnd_toEndOf="@+id/imageView16"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toTopOf="@+id/imageView16" />
+        app:layout_constraintBottom_toBottomOf="@+id/addByUserCode"
+        app:layout_constraintEnd_toEndOf="@+id/addByUserCode"
+        app:layout_constraintStart_toStartOf="@+id/addByUserCode"
+        app:layout_constraintTop_toTopOf="@+id/addByUserCode" />
 
     <ImageButton
         android:id="@+id/buttonAddFriend"
@@ -46,10 +46,10 @@
         android:contentDescription="@string/add_new_friend"
         android:src="@drawable/add_friend_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groups" />
+        app:layout_constraintTop_toBottomOf="@+id/information_title" />
 
     <TextView
-        android:id="@+id/groups"
+        android:id="@+id/information_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView16"
+        app:layout_constraintTop_toBottomOf="@+id/addByUserCode"
         tools:listitem="@layout/friend_item">
 
     </androidx.recyclerview.widget.RecyclerView>

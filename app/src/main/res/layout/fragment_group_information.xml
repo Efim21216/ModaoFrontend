@@ -6,34 +6,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.GroupInformationFragment">
 
-    <TextView
-        android:id="@+id/groups"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto_slab_bold"
-        android:text="@string/information"
-        android:textColor="@color/black"
-        android:textSize="@dimen/headers"
+        android:contentDescription="@string/info_group"
+        android:src="@drawable/group_information_head"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/information_title"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto_slab_bold"
+        android:gravity="center"
+        android:text="@string/information"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/headers"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
     <LinearLayout
         android:id="@+id/infoPerson"
-        android:layout_marginTop="30dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/white_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groups">
+        app:layout_constraintTop_toBottomOf="@+id/information_title">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/roboto"
             android:text="@string/name"
             android:textColor="@color/black"
@@ -46,52 +61,55 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto"
-            android:textSize="@dimen/subtitle" />
+            android:textSize="@dimen/subtitle"
+            android:visibility="visible" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/roboto"
             android:text="@string/date_of_creation"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="@dimen/subtitle"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/dataCreation"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/subtitle"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/titleGroupUuid"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/roboto"
             android:text="@string/groupUuid"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="@dimen/subtitle"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/groupUuid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:fontFamily="@font/inter_light"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/subtitle"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/titleDescription"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
@@ -116,14 +134,13 @@
         android:id="@+id/imageButton11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white"
         android:contentDescription="@string/edit"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/infoPerson"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

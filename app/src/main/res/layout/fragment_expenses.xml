@@ -7,7 +7,7 @@
     tools:context=".fragments.ExpensesFragment">
 
     <TextView
-        android:id="@+id/groups"
+        android:id="@+id/expenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groups"
+        app:layout_constraintTop_toBottomOf="@+id/expenses"
         tools:listitem="@layout/expense_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
