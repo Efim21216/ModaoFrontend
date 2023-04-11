@@ -25,7 +25,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val groupInfo = MutableLiveData<Group>()
     val invitationUser = MutableLiveData<Array<Notification>>()
     val listFriends = MutableLiveData<Array<User>>()
-    val countAdded = MutableLiveData<Int>(0)
+
 
     private val handler = CoroutineExceptionHandler { _, throwable -> messageHandler.value = throwable.message}
     fun getUser() {
@@ -104,9 +104,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     fun addUserToGroup(groupId: Long, userId: Long){
         viewModelScope.launch(handler) {
             val response = repository.addUserToGroup(groupId, userId)
-            if (response.isSuccessful){
-                countAdded.value?.inc()
-            } else {
+            if (!response.isSuccessful){
                 Log.e("My errors", "Error add friend")
             }
         }

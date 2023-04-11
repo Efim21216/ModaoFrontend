@@ -3,6 +3,7 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -42,6 +43,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.3'
 
 
     //Navigation graph
@@ -74,4 +76,12 @@ dependencies {
 
     //security
     implementation "androidx.security:security-crypto:1.1.0-alpha05"
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging'
+
 }

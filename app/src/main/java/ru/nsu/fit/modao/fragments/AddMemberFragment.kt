@@ -97,5 +97,6 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
     override fun onClickItem(item: ParticipantEvent) {
         item.selected = !item.selected
     }
+
 }
 
