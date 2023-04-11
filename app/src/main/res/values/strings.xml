@@ -101,4 +101,8 @@
     <string name="money">money</string>
     <string name="ruble">ruble</string>
     <string name="finish_the_creation">finish the creation</string>
+    <string name="group_members">Group members</string>
+    <string name="group_events">Group events</string>
+    <string name="data_confirmation_of_the_group">Data confirmation of the group</string>
+    <string name="group_head">Group head</string>
 </resources>
