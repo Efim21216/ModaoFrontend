@@ -54,8 +54,8 @@ class Repository(private val app: App) {
         return app.api.notConfirmEvent(AUTH + app.accessToken, eventId)
     }
 
-    suspend fun getEventInfo(eventId: Long): Response<Expense> {
-        return app.api.getEventInfo(AUTH + app.accessToken, eventId)
+    suspend fun getEventInfo(eventId: Long, groupId: Long): Response<Expense> {
+        return app.api.getEventInfo(AUTH + app.accessToken, eventId, groupId)
     }
     suspend fun getGroupUnconfirmedExpenses(groupId: Long): Response<Array<Expense>> {
         return app.api.getGroupUnconfirmedExpenses(AUTH + app.accessToken, groupId)

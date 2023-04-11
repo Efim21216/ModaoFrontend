@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter
 import ru.nsu.fit.modao.databinding.FragmentSelectSecondParticipantBinding
+import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
@@ -27,7 +28,7 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
 
     private var _binding: FragmentSelectSecondParticipantBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<AddMemberFragmentArgs>()
+    private val args by navArgs<SelectSecondParticipantFragmentArgs>()
     private lateinit var mainViewModel: MainViewModel
     private lateinit var app: App
     private val adapter = ParticipantsAdapter()
@@ -64,6 +65,7 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
             if (list.isEmpty()) {
                 binding.buttonDone.visibility = View.GONE
                 binding.tipDialog.text = getString(R.string.addMoreMember)
+                binding.buttonGo.visibility = View.VISIBLE
             }
             adapter.setList(list)
         }
@@ -75,8 +77,15 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
         binding.buttonDone.setOnClickListener {
             val action = SelectSecondParticipantFragmentDirections
                 .actionSelectSecondParticipantFragmentToCreateAnExpenseFragment(args.group)
-            action.second = lastUser
+            val arg = CreationExpenseViaBottom(second = lastUser,
+                isEvent = args.infoExpense.isEvent, cost = args.infoExpense.cost,
+            description = args.infoExpense.description)
+            action.infoExpense = arg
             findNavController().navigate(action)
+        }
+        binding.buttonGo.setOnClickListener {
+            findNavController().navigate(SelectSecondParticipantFragmentDirections
+                .actionSelectSecondParticipantFragmentToGroupMembersFragment(args.group))
         }
     }
 

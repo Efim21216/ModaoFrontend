@@ -50,4 +50,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tipDialog"
         tools:listitem="@layout/participant_item" />
 
+    <Button
+        android:id="@+id/buttonGo"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go"
+        app:layout_constraintBottom_toBottomOf="@+id/tipDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tipDialog"
+        app:layout_constraintTop_toTopOf="@+id/tipDialog" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.nsu.fit.modao.databinding.FragmentCreateNewEventBinding
 import ru.nsu.fit.modao.models.CreationExpense
+import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.repository.Repository
@@ -98,17 +98,23 @@ class CreateNewEventFragment : Fragment() {
         }
         binding.buttonTwo.setOnClickListener {
             findNavController().navigate(CreateNewEventFragmentDirections
-                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
+                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group,
+                    CreationExpenseViaBottom(isEvent = true,
+                        cost = binding.enterCost.text.toString(),
+                        description = binding.enterDescription.text.toString())))
         }
         binding.selectParticipant.setOnClickListener {
             findNavController().navigate(CreateNewEventFragmentDirections
-                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
+                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group,
+                    CreationExpenseViaBottom(isEvent = false,
+                        cost = binding.enterCost.text.toString(),
+                        description = binding.enterDescription.text.toString())))
         }
 
         binding.buttonFinish.setOnClickListener {
             var type = 0
             if (!binding.newExpenseButton.isVisible) {
-                if (args.second == null) {
+                if (args.infoExpense?.second == null) {
                     createExpenseViewModel.message.value = "Select the participant"
                     return@setOnClickListener
                 }
@@ -140,6 +146,19 @@ class CreateNewEventFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory)[CreateExpenseViewModel::class.java]
         mainViewModel =
             ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        if (args.infoExpense == null) {
+            return
+        }
+        if (args.infoExpense?.cost != ""){
+            binding.enterCost.setText(args.infoExpense?.cost)
+        }
+        if (args.infoExpense?.description != ""){
+            binding.enterDescription.setText(args.infoExpense?.description)
+        }
+        if (!args.infoExpense!!.isEvent){
+            changeMode(View.VISIBLE, View.GONE)
+        }
+
     }
     private fun createListParticipant(user: User): ParticipantEvent{
         if (user.id == app!!.userId) {
@@ -151,10 +170,7 @@ class CreateNewEventFragment : Fragment() {
             )
         } else {
             var select = true
-            if (args.second != null) {
-                Log.d("MyTag", args.second?.username!!)
-            }
-            if (args.second != null && args.second?.id != user.id){
+            if (args.infoExpense?.second != null && args.infoExpense?.second?.id != user.id){
                 select = false
             }
             return ParticipantEvent(

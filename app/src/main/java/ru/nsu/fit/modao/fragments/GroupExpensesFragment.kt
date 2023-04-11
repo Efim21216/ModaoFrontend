@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var showOnlyMy = false
     private lateinit var window: PopupWindow
     private lateinit var bindingPopupWindow: FilterExpensesBinding
-    val Boolean.intValue
+    private val Boolean.intValue
         get() = if (this) 1 else 0
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -164,6 +163,6 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         }
     }
     override fun onClickItem(item: Expense) {
-        mainViewModel.getEventInfo(item.id!!)
+        mainViewModel.getEventInfo(item.id!!, args.group.id!!)
     }
 }
