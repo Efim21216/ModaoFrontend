@@ -106,4 +106,10 @@
     <string name="group_events">Group events</string>
     <string name="data_confirmation_of_the_group">Data confirmation of the group</string>
     <string name="group_head">Group head</string>
+    <string name="created">Created:</string>
+    <string name="cost">Cost:</string>
+    <string name="see_details"><u>See details...</u></string>
+    <string name="confirm">Confirm?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -3,4 +3,5 @@
     <dimen name="headers">24sp</dimen>
     <dimen name="subtitle">20sp</dimen>
     <dimen name="plain_text">18sp</dimen>
+    <dimen name="small">16sp</dimen>
 </resources>
