@@ -1,10 +1,10 @@
 package ru.nsu.fit.modao.utils
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
+import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,6 +29,20 @@ class App: Application() {
     val api: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
+
+    override fun onCreate() {
+        super.onCreate()
+
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                return@addOnCompleteListener
+            }
+            val token = it.result
+            Log.d("MyTag", token)
+        }
+    }
+
     val encryptedSharedPreferences by lazy {
         val masterKey: MasterKey = MasterKey.Builder(applicationContext)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
