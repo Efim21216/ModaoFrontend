@@ -8,6 +8,7 @@ data class Expense (
     val groupId: Long? = null,
     val price: Float? = null,
     val userPayingId: Long? = null,
+    val usernameCreator: String? = null,
     val usernamePaying: String? = null,
     val customPairIdCoefficientList: Array<ParticipantEvent>? = null,
     val customPairIdCoefficientPaying: ParticipantEvent? = null,

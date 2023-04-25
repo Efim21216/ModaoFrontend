@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.utils
 
 import android.app.Application
+import android.content.IntentFilter
 import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -10,6 +11,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.nsu.fit.modao.api.ApiService
+import ru.nsu.fit.modao.notification.MyReceiver
+import ru.nsu.fit.modao.notification.PushService.Companion.INTENT_FILTER
 import ru.nsu.fit.modao.utils.Constants.Companion.BASE_URL
 
 class App: Application() {
@@ -32,8 +35,6 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (!it.isSuccessful) {
                 return@addOnCompleteListener
@@ -41,6 +42,10 @@ class App: Application() {
             val token = it.result
             Log.d("MyTag", token)
         }
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(INTENT_FILTER)
+        val receiver = MyReceiver()
+        registerReceiver(receiver, intentFilter)
     }
 
     val encryptedSharedPreferences by lazy {

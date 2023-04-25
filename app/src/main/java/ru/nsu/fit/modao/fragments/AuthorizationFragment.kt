@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,9 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        activity?.intent?.extras?.keySet()?.forEach {key ->
+            Log.d("MyTag", "Key: $key value: ${activity?.intent?.extras?.getString(key)}")
+        }
         app = requireActivity().application as App
         val repository = Repository(app)
         val viewModelFactory = RepositoryViewModelFactory(repository)

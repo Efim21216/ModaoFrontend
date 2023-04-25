@@ -2,6 +2,7 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,6 +105,7 @@ class CreateNewEventFragment : Fragment() {
                         description = binding.enterDescription.text.toString())))
         }
         binding.selectParticipant.setOnClickListener {
+            Log.d("MyTag", "to select")
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group,
                     CreationExpenseViaBottom(isEvent = false,
@@ -139,6 +141,7 @@ class CreateNewEventFragment : Fragment() {
         binding.buttonAll.visibility = expense
     }
     private fun initService() {
+        Log.d("MyTag", "INIT")
         app = activity?.application as App
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
@@ -147,6 +150,7 @@ class CreateNewEventFragment : Fragment() {
         mainViewModel =
             ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         if (args.infoExpense == null) {
+            Log.d("MyTag", "NULL")
             return
         }
         if (args.infoExpense?.cost != ""){

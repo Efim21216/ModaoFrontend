@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,11 @@ class GroupInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if (args.notification) {
+            Log.d("MyTag", "group info to data")
+            findNavController().navigate(GroupInfoFragmentDirections
+                .actionGroupInfoFragmentToDataConfirmationFragment(args.group))
+        }
         binding.nameGroup.text = args.group.groupName
         app = requireActivity().application as App
         val repository = Repository(app)

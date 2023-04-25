@@ -2,12 +2,14 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.modao.adapter.AdapterListener
@@ -25,6 +27,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
     private var app: App? = null
     private val adapter: GroupAdapter = GroupAdapter()
     private lateinit var mainViewModel: MainViewModel
+    private val args by navArgs<GroupsFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +49,16 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        if (args.notification){
+            mainViewModel.getGroupInfo(args.groupId)
+            Log.d("MyTag", "Notification")
+            mainViewModel.groupInfo.observe(viewLifecycleOwner) {
+                Log.d("MyTag", "groups to group info")
+                val action = GroupsFragmentDirections.actionGroupsFragmentToGroupInfoFragment(it)
+                action.notification = true
+                findNavController().navigate(action)
+            }
+        }
         mainViewModel.getUserGroups()
         adapter.attachListener(this)
         mainViewModel.userGroups.observe(viewLifecycleOwner){
@@ -67,6 +80,8 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+
+
     }
 
     override fun onClickItem(item: Group) {
