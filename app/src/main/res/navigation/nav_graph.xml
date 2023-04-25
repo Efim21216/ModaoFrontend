@@ -162,6 +162,9 @@
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_dataConfirmationFragment_to_seeDetailsFragment"
+                app:destination="@id/seeDetailsFragment" />
         </fragment>
         <fragment
             android:id="@+id/groupMembersFragment"
@@ -212,6 +215,11 @@
                 android:id="@+id/action_selectSecondParticipantFragment_to_groupMembersFragment"
                 app:destination="@id/groupMembersFragment" />
         </dialog>
+        <fragment
+            android:id="@+id/seeDetailsFragment"
+            android:name="ru.nsu.fit.modao.SeeDetailsFragment"
+            android:label="fragment_see_details"
+            tools:layout="@layout/fragment_see_details" />
     </navigation>
     <fragment
         android:id="@+id/startFragment"

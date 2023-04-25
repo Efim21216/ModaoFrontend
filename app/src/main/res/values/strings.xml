@@ -87,7 +87,6 @@
     <string name="add_new_friend">Add new friend</string>
     <string name="add_by_uuid">🔍  Add by user code</string>
     <string name="add_member_to_the_group">Add member to the group</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_new_member">Select new member</string>
     <string name="completed_the_selection">Completed the selection</string>
@@ -113,4 +112,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add_by_user_code_field">add by user code field</string>
+    <string name="who_spent">Who spent:</string>
+    <string name="who_participated">Who participated:</string>
 </resources>
