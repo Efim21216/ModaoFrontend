@@ -21,6 +21,7 @@ class GroupInfoFragment : Fragment() {
     private val args by navArgs<GroupInfoFragmentArgs>()
     private lateinit var mainViewModel: MainViewModel
     private lateinit var app: App
+    private var first = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +38,10 @@ class GroupInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (args.notification) {
+
+        if (args.notification && first) {
             Log.d("MyTag", "group info to data")
+            first = false
             findNavController().navigate(GroupInfoFragmentDirections
                 .actionGroupInfoFragmentToDataConfirmationFragment(args.group))
         }

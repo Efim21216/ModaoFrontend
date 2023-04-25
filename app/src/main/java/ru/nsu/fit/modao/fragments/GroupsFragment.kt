@@ -49,6 +49,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         val repository = Repository(app!!)
         val viewModelFactory = RepositoryViewModelFactory(repository)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
         if (args.notification){
             mainViewModel.getGroupInfo(args.groupId)
             Log.d("MyTag", "Notification")
@@ -59,6 +60,7 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
                 findNavController().navigate(action)
             }
         }
+
         mainViewModel.getUserGroups()
         adapter.attachListener(this)
         mainViewModel.userGroups.observe(viewLifecycleOwner){

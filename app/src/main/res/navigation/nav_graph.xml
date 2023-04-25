@@ -264,9 +264,6 @@
         <action
             android:id="@+id/action_startFragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
-        <action
-            android:id="@+id/action_startFragment_to_nested_groups"
-            app:destination="@id/nested_groups" />
     </fragment>
     <fragment
         android:id="@+id/notification_fragment"

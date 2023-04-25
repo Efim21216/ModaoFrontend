@@ -1,18 +1,13 @@
 package ru.nsu.fit.modao.utils
 
 import android.app.Application
-import android.content.IntentFilter
-import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.nsu.fit.modao.api.ApiService
-import ru.nsu.fit.modao.notification.MyReceiver
-import ru.nsu.fit.modao.notification.PushService.Companion.INTENT_FILTER
 import ru.nsu.fit.modao.utils.Constants.Companion.BASE_URL
 
 class App: Application() {
@@ -32,7 +27,7 @@ class App: Application() {
     val api: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
-
+/*
     override fun onCreate() {
         super.onCreate()
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
@@ -46,7 +41,7 @@ class App: Application() {
         intentFilter.addAction(INTENT_FILTER)
         val receiver = MyReceiver()
         registerReceiver(receiver, intentFilter)
-    }
+    }*/
 
     val encryptedSharedPreferences by lazy {
         val masterKey: MasterKey = MasterKey.Builder(applicationContext)
