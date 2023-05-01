@@ -6,32 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.MenuAdapter
 import ru.nsu.fit.modao.databinding.FragmentCreateExpenseBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+import javax.inject.Inject
+@AndroidEntryPoint
 class CreateExpenseFragment : Fragment(), AdapterListener<String> {
     private var _binding: FragmentCreateExpenseBinding? = null
     private val binding get() = _binding!!
     private var menuList = listOf("Who spent", "Participants", "Coefficient")
     private val adapter = MenuAdapter()
-    private var app: App? = null
+    @Inject
+    lateinit var app: App
     private val args by navArgs<CreateExpenseFragmentArgs>()
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var createExpenseViewModel: CreateExpenseViewModel
+    private val mainViewModel: MainViewModel by viewModels()
+    private val createExpenseViewModel: CreateExpenseViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,14 +56,6 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
         adapter.setList(menuList)
         binding.recyclerMenu.adapter = adapter
 
-        app = activity?.application as App
-        val repository = Repository(app!!)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        createExpenseViewModel =
-            ViewModelProvider(this, viewModelFactory)[CreateExpenseViewModel::class.java]
-        mainViewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory)[MainViewModel::class.java]
-
         mainViewModel.getUsersInGroup(args.dataExpense.group.id!!)
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
@@ -73,7 +66,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
         }
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
             createExpenseViewModel.participants.value = it.map { user ->
-                if (user.id == app!!.userId) {
+                if (user.id == app.userId) {
                     ParticipantEvent(
                         username = user.username,
                         id = user.id,

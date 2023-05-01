@@ -6,22 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.adapter.CoefficientAdapter
 import ru.nsu.fit.modao.databinding.FragmentEnterCoefficientsBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+@AndroidEntryPoint
 class EnterCoefficientsFragment : Fragment(), CoefficientAdapter.CustomListener {
     private var _binding: FragmentEnterCoefficientsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var createExpenseViewModel: CreateExpenseViewModel
-    private var app: App? = null
+    private val createExpenseViewModel: CreateExpenseViewModel by viewModels({requireParentFragment().requireParentFragment()})
     private val adapter = CoefficientAdapter()
 
     override fun onCreateView(
@@ -41,14 +38,6 @@ class EnterCoefficientsFragment : Fragment(), CoefficientAdapter.CustomListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        app = activity?.application as App
-        val repository = Repository(app!!)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        createExpenseViewModel =
-            ViewModelProvider(
-                requireParentFragment().requireParentFragment(),
-                viewModelFactory
-            )[CreateExpenseViewModel::class.java]
         adapter.attachListener(this)
         val list = createExpenseViewModel.participants.value ?: arrayOf()
         adapter.setList(list)

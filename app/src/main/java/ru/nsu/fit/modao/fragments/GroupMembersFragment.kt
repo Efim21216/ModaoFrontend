@@ -6,26 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.FriendsAdapter
-import ru.nsu.fit.modao.adapter.SelectAdapter
 import ru.nsu.fit.modao.databinding.FragmentGroupMembersBinding
 import ru.nsu.fit.modao.models.User
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+@AndroidEntryPoint
 class GroupMembersFragment : Fragment(), AdapterListener<User> {
     private var _binding: FragmentGroupMembersBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var app: App
+    private val mainViewModel: MainViewModel by viewModels()
     private val args by navArgs<GroupMembersFragmentArgs>()
     private val adapter = FriendsAdapter()
 
@@ -45,11 +41,6 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         adapter.setListener(this)
         binding.recyclerMembers.layoutManager =

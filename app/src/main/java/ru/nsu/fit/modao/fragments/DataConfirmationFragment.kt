@@ -6,27 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FragmentDataConfirmationBinding
 import ru.nsu.fit.modao.databinding.PopUpWindowDataConfBinding
 import ru.nsu.fit.modao.models.Expense
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-
+@AndroidEntryPoint
 class DataConfirmationFragment : Fragment(), AdapterListener<Expense> {
     private var _binding: FragmentDataConfirmationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var  app: App
+    private val mainViewModel: MainViewModel by viewModels()
     private val adapter = ExpensesAdapter()
     private val args by navArgs<DataConfirmationFragmentArgs>()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -39,11 +36,6 @@ class DataConfirmationFragment : Fragment(), AdapterListener<Expense> {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         mainViewModel.unconfirmedExpenses.observe(viewLifecycleOwner){
             adapter.setList(it)

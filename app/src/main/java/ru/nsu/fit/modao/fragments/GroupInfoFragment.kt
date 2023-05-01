@@ -6,21 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding
-import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+import javax.inject.Inject
+@AndroidEntryPoint
 class GroupInfoFragment : Fragment() {
     private var _binding: FragmentGroupInfoBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<GroupInfoFragmentArgs>()
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var app: App
+    private val mainViewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var app: App
     private var first = true
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,12 +47,6 @@ class GroupInfoFragment : Fragment() {
                 .actionGroupInfoFragmentToDataConfirmationFragment(args.group))
         }
         binding.nameGroup.text = args.group.groupName
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        mainViewModel = ViewModelProvider(
-            requireActivity(),
-            RepositoryViewModelFactory(repository)
-        )[MainViewModel::class.java]
 
         mainViewModel.getListOrganizers(args.group.id!!)
         mainViewModel.organizers.observe(viewLifecycleOwner) {

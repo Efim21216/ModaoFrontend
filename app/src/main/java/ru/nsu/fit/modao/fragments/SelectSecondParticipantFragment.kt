@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter
 import ru.nsu.fit.modao.databinding.FragmentSelectSecondParticipantBinding
 import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     ParticipantsAdapter.CustomListener,
     ParticipantsAdapter.InitListener {
@@ -29,8 +29,9 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     private var _binding: FragmentSelectSecondParticipantBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<SelectSecondParticipantFragmentArgs>()
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var app: App
+    private val mainViewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var app: App
     private val adapter = ParticipantsAdapter()
     private var lastSelected: RadioButton? = null
     private var lastUser: ParticipantEvent? = null
@@ -44,13 +45,6 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        mainViewModel = ViewModelProvider(
-            this,
-            RepositoryViewModelFactory(repository)
-        )[MainViewModel::class.java]
 
         mainViewModel.getUsersInGroup(args.group.id!!)
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {

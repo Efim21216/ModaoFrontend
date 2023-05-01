@@ -7,25 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.NotificationFriendsAdapter
 import ru.nsu.fit.modao.databinding.FragmentNotificationBinding
 import ru.nsu.fit.modao.models.Notification
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-
+@AndroidEntryPoint
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var app: App
     private val adapter = NotificationFriendsAdapter()
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
         return binding.root
@@ -53,13 +50,6 @@ class NotificationFragment : Fragment() {
         binding.recyclerNotification.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.recyclerNotification.adapter = adapter
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        mainViewModel = ViewModelProvider(
-            this,
-            RepositoryViewModelFactory(repository)
-        )[MainViewModel::class.java]
 
         mainViewModel.getInvitationsFriend()
         mainViewModel.getInvitationsGroup()

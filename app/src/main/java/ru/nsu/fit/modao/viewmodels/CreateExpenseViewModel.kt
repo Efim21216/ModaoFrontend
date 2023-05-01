@@ -4,13 +4,16 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.repository.Repository
+import ru.nsu.fit.modao.repository.MainRepository
+import javax.inject.Inject
 
-class CreateExpenseViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class CreateExpenseViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
     val participants = MutableLiveData<Array<ParticipantEvent>>()
     val message = MutableLiveData<String>()
     val eventId = MutableLiveData<Long>()

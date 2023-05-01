@@ -6,26 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter
 import ru.nsu.fit.modao.databinding.FragmentExpenseWhoSpentBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
 
-
+@AndroidEntryPoint
 class ExpenseWhoSpentFragment : Fragment(), ParticipantsAdapter.CustomListener,
     ParticipantsAdapter.InitListener {
     private var _binding: FragmentExpenseWhoSpentBinding? = null
     private val binding get() = _binding!!
     private var lastSelected: RadioButton? = null
     private val adapter: ParticipantsAdapter = ParticipantsAdapter()
-    private lateinit var createExpenseViewModel: CreateExpenseViewModel
-    private var app: App? = null
+    private val createExpenseViewModel: CreateExpenseViewModel by viewModels({requireParentFragment().requireParentFragment()})
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,14 +39,6 @@ class ExpenseWhoSpentFragment : Fragment(), ParticipantsAdapter.CustomListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = activity?.application as App
-        val repository = Repository(app!!)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        createExpenseViewModel = ViewModelProvider(
-            requireParentFragment().requireParentFragment(),
-            viewModelFactory
-        )[CreateExpenseViewModel::class.java]
 
         adapter.attachListener(this)
         adapter.attachInitListener(this)

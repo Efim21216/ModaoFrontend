@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FragmentExpensesBinding
 import ru.nsu.fit.modao.models.Currency
 import ru.nsu.fit.modao.models.Expense
-
+@AndroidEntryPoint
 class ExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var _binding: FragmentExpensesBinding? = null
     private val binding get() = _binding!!

@@ -7,29 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FilterExpensesBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupExpensesBinding
 import ru.nsu.fit.modao.models.Expense
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+@AndroidEntryPoint
 class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var _binding: FragmentGroupExpensesBinding? = null
     private val binding get() = _binding!!
     private val adapter = ExpensesAdapter()
     private val args by navArgs<GroupExpensesFragmentArgs>()
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var app: App
+    private val mainViewModel: MainViewModel by viewModels()
     private var expenses: Array<Expense> = arrayOf()
     private var showEvent = true
     private var showTransfer = true
@@ -54,12 +51,6 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        mainViewModel =
-            ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         adapter.setList(expenses)
         adapter.attachListener(this)

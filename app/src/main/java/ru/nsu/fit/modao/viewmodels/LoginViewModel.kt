@@ -3,16 +3,16 @@ package ru.nsu.fit.modao.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.nsu.fit.modao.models.Authorization
 import ru.nsu.fit.modao.models.User
-import ru.nsu.fit.modao.repository.Repository
-import java.net.SocketTimeoutException
+import ru.nsu.fit.modao.repository.MainRepository
+import javax.inject.Inject
 
-class LoginViewModel(private val repository: Repository): ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val repository: MainRepository): ViewModel() {
     val token = MutableLiveData<Authorization>()
     val userId = MutableLiveData<Long>()
     val message = MutableLiveData<String>()

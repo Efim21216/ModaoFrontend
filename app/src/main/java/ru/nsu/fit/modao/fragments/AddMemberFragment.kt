@@ -4,29 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.NewMemberAdapter
 import ru.nsu.fit.modao.databinding.FragmentAddMemberBinding
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
-import ru.nsu.fit.modao.repository.Repository
-import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
-
+@AndroidEntryPoint
 class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<ParticipantEvent> {
     private var _binding: FragmentAddMemberBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<AddMemberFragmentArgs>()
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var app: App
+    private val mainViewModel: MainViewModel by viewModels()
     private var count = 1
     private lateinit var members: List<User>
     private var listFriends: Array<ParticipantEvent> = arrayOf()
@@ -47,13 +44,6 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        app = requireActivity().application as App
-        val repository = Repository(app)
-        mainViewModel = ViewModelProvider(
-            this,
-            RepositoryViewModelFactory(repository)
-        )[MainViewModel::class.java]
 
         mainViewModel.getUsersInGroup(args.group.id!!)
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {

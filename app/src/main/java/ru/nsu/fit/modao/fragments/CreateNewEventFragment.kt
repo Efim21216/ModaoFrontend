@@ -9,25 +9,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.databinding.FragmentCreateNewEventBinding
 import ru.nsu.fit.modao.models.CreationExpense
 import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
-import ru.nsu.fit.modao.repository.Repository
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import ru.nsu.fit.modao.viewmodels.RepositoryViewModelFactory
+import javax.inject.Inject
+@AndroidEntryPoint
 class CreateNewEventFragment : Fragment() {
     private var _binding: FragmentCreateNewEventBinding? = null
     private val binding get() = _binding!!
-    private var app: App? = null
-    private lateinit var createExpenseViewModel: CreateExpenseViewModel
-    private lateinit var mainViewModel: MainViewModel
+    @Inject
+    lateinit var app: App
+    private val createExpenseViewModel: CreateExpenseViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
     private val args by navArgs<CreateNewEventFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -141,16 +143,7 @@ class CreateNewEventFragment : Fragment() {
         binding.buttonAll.visibility = expense
     }
     private fun initService() {
-        Log.d("MyTag", "INIT")
-        app = activity?.application as App
-        val repository = Repository(app!!)
-        val viewModelFactory = RepositoryViewModelFactory(repository)
-        createExpenseViewModel =
-            ViewModelProvider(this, viewModelFactory)[CreateExpenseViewModel::class.java]
-        mainViewModel =
-            ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         if (args.infoExpense == null) {
-            Log.d("MyTag", "NULL")
             return
         }
         if (args.infoExpense?.cost != ""){
@@ -165,7 +158,7 @@ class CreateNewEventFragment : Fragment() {
 
     }
     private fun createListParticipant(user: User): ParticipantEvent{
-        if (user.id == app!!.userId) {
+        if (user.id == app.userId) {
             return ParticipantEvent(
                 username = user.username,
                 id = user.id,
