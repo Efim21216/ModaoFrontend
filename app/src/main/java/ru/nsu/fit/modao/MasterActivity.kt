@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,8 +15,10 @@ class MasterActivity: AppCompatActivity() {
         binding = ActivityMasterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bottomMenu.setOnItemSelectedListener {
-            findNavController(R.id.fragment).navigate(it.itemId)
+        binding.bottomMenu.setOnItemSelectedListener {item ->
+            if (!findNavController(R.id.fragment).popBackStack(item.itemId, inclusive = false) ) {
+                findNavController(R.id.fragment).navigate(item.itemId)
+            }
             return@setOnItemSelectedListener true
         }
     }

@@ -15,7 +15,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
     val tipMessage = MutableLiveData<String>()
     val messageHandler = MutableLiveData<String>()
-
     val user = MutableLiveData<User>()
     val groupId = MutableLiveData<Long>()
     val expenses = MutableLiveData<Array<Expense>>()

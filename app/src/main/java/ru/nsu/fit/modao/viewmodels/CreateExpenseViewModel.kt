@@ -15,11 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateExpenseViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
     val participants = MutableLiveData<Array<ParticipantEvent>>()
+    var users: Array<ParticipantEvent> = arrayOf()
     val message = MutableLiveData<String>()
     val eventId = MutableLiveData<Long>()
     var sponsor: ParticipantEvent? = null
     private val handler = CoroutineExceptionHandler { _, throwable -> throwable.printStackTrace() }
     fun createExpense(description: String, cost: String, id: Long, type: Int) {
+        participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
         if (participants.value == null) {
             message.value = "Server problems..."
             return
@@ -28,7 +30,6 @@ class CreateExpenseViewModel @Inject constructor(private val repository: MainRep
             message.value = "Enter the description"
             return
         }
-
         participants.value?.forEach { participantEvent -> participantEvent.coefficient = 1f }
         val sum: Float
         try {

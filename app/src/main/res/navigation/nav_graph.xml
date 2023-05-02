@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_fragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@id/authorizationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/expenses_fragment"
@@ -105,11 +107,6 @@
             <action
                 android:id="@+id/action_createAnExpenseFragment_to_selectSecondParticipantFragment"
                 app:destination="@id/selectSecondParticipantFragment" />
-            <argument
-                android:name="infoExpense"
-                android:defaultValue="@null"
-                app:argType="ru.nsu.fit.modao.models.CreationExpenseViaBottom"
-                app:nullable="true" />
         </fragment>
         <fragment
             android:id="@+id/createGroupFragment"
@@ -238,9 +235,6 @@
             <argument
                 android:name="group"
                 app:argType="ru.nsu.fit.modao.models.Group" />
-            <argument
-                android:name="infoExpense"
-                app:argType="ru.nsu.fit.modao.models.CreationExpenseViaBottom" />
             <action
                 android:id="@+id/action_selectSecondParticipantFragment_to_groupMembersFragment"
                 app:destination="@id/groupMembersFragment"

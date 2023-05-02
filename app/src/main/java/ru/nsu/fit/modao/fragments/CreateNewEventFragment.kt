@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,7 +29,7 @@ class CreateNewEventFragment : Fragment() {
     private val binding get() = _binding!!
     @Inject
     lateinit var app: App
-    private val createExpenseViewModel: CreateExpenseViewModel by viewModels()
+    private val createExpenseViewModel: CreateExpenseViewModel by activityViewModels()
     private val mainViewModel: MainViewModel by viewModels()
     private val args by navArgs<CreateNewEventFragmentArgs>()
     override fun onCreateView(
@@ -47,23 +48,27 @@ class CreateNewEventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initService()
         mainViewModel.getUsersInGroup(args.group.id!!)
-
+        Log.d("MyTag", createExpenseViewModel.eventId.toString())
+        Log.d("MyTag", createExpenseViewModel.message.toString())
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
-            createExpenseViewModel.participants.value = it.map { user ->
+            val array = it.map { user ->
                 createListParticipant(user)
             }.toTypedArray()
+            array.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
+            createExpenseViewModel.users = array
+            createExpenseViewModel.participants.value = array.clone()
         }
         createExpenseViewModel.message.observe(viewLifecycleOwner) {
             val builder = AlertDialog.Builder(context)
             builder.setMessage(it)
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
+            createExpenseViewModel.message.value = null
         }
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
+            createExpenseViewModel.eventId.value = null
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group))
         }
@@ -90,7 +95,8 @@ class CreateNewEventFragment : Fragment() {
                 .actionCreateAnExpenseFragmentToCreateExpenseFragment(CreationExpense(args.group, cost, description)))
         }
         binding.buttonAll.setOnClickListener {
-            createExpenseViewModel.participants.value?.forEach { user -> user.selected = true }
+            //createExpenseViewModel.participants.value?.forEach { user -> user.selected = true }
+            createExpenseViewModel.participants.value = createExpenseViewModel.users
             Toast.makeText(context, "All members are selected", Toast.LENGTH_SHORT).show()
         }
         binding.grayNewTransfer.setOnClickListener {
@@ -101,27 +107,16 @@ class CreateNewEventFragment : Fragment() {
         }
         binding.buttonTwo.setOnClickListener {
             findNavController().navigate(CreateNewEventFragmentDirections
-                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group,
-                    CreationExpenseViaBottom(isEvent = true,
-                        cost = binding.enterCost.text.toString(),
-                        description = binding.enterDescription.text.toString())))
+                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
         }
         binding.selectParticipant.setOnClickListener {
-            Log.d("MyTag", "to select")
             findNavController().navigate(CreateNewEventFragmentDirections
-                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group,
-                    CreationExpenseViaBottom(isEvent = false,
-                        cost = binding.enterCost.text.toString(),
-                        description = binding.enterDescription.text.toString())))
+                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
         }
 
         binding.buttonFinish.setOnClickListener {
             var type = 0
             if (!binding.newExpenseButton.isVisible) {
-                if (args.infoExpense?.second == null) {
-                    createExpenseViewModel.message.value = "Select the participant"
-                    return@setOnClickListener
-                }
                 type = 1
             }
             createExpenseViewModel.createExpense(
@@ -131,6 +126,7 @@ class CreateNewEventFragment : Fragment() {
             )
         }
     }
+
 
     private fun changeMode(transfer: Int, expense: Int){
         binding.grayNewExpense.visibility = transfer
@@ -142,7 +138,7 @@ class CreateNewEventFragment : Fragment() {
         binding.buttonTwo.visibility = expense
         binding.buttonAll.visibility = expense
     }
-    private fun initService() {
+    /*private fun initService() {
         if (args.infoExpense == null) {
             return
         }
@@ -156,24 +152,20 @@ class CreateNewEventFragment : Fragment() {
             changeMode(View.VISIBLE, View.GONE)
         }
 
-    }
-    private fun createListParticipant(user: User): ParticipantEvent{
-        if (user.id == app.userId) {
-            return ParticipantEvent(
+    }*/
+    private fun createListParticipant(user: User): ParticipantEvent {
+        return if (user.id == app.userId) {
+            ParticipantEvent(
                 username = user.username,
                 id = user.id,
                 selected = true,
                 isSponsor = true
             )
         } else {
-            var select = true
-            if (args.infoExpense?.second != null && args.infoExpense?.second?.id != user.id){
-                select = false
-            }
-            return ParticipantEvent(
+            ParticipantEvent(
                 username = user.username,
                 id = user.id,
-                selected = select,
+                selected = true,
                 isSponsor = false
             )
         }

@@ -1,10 +1,12 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,7 +19,9 @@ import ru.nsu.fit.modao.adapter.ParticipantsAdapter
 import ru.nsu.fit.modao.databinding.FragmentSelectSecondParticipantBinding
 import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
+import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
 
@@ -30,6 +34,7 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     private val binding get() = _binding!!
     private val args by navArgs<SelectSecondParticipantFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
+    private val createExpenseViewModel: CreateExpenseViewModel by activityViewModels()
     @Inject
     lateinit var app: App
     private val adapter = ParticipantsAdapter()
@@ -45,37 +50,25 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mainViewModel.getUsersInGroup(args.group.id!!)
-        mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
-            val list = it.filter { user -> user.id !=  app.userId}.map { user ->
-                ParticipantEvent(
-                    username = user.username,
-                    id = user.id,
-                    selected = false,
-                    isSponsor = false
-                )
-            }.toTypedArray()
-            if (list.isEmpty()) {
-                binding.buttonDone.visibility = View.GONE
-                binding.tipDialog.text = getString(R.string.addMoreMember)
-                binding.buttonGo.visibility = View.VISIBLE
-            }
-            adapter.setList(list)
-        }
-        adapter.attachListener(this)
-        adapter.attachInitListener(this)
-        binding.newMemberRecycler.layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        binding.newMemberRecycler.adapter = adapter
+        initRecycler()
         binding.buttonDone.setOnClickListener {
+            /*
             val action = SelectSecondParticipantFragmentDirections
                 .actionSelectSecondParticipantFragmentToCreateAnExpenseFragment(args.group)
             val arg = CreationExpenseViaBottom(second = lastUser,
                 isEvent = args.infoExpense.isEvent, cost = args.infoExpense.cost,
             description = args.infoExpense.description)
             action.infoExpense = arg
-            findNavController().navigate(action)
+            findNavController().navigate(action) */
+            createExpenseViewModel.users.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
+            createExpenseViewModel.participants.value = createExpenseViewModel.users.filter {
+                it.id == app.userId ||
+                        it.id == lastUser?.id
+            }.toTypedArray()
+            createExpenseViewModel.participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
+            /*findNavController().navigate(SelectSecondParticipantFragmentDirections
+                .actionSelectSecondParticipantFragmentToCreateAnExpenseFragment(args.group))*/
+            findNavController().popBackStack(R.id.createAnExpenseFragment, inclusive = false)
         }
         binding.buttonGo.setOnClickListener {
             findNavController().navigate(SelectSecondParticipantFragmentDirections
@@ -85,15 +78,15 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
 
     override fun onClickItem(button: RadioButton, user: ParticipantEvent) {
         if (user.isSponsor){
-            user.isSponsor = false
+            //user.isSponsor = false
             lastSelected?.isChecked = false
             lastUser = null
         } else {
             lastSelected?.isChecked = false
             lastSelected = button
-            lastUser?.isSponsor = false
+            //lastUser?.isSponsor = false
             button.isChecked = true
-            user.isSponsor = true
+            //user.isSponsor = true
             lastUser = user
         }
     }
@@ -102,5 +95,12 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
         button.isChecked = false
         user.selected = false
     }
-
+    private fun initRecycler(){
+        adapter.setList(createExpenseViewModel.users.filter { it.id != app.userId }.toTypedArray().clone())
+        adapter.attachListener(this)
+        adapter.attachInitListener(this)
+        binding.newMemberRecycler.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.newMemberRecycler.adapter = adapter
+    }
 }
