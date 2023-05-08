@@ -2,6 +2,7 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var showEvent = true
     private var showTransfer = true
     private var showOnlyMy = false
+    private var lastEvent: Expense? = null
     private lateinit var window: PopupWindow
     private lateinit var bindingPopupWindow: FilterExpensesBinding
     private val Boolean.intValue
@@ -78,9 +80,14 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
 
         mainViewModel.infoEvent.observe(viewLifecycleOwner) {
+            if (lastEvent === it) {
+                return@observe
+            }
+            lastEvent = it
             val builder = AlertDialog.Builder(context)
             builder.setTitle(it.name)
             val info: StringBuilder = java.lang.StringBuilder()
+            Log.d("MyTag", "Info $it")
             it.expenseDtoList?.forEach { participantEvent ->
                 info.append(
                     participantEvent.username + ": "

@@ -19,6 +19,7 @@ class CreateExpenseViewModel @Inject constructor(private val repository: MainRep
     val message = MutableLiveData<String>()
     val eventId = MutableLiveData<Long>()
     var sponsor: ParticipantEvent? = null
+    var payFor = false
     private val handler = CoroutineExceptionHandler { _, throwable -> throwable.printStackTrace() }
     fun createExpense(description: String, cost: String, id: Long, type: Int) {
         participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
@@ -31,6 +32,18 @@ class CreateExpenseViewModel @Inject constructor(private val repository: MainRep
             return
         }
         participants.value?.forEach { participantEvent -> participantEvent.coefficient = 1f }
+        try {
+            participants.value?.forEach { participantEvent ->
+                if (participantEvent.assumedCoefficient != null) {
+                    participantEvent.coefficient = participantEvent.assumedCoefficient?.toFloat()
+                } else {
+                    participantEvent.coefficient = 1f
+                }
+            }
+        } catch (e: NumberFormatException) {
+            message.value = "Enter coefficient"
+            return
+        }
         val sum: Float
         try {
             sum = cost.toFloat()
@@ -50,20 +63,8 @@ class CreateExpenseViewModel @Inject constructor(private val repository: MainRep
             message.value = "Select participants"
             return
         }
-        try {
-            participantsEvent.forEach { user ->
-                if (user.assumedCoefficient != null){
-                    user.coefficient = user.assumedCoefficient?.toFloat()
-                } else {
-                    user.coefficient = 1f
-                }
 
-            }
-        } catch (e: NumberFormatException) {
-            message.value = "Enter coefficient"
-            return
-        }
-        if (type == 1) {
+        if (type == 1 || payFor) {
             sponsor.coefficient = 0f
         }
         viewModelScope.launch(handler) {

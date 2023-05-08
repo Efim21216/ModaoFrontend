@@ -1,13 +1,11 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.ParticipantsAdapter
 import ru.nsu.fit.modao.databinding.FragmentSelectSecondParticipantBinding
-import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
-import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
-import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,7 +28,6 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
     private var _binding: FragmentSelectSecondParticipantBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<SelectSecondParticipantFragmentArgs>()
-    private val mainViewModel: MainViewModel by viewModels()
     private val createExpenseViewModel: CreateExpenseViewModel by activityViewModels()
     @Inject
     lateinit var app: App
@@ -52,28 +46,19 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
         binding.buttonDone.setOnClickListener {
-            /*
-            val action = SelectSecondParticipantFragmentDirections
-                .actionSelectSecondParticipantFragmentToCreateAnExpenseFragment(args.group)
-            val arg = CreationExpenseViaBottom(second = lastUser,
-                isEvent = args.infoExpense.isEvent, cost = args.infoExpense.cost,
-            description = args.infoExpense.description)
-            action.infoExpense = arg
-            findNavController().navigate(action) */
-            createExpenseViewModel.users.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
+            //createExpenseViewModel.users.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
             createExpenseViewModel.participants.value = createExpenseViewModel.users.filter {
                 it.id == app.userId ||
                         it.id == lastUser?.id
             }.toTypedArray()
-            createExpenseViewModel.participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
-            /*findNavController().navigate(SelectSecondParticipantFragmentDirections
-                .actionSelectSecondParticipantFragmentToCreateAnExpenseFragment(args.group))*/
+            //createExpenseViewModel.participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
             findNavController().popBackStack(R.id.createAnExpenseFragment, inclusive = false)
         }
         binding.buttonGo.setOnClickListener {
             findNavController().navigate(SelectSecondParticipantFragmentDirections
                 .actionSelectSecondParticipantFragmentToGroupMembersFragment(args.group))
         }
+
     }
 
     override fun onClickItem(button: RadioButton, user: ParticipantEvent) {
@@ -96,7 +81,13 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
         user.selected = false
     }
     private fun initRecycler(){
-        adapter.setList(createExpenseViewModel.users.filter { it.id != app.userId }.toTypedArray().clone())
+        val list = createExpenseViewModel.users.filter { it.id != app.userId }.toTypedArray().clone()
+        if (list.isEmpty()){
+            binding.buttonGo.visibility = View.VISIBLE
+            binding.buttonDone.visibility = View.GONE
+            binding.tipDialog.setText(R.string.addMoreMember)
+        }
+        adapter.setList(list)
         adapter.attachListener(this)
         adapter.attachInitListener(this)
         binding.newMemberRecycler.layoutManager =

@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,13 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.databinding.FragmentCreateNewEventBinding
 import ru.nsu.fit.modao.models.CreationExpense
-import ru.nsu.fit.modao.models.CreationExpenseViaBottom
 import ru.nsu.fit.modao.models.ParticipantEvent
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class CreateNewEventFragment : Fragment() {
     private var _binding: FragmentCreateNewEventBinding? = null
@@ -32,6 +31,7 @@ class CreateNewEventFragment : Fragment() {
     private val createExpenseViewModel: CreateExpenseViewModel by activityViewModels()
     private val mainViewModel: MainViewModel by viewModels()
     private val args by navArgs<CreateNewEventFragmentArgs>()
+    private var lastEvent: Long? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,13 +49,18 @@ class CreateNewEventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel.getUsersInGroup(args.group.id!!)
-        Log.d("MyTag", createExpenseViewModel.eventId.toString())
-        Log.d("MyTag", createExpenseViewModel.message.toString())
+        createExpenseViewModel.payFor = false
+
+        binding.grayNewTransfer.setOnClickListener {
+            changeMode(View.VISIBLE, View.GONE)
+        }
+        binding.grayNewExpense.setOnClickListener {
+            changeMode(View.GONE, View.VISIBLE)
+        }
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
             val array = it.map { user ->
                 createListParticipant(user)
             }.toTypedArray()
-            array.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
             createExpenseViewModel.users = array
             createExpenseViewModel.participants.value = array.clone()
         }
@@ -68,12 +73,16 @@ class CreateNewEventFragment : Fragment() {
         }
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
-            createExpenseViewModel.eventId.value = null
+            if (lastEvent === it){
+                return@observe
+            }
+            createExpenseViewModel.eventId.value = lastEvent
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group))
         }
 
         binding.buttonMoreOptions.setOnClickListener {
+            createExpenseViewModel.payFor = false
             val description = binding.enterDescription.text.toString()
             val builder = AlertDialog.Builder(context)
             builder.setPositiveButton("OK") { _, _ -> }
@@ -96,24 +105,26 @@ class CreateNewEventFragment : Fragment() {
         }
         binding.buttonAll.setOnClickListener {
             //createExpenseViewModel.participants.value?.forEach { user -> user.selected = true }
+            createExpenseViewModel.payFor = false
             createExpenseViewModel.participants.value = createExpenseViewModel.users
             Toast.makeText(context, "All members are selected", Toast.LENGTH_SHORT).show()
         }
-        binding.grayNewTransfer.setOnClickListener {
-            changeMode(View.VISIBLE, View.GONE)
-        }
-        binding.grayNewExpense.setOnClickListener {
-            changeMode(View.GONE, View.VISIBLE)
-        }
+
         binding.buttonTwo.setOnClickListener {
+            createExpenseViewModel.payFor = false
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
         }
         binding.selectParticipant.setOnClickListener {
+            createExpenseViewModel.payFor = false
             findNavController().navigate(CreateNewEventFragmentDirections
                 .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
         }
-
+        binding.buttonPayFor.setOnClickListener {
+            createExpenseViewModel.payFor = true
+            findNavController().navigate(CreateNewEventFragmentDirections
+                .actionCreateAnExpenseFragmentToSelectSecondParticipantFragment(args.group))
+        }
         binding.buttonFinish.setOnClickListener {
             var type = 0
             if (!binding.newExpenseButton.isVisible) {
@@ -137,22 +148,8 @@ class CreateNewEventFragment : Fragment() {
         binding.buttonMoreOptions.visibility = expense
         binding.buttonTwo.visibility = expense
         binding.buttonAll.visibility = expense
+        binding.buttonPayFor.visibility = expense
     }
-    /*private fun initService() {
-        if (args.infoExpense == null) {
-            return
-        }
-        if (args.infoExpense?.cost != ""){
-            binding.enterCost.setText(args.infoExpense?.cost)
-        }
-        if (args.infoExpense?.description != ""){
-            binding.enterDescription.setText(args.infoExpense?.description)
-        }
-        if (!args.infoExpense!!.isEvent){
-            changeMode(View.VISIBLE, View.GONE)
-        }
-
-    }*/
     private fun createListParticipant(user: User): ParticipantEvent {
         return if (user.id == app.userId) {
             ParticipantEvent(
