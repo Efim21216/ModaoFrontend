@@ -81,7 +81,18 @@
         app:layout_constraintEnd_toEndOf="@+id/expensesRecycler"
         app:layout_constraintTop_toTopOf="@+id/event" />
 
-
+    <Button
+        android:id="@+id/buttonFilterByDate"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:text="@string/FilterByDate"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/event"
+        app:layout_constraintEnd_toStartOf="@+id/event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/event" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

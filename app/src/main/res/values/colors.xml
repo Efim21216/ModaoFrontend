@@ -12,4 +12,5 @@
     <color name="profit">#6ED4AB</color>
     <color name="loss">#D46E6E</color>
     <color name="bottom_menu">#568EFC</color>
+    <color name="bottom_btn">#246BF8</color>
 </resources>

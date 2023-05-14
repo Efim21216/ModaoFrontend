@@ -2,8 +2,9 @@ package ru.nsu.fit.modao.utils
 
 class Constants {
     companion object {
-        const val BASE_URL = "http://192.168.137.1:8080"
+        //const val BASE_URL = "http://192.168.137.1:8080"
         //const val BASE_URL = "http://192.168.137.52:8080"
+        const val BASE_URL = "http://192.168.137.3:8080" //wifi sister
         //const val BASE_URL = "http://139.59.143.34:5000"
         //const val BASE_URL = "http://192.168.0.101:8080"
         //const val BASE_URL = "http://192.168.0.107:8080"

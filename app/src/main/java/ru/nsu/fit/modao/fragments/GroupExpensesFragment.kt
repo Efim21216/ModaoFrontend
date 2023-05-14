@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.adapter.AdapterListener
@@ -21,6 +23,9 @@ import ru.nsu.fit.modao.databinding.FilterExpensesBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupExpensesBinding
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import java.text.DateFormat
+import java.util.*
+
 @AndroidEntryPoint
 class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     private var _binding: FragmentGroupExpensesBinding? = null
@@ -54,14 +59,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter.setList(expenses)
-        adapter.attachListener(this)
-        mainViewModel.expenses.observe(viewLifecycleOwner) {
-            adapter.setList(it)
-        }
-        binding.expensesRecycler.layoutManager =
-            LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
-        binding.expensesRecycler.adapter = adapter
+        setRecycler()
 
         binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
@@ -103,6 +101,34 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
             window.showAsDropDown(binding.filterIcon, -250, 0)
         }
 
+        binding.buttonFilterByDate.setOnClickListener {
+            showDatePicker()
+        }
+    }
+    private fun showDatePicker(){
+        val dialog = MaterialDatePicker.Builder.dateRangePicker()
+            .setTheme(R.style.MaterialCalendarTheme)
+            .setPositiveButtonText("Save")
+            .setNegativeButtonText("Cancel")
+            .build()
+        dialog.addOnPositiveButtonClickListener {
+            val date1 = Date(it.first)
+            val date2 = Date(it.second)
+            Toast.makeText(context, "${DateFormat.getDateInstance().format(date1)} " +
+                    "- ${DateFormat.getDateInstance().format(date2)}",
+                Toast.LENGTH_LONG).show()
+        }
+        dialog.show(childFragmentManager, "MyTag")
+    }
+    private fun setRecycler(){
+        adapter.setList(expenses)
+        adapter.attachListener(this)
+        mainViewModel.expenses.observe(viewLifecycleOwner) {
+            adapter.setList(it)
+        }
+        binding.expensesRecycler.layoutManager =
+            LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
+        binding.expensesRecycler.adapter = adapter
     }
 
     private fun setPopupWindow(){

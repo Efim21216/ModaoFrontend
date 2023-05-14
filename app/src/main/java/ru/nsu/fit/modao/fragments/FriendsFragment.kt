@@ -38,7 +38,7 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        
         adapter.setListener(this)
         binding.friendsRecycler.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
