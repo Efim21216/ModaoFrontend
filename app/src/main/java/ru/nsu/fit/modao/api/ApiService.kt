@@ -73,9 +73,10 @@ interface ApiService {
 
     ): Response<Unit>
 
-    @PUT("/event/unconfirmation/{eventId}")
+    @PUT("/event/unconfirmation/{groupId}/{eventId}")
     suspend fun notConfirmEvent(
         @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long,
         @Path("eventId") eventId: Long
     ): Response<Unit>
 

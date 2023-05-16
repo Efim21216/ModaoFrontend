@@ -1,5 +1,9 @@
 package ru.nsu.fit.modao.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Expense (
     val currency: Currency? = null,
     val id: Long? = null,
@@ -13,7 +17,7 @@ data class Expense (
     val customPairIdCoefficientList: Array<ParticipantEvent>? = null,
     val customPairIdCoefficientPaying: ParticipantEvent? = null,
     val expenseDtoList: Array<ParticipantEvent>? = null
-) {
+): ExpenseListItem(), Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

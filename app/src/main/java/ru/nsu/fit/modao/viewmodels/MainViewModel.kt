@@ -29,7 +29,14 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     val listFriends = MutableLiveData<Array<User>>()
 
 
-    private val handler = CoroutineExceptionHandler { _, throwable -> messageHandler.value = throwable.message}
+    private val handler = CoroutineExceptionHandler { _, throwable ->
+        messageHandler.value = throwable.message
+
+        Log.e("MyTag", "${throwable.message}\n" +
+                "${throwable.cause}\n${throwable.localizedMessage}\n" +
+                "${throwable.suppressed}\n${throwable.suppressedExceptions}\n" +
+                "${throwable.stackTrace}")
+    }
     fun getUser() {
         viewModelScope.launch(handler) {
             val response = repository.getUser()
@@ -93,9 +100,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             }
         }
     }
-    fun notConfirmEvent(eventId: Long, groupId: Long){
+    fun notConfirmEvent(groupId: Long, eventId: Long){
         viewModelScope.launch(handler) {
-            val response = repository.notConfirmEvent(eventId)
+            val response = repository.notConfirmEvent(groupId, eventId)
             if (!response.isSuccessful) {
                 Log.d("MyTag", response.message())
             } else {

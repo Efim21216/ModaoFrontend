@@ -11,5 +11,6 @@ data class ParticipantEvent(
     var selected: Boolean = false,
     var isSponsor: Boolean = false,
     var coefficient: Float? = null,
+    var transferAmount: String? = null,
     var assumedCoefficient: String? = null
 ) : Parcelable
