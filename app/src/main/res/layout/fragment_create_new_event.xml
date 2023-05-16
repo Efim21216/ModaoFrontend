@@ -7,71 +7,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.CreateNewEventFragment">
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/gray_new_transfer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/not_a_transfer"
-        android:src="@drawable/gray_new_transfer"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/new_transfer"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="#D9D9D9"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/new_expense" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/gray_new_expense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/not_an_expense"
-        android:src="@drawable/gray_new_expense"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/new_expense"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:backgroundTint="#D9D9D9"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/new_expense" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/new_expense_button"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/new_expense"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
+        android:visibility="visible"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/new_expense"
+        app:strokeColor="@color/gray"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/new_transfer_button"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/new_transfer"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
+        android:visibility="gone"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/new_expense"
+        app:strokeColor="@color/gray"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/selectParticipant"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginBottom="119dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/select_participant"
-        android:src="@drawable/button_select_participant"
+        android:fontFamily="@font/roboto"
+        android:text="@string/select_participant"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="gone"
+        app:backgroundTint="#BEDCFF"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/new_expense_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/it_s_a_new_expense"
-        android:src="@drawable/new_expense"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_expense" />
-
-    <ImageButton
-        android:id="@+id/new_transfer_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/it_s_a_new_transfer"
-        android:src="@drawable/new_transfer"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_expense" />
+        app:strokeColor="@color/gray"
+        app:strokeWidth="2dp" />
 
     <TextView
         android:id="@+id/new_expense"
@@ -88,61 +109,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="47dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/all_in_button"
-        android:minHeight="48dp"
-        android:src="@drawable/button_all_in"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/all_in_button"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="visible"
+        app:backgroundTint="#FFBEFD"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonTwo"
-        app:layout_constraintEnd_toStartOf="@+id/buttonTwo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
         app:layout_constraintTop_toTopOf="@+id/buttonTwo" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="40dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/two_button"
-        android:minHeight="48dp"
-        android:src="@drawable/button_two"
+        android:fontFamily="@font/roboto"
+        android:text="@string/two_button"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="#FFE1BE"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonMoreOptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="54dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/more_options_button"
-        android:minHeight="48dp"
-        android:src="@drawable/button_more_options"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/more_options_button"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+        app:backgroundTint="#BEDCFF"
+        app:cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="@+id/buttonAll"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAll" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonPayFor"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/pay_for"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
+        android:visibility="visible"
+        app:backgroundTint="#BEFFC0"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTwo"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTwo" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonFinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="30dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/finish_button"
-        android:minHeight="48dp"
-        android:src="@drawable/button_finish"
+        android:fontFamily="@font/roboto"
+        android:text="@string/finish"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/plain_text"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -194,15 +238,5 @@
             android:textSize="@dimen/plain_text" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/buttonPayFor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Pay for someone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMoreOptions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

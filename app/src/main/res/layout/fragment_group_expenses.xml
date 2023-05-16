@@ -87,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:text="@string/FilterByDate"
+        android:text="@string/filter_by_date"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/event"
         app:layout_constraintEnd_toStartOf="@+id/event"

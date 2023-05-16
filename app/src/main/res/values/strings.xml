@@ -71,12 +71,12 @@
     <string name="all_in_button">All in</string>
     <string name="two_button">Two</string>
     <string name="more_options_button">More options</string>
-    <string name="finish_button">Finish</string>
+    <string name="finish">Finish</string>
     <string name="enter_cost">Enter cost</string>
     <string name="enter_description">Enter description</string>
     <string name="events">Events</string>
     <string name="filter_events">Filter events</string>
-    <string name="continue_button">Continue registration</string>
+    <string name="continue_button">Continue</string>
     <string name="new_friend_notification">New friend notification</string>
     <string name="new_group_notification">New group notification</string>
     <string name="new_expense_notification">New expense notification</string>
@@ -86,6 +86,7 @@
     <string name="new_expense_notify">New expense:</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="add_by_uuid">🔍  Add by user code</string>
+    <string name="add_by_guid">🔍  Add by group code</string>
     <string name="add_member_to_the_group">Add member to the group</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_new_member">Select new member</string>
@@ -114,4 +115,10 @@
     <string name="add_by_user_code_field">add by user code field</string>
     <string name="who_spent">Who spent:</string>
     <string name="who_participated">Who participated:</string>
+    <string name="filter_by_date">Filter by date</string>
+    <string name="done">Done</string>
+    <string name="log_in">Log in</string>
+    <string name="pay_for">Pay for</string>
+    <string name="new_transfer">New transfer</string>
+    <string name="new_expense">New expense</string>
 </resources>

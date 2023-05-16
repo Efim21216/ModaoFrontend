@@ -23,13 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
         android:contentDescription="@string/completed_the_selection"
-        android:src="@drawable/done_button"
+        android:fontFamily="@font/roboto"
+        android:text="@string/done"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/plain_text"
+        android:textStyle="italic"
+        app:backgroundTint="#6ED4AB"
         app:layout_constraintBottom_toBottomOf="@+id/tipDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tipDialog"
