@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="305dp">
+    android:paddingBottom="20dp"
+    android:layout_height="320dp">
 
     <TextView
         android:id="@+id/description"
@@ -86,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -103,13 +104,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="-10dp"
-        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/yes"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toStartOf="@+id/textConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/textConfirm"
         app:srcCompat="@drawable/yes_button"
         tools:ignore="ImageContrastCheck" />
 
@@ -119,12 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="-10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/no"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/textConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/textConfirm"
         app:srcCompat="@drawable/no_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

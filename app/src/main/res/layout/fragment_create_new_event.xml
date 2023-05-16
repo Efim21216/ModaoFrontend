@@ -232,7 +232,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto"
             android:hint="@string/enter_cost"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:maxWidth="488dp"
             android:maxLength="150"
             android:textSize="@dimen/plain_text" />

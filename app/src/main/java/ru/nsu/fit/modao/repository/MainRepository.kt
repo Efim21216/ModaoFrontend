@@ -50,8 +50,8 @@ class MainRepository (private val app: App) {
         return app.api.getListOrganizers(Constants.AUTH + app.accessToken, groupId)
     }
 
-    suspend fun notConfirmEvent(eventId: Long): Response<Unit> {
-        return app.api.notConfirmEvent(Constants.AUTH + app.accessToken, eventId)
+    suspend fun notConfirmEvent(groupId: Long, eventId: Long): Response<Unit> {
+        return app.api.notConfirmEvent(Constants.AUTH + app.accessToken, groupId, eventId)
     }
 
     suspend fun getEventInfo(eventId: Long, groupId: Long): Response<Expense> {

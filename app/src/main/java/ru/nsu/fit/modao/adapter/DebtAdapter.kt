@@ -25,7 +25,6 @@ class DebtAdapter: RecyclerView.Adapter<DebtAdapter.DebtHolder>() {
         fun bind(expense: UserDebt) = with(binding){
             shortInfo.text = expense.username
             amountExpense.text = expense.debt
-            // TODO check currency
             if (expense.debt!!.replaceFirst(',','.').toDouble() < 0){
                 currencyImage.setImageResource(R.drawable.ic_loss_rub)
                 amountExpense.setTextColor(Color.parseColor("#D46E6E"))

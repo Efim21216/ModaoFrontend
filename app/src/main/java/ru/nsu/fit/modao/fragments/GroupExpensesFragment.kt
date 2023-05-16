@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,19 +20,22 @@ import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FilterExpensesBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupExpensesBinding
+import ru.nsu.fit.modao.databinding.PopUpWindowDataConfBinding
 import ru.nsu.fit.modao.models.Expense
+import ru.nsu.fit.modao.models.ExpenseListItem
+import ru.nsu.fit.modao.models.LoadItems
+import ru.nsu.fit.modao.utils.Constants.Companion.PAGE_SIZE
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import java.text.DateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
+class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private var _binding: FragmentGroupExpensesBinding? = null
     private val binding get() = _binding!!
     private val adapter = ExpensesAdapter()
     private val args by navArgs<GroupExpensesFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
-    private var expenses: Array<Expense> = arrayOf()
     private var showEvent = true
     private var showTransfer = true
     private var showOnlyMy = false
@@ -60,7 +62,48 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         super.onViewCreated(view, savedInstanceState)
 
         setRecycler()
+        setButtonOnClick()
+        setPopupWindow()
+        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
+        setObserver()
 
+    }
+    private fun setObserver() {
+
+        mainViewModel.expenses.observe(viewLifecycleOwner) {
+            val list: MutableList<ExpenseListItem> = it.toMutableList()
+            if (it.size > PAGE_SIZE) {
+                list.add(PAGE_SIZE - 5, LoadItems(isLoad = false))
+            }
+            adapter.setList(list.toTypedArray())
+        }
+
+        mainViewModel.infoEvent.observe(viewLifecycleOwner) {
+            if (lastEvent === it) {
+                return@observe
+            }
+            lastEvent = it
+            val builder = AlertDialog.Builder(context)
+            val bindingAlert = PopUpWindowDataConfBinding
+                .bind(layoutInflater.inflate(R.layout.pop_up_window_data_conf, null))
+            bindingAlert.description.text = it.name
+            bindingAlert.cost.text = it.price?.toString()
+            bindingAlert.whoCreated.text = it.usernameCreator
+            bindingAlert.yesButton.visibility = View.GONE
+            bindingAlert.noButton.visibility = View.GONE
+            bindingAlert.textConfirm.visibility = View.GONE
+            builder.setView(bindingAlert.root)
+            val dialog = builder.create()
+            bindingAlert.buttonDetails.setOnClickListener {_ ->
+                dialog.dismiss()
+                findNavController().navigate(GroupExpensesFragmentDirections
+                    .actionGroupExpensesFragmentToSeeDetailsFragment(false, it))
+            }
+
+            dialog.show()
+        }
+    }
+    private fun setButtonOnClick() {
         binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
                 GroupExpensesFragmentDirections
@@ -73,29 +116,6 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
                 GroupExpensesFragmentDirections
                     .actionGroupExpensesFragmentToUserExpensesInGroupFragment(args.group)
             )
-        }
-        setPopupWindow()
-        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
-
-        mainViewModel.infoEvent.observe(viewLifecycleOwner) {
-            if (lastEvent === it) {
-                return@observe
-            }
-            lastEvent = it
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle(it.name)
-            val info: StringBuilder = java.lang.StringBuilder()
-            Log.d("MyTag", "Info $it")
-            it.expenseDtoList?.forEach { participantEvent ->
-                info.append(
-                    participantEvent.username + ": "
-                            + participantEvent.coefficient?.toString()
-                            + "\n"
-                )
-            }
-            builder.setMessage(info.toString())
-            builder.setPositiveButton("OK") { _, _ -> }
-            builder.create().show()
         }
         binding.filterIcon.setOnClickListener {
             window.showAsDropDown(binding.filterIcon, -250, 0)
@@ -121,11 +141,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
         dialog.show(childFragmentManager, "MyTag")
     }
     private fun setRecycler(){
-        adapter.setList(expenses)
         adapter.attachListener(this)
-        mainViewModel.expenses.observe(viewLifecycleOwner) {
-            adapter.setList(it)
-        }
         binding.expensesRecycler.layoutManager =
             LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
@@ -186,7 +202,16 @@ class GroupExpensesFragment : Fragment(), AdapterListener<Expense> {
             }
         }
     }
-    override fun onClickItem(item: Expense) {
-        mainViewModel.getEventInfo(item.id!!, args.group.id!!)
+    override fun onClickItem(item: ExpenseListItem) {
+        when (item) {
+            is Expense -> mainViewModel.getEventInfo(item.id!!, args.group.id!!)
+            is LoadItems -> {
+                if (item.isLoad) {
+                    return
+                }
+                item.isLoad = true
+            }
+        }
+
     }
 }
