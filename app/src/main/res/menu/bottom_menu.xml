@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_account"
         android:id="@+id/profile_fragment"/>
     <item
-        android:title="@string/expenses"
+        android:title="@string/notification"
         android:icon="@drawable/ic_wallet"
-        android:id="@+id/expenses_fragment"/>
+        android:id="@+id/notification_fragment"/>
     <item
         android:title="@string/friends"
         android:icon="@drawable/ic_friends"

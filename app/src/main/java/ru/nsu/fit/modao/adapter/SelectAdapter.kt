@@ -1,5 +1,6 @@
 package ru.nsu.fit.modao.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,22 @@ import ru.nsu.fit.modao.models.ParticipantEvent
 
 class SelectAdapter: RecyclerView.Adapter<SelectAdapter.SelectHolder>() {
     private var listener: CustomListener? = null
-    private var list = ArrayList<ParticipantEvent>()
+    private var list: Array<ParticipantEvent> = arrayOf()
 
     fun attachListener(listener: CustomListener){
         this.listener = listener
     }
-    fun setList(list: ArrayList<ParticipantEvent>){
+    fun setList(list: Array<ParticipantEvent>){
         this.list = list
         notifyDataSetChanged()
+    }
+    fun unselectAllParticipants(){
+        list.forEach { participant -> participant.selected = false }
+        notifyItemRangeChanged(0, list.size)
+    }
+    fun selectAllParticipants(){
+        list.forEach { participant -> participant.selected = true }
+        notifyItemRangeChanged(0, list.size)
     }
     class SelectHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ParticipantItemBinding.bind(item)

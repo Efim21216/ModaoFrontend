@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978696930580",
+    "project_id": "modao-87283",
+    "storage_bucket": "modao-87283.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978696930580:android:1ec2c5d79f52c67479ee01",
+        "android_client_info": {
+          "package_name": "ru.nsu.fit.modao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978696930580-ff16avcueub0bg7nol04pvdmaj2163l4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1mD6bgYVDQXTknufv-KoeeVesJSTN0qQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978696930580-ff16avcueub0bg7nol04pvdmaj2163l4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

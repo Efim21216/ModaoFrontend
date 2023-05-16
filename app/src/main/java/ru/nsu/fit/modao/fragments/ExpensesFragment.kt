@@ -7,16 +7,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import dagger.hilt.android.AndroidEntryPoint
+import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.ExpensesAdapter
 import ru.nsu.fit.modao.databinding.FragmentExpensesBinding
 import ru.nsu.fit.modao.models.Currency
 import ru.nsu.fit.modao.models.Expense
+import ru.nsu.fit.modao.models.ExpenseListItem
 
-class ExpensesFragment : Fragment() {
+@AndroidEntryPoint
+class ExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private var _binding: FragmentExpensesBinding? = null
     private val binding get() = _binding!!
     private val adapter: ExpensesAdapter = ExpensesAdapter()
-    private val expenses: ArrayList<Expense> = ArrayList()
+    private val expenses: Array<ExpenseListItem> = arrayOf(
+        Expense(name = "Nikita paid", currency = Currency.RUB, price = -100.0f),
+        Expense(name = "Olga paid", currency = Currency.RUB, price = 200.0f),
+        Expense(name = "Efim paid", currency = Currency.RUB, price = -150.0f),
+        Expense(name = "Peter paid", currency = Currency.RUB, price = 99.9f)
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,14 +44,13 @@ class ExpensesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        expenses.add(Expense("Nikita paid", "Nikita Paid", Currency.RUB, -100.0))
-        expenses.add(Expense("Nikita paid", "Nikita Paid", Currency.RUB, 200.0))
-        expenses.add(Expense("You paid", "You paid", Currency.RUB, 300.0))
-        expenses.add(Expense("Olga paid", "Olga Paid", Currency.RUB, -230.0))
-
-
         adapter.setList(expenses)
+        adapter.attachListener(this)
         binding.expensesRecycler.layoutManager = LinearLayoutManager(this.context, VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
+    }
+
+    override fun onClickItem(item: ExpenseListItem) {
+        TODO("Not yet implemented")
     }
 }

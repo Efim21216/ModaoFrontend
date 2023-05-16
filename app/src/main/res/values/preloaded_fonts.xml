@@ -5,5 +5,9 @@
         <item>@font/inter_bold</item>
         <item>@font/inter_light</item>
         <item>@font/inter_medium</item>
+        <item>@font/noto_sans</item>
+        <item>@font/noto_sans_bold</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_slab_bold</item>
     </array>
 </resources>

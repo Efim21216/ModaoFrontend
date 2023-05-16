@@ -7,14 +7,14 @@
     tools:context=".fragments.GroupExpensesFragment">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/expenses"
+        android:fontFamily="@font/roboto_slab_bold"
+        android:text="@string/events"
         android:textColor="@color/black"
-        android:textSize="36sp"
+        android:textSize="@dimen/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,19 +29,70 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/event"
         tools:listitem="@layout/expense_item" />
 
-    <ImageButton
-        android:id="@+id/buttonAddExpense"
-        android:contentDescription="@string/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background = "@android:color/transparent"
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="99dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expensesRecycler"
-        app:srcCompat="@drawable/button_add_expense" />
+        app:layout_constraintTop_toBottomOf="@+id/expensesRecycler">
+
+        <Button
+            android:id="@+id/buttonAddEvent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="@string/add_event"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/buttonMyDebt"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="25dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="@string/my_debt_caps"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/filterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/filter_events"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/filter_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/event"
+        app:layout_constraintEnd_toEndOf="@+id/expensesRecycler"
+        app:layout_constraintTop_toTopOf="@+id/event" />
+
+    <Button
+        android:id="@+id/buttonFilterByDate"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:text="@string/FilterByDate"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/event"
+        app:layout_constraintEnd_toStartOf="@+id/event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/event" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

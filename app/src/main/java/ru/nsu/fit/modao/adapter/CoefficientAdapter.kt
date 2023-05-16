@@ -1,5 +1,6 @@
 package ru.nsu.fit.modao.adapter
 
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,12 @@ import ru.nsu.fit.modao.models.ParticipantEvent
 
 class CoefficientAdapter: RecyclerView.Adapter<CoefficientAdapter.CoefficientHolder>() {
     private var listener: CustomListener? = null
-    private lateinit var list: List<ParticipantEvent>
+    private lateinit var list: Array<ParticipantEvent>
 
     fun attachListener(listener: CustomListener){
         this.listener = listener
     }
-    fun setList(list: List<ParticipantEvent>){
+    fun setList(list: Array<ParticipantEvent>){
         this.list = list
         notifyDataSetChanged()
     }
@@ -24,9 +25,10 @@ class CoefficientAdapter: RecyclerView.Adapter<CoefficientAdapter.CoefficientHol
         val binding = CoefficientItemBinding.bind(item)
         fun bind(elem: ParticipantEvent, listener: CustomListener){
             binding.nameParticipant.text = elem.username
-            binding.editCoefficient.setText(elem.coefficient.toString())
+            val coefficient = elem.assumedCoefficient ?: elem.coefficient.toString()
+            binding.editCoefficient.setText(coefficient)
             binding.editCoefficient.addTextChangedListener(){
-                listener.onEditText(it.toString(), elem)
+                listener.onEditText(it, elem)
             }
         }
     }
@@ -37,13 +39,13 @@ class CoefficientAdapter: RecyclerView.Adapter<CoefficientAdapter.CoefficientHol
     }
 
     override fun onBindViewHolder(holder: CoefficientHolder, position: Int) {
-        holder.bind(list[position], listener!!)
+        holder.bind(list.filter{it.selected}[position], listener!!)
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list.filter{it.selected}.size
     }
     interface CustomListener {
-        fun onEditText(value: String, participant: ParticipantEvent)
+        fun onEditText(value: Editable?, participant: ParticipantEvent)
     }
 }

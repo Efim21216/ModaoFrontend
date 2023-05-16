@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/startFragment">
 
     <fragment
         android:id="@+id/profile_fragment"
         android:name="ru.nsu.fit.modao.fragments.ProfileFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_fragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@id/authorizationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/expenses_fragment"
@@ -28,7 +30,7 @@
         android:id="@+id/authorizationFragment"
         android:name="ru.nsu.fit.modao.fragments.AuthorizationFragment"
         android:label="fragment_authorization"
-        tools:layout="@layout/fragment_authorization" >
+        tools:layout="@layout/fragment_authorization">
 
         <action
             android:id="@+id/action_authorizationFragment_to_profile_fragment"
@@ -41,12 +43,13 @@
         android:id="@+id/registrationFragment"
         android:name="ru.nsu.fit.modao.fragments.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
     </fragment>
-    <navigation android:id="@+id/nested_groups"
+    <navigation
+        android:id="@+id/nested_groups"
         app:startDestination="@id/groups_fragment">
         <fragment
             android:id="@+id/groups_fragment"
@@ -59,6 +62,51 @@
             <action
                 android:id="@+id/action_groups_fragment_to_createGroupFragment"
                 app:destination="@id/createGroupFragment" />
+            <argument
+                android:name="notification"
+                app:argType="boolean"
+                android:defaultValue="false" />
+            <action
+                android:id="@+id/action_groups_fragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment" />
+            <argument
+                android:name="groupId"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </fragment>
+        <dialog
+            android:id="@+id/addMemberFragment"
+            android:name="ru.nsu.fit.modao.fragments.AddMemberFragment"
+            android:label="fragment_add_member"
+            tools:layout="@layout/fragment_add_member">
+            <action
+                android:id="@+id/action_addMemberFragment_to_groupMembersFragment"
+                app:destination="@id/groupMembersFragment"
+                app:popUpTo="@id/groupMembersFragment"
+                app:popUpToInclusive="true" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </dialog>
+        <fragment
+            android:id="@+id/createAnExpenseFragment"
+            android:name="ru.nsu.fit.modao.fragments.CreateNewEventFragment"
+            android:label="fragment_create_an_expense"
+            tools:layout="@layout/fragment_create_new_event">
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_createExpenseFragment"
+                app:destination="@id/createExpenseFragment" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment"
+                app:popUpTo="@id/groupExpensesFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_selectSecondParticipantFragment"
+                app:destination="@id/selectSecondParticipantFragment" />
         </fragment>
         <fragment
             android:id="@+id/createGroupFragment"
@@ -83,59 +131,187 @@
             <action
                 android:id="@+id/action_groupInfoFragment_to_groupExpensesFragment"
                 app:destination="@id/groupExpensesFragment" />
+            <action
+                android:id="@+id/action_groupInfoFragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment" />
+            <action
+                android:id="@+id/action_groupInfoFragment_to_groupMembersFragment"
+                app:destination="@id/groupMembersFragment" />
+            <action
+                android:id="@+id/action_groupInfoFragment_to_groupInformationFragment"
+                app:destination="@id/groupInformationFragment" />
+            <argument
+                android:name="notification"
+                app:argType="boolean"
+                android:defaultValue="false" />
         </fragment>
         <fragment
             android:id="@+id/groupExpensesFragment"
             android:name="ru.nsu.fit.modao.fragments.GroupExpensesFragment"
             android:label="fragment_create_group"
-            tools:layout="@layout/fragment_group_expenses" >
+            tools:layout="@layout/fragment_group_expenses">
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
             <action
-                android:id="@+id/action_groupExpensesFragment_to_enterCostFragment"
-                app:destination="@id/enterCostFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/selectParticipantsFragment"
-            android:name="ru.nsu.fit.modao.fragments.SelectParticipantsFragment"
-            android:label="fragment_select_participants"
-            tools:layout="@layout/fragment_select_participants" >
-            <argument
-                android:name="cost"
-                app:argType="float" />
+                android:id="@+id/action_groupExpensesFragment_to_userExpensesInGroupFragment"
+                app:destination="@id/userExpensesInGroupFragment" />
             <action
-                android:id="@+id/action_selectParticipantsFragment_to_enterCoefficientsFragment"
-                app:destination="@id/enterCoefficientsFragment" />
-            <argument
-                android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
-        </fragment>
-        <fragment
-            android:id="@+id/enterCostFragment"
-            android:name="ru.nsu.fit.modao.fragments.EnterCostFragment"
-            android:label="fragment_enter_cost"
-            tools:layout="@layout/fragment_enter_cost" >
+                android:id="@+id/action_groupExpensesFragment_to_createAnExpenseFragment"
+                app:destination="@id/createAnExpenseFragment" />
             <action
-                android:id="@+id/action_enterCostFragment_to_selectParticipantsFragment"
-                app:destination="@id/selectParticipantsFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/enterCoefficientsFragment"
-            android:name="ru.nsu.fit.modao.fragments.EnterCoefficientsFragment"
-            android:label="fragment_enter_coefficients"
-            tools:layout="@layout/fragment_enter_coefficients" >
-            <argument
-                android:name="participants"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent[]" />
-            <argument
-                android:name="cost"
-                app:argType="float" />
-            <argument
-                android:name="sponsor"
-                app:argType="ru.nsu.fit.modao.models.ParticipantEvent" />
+                android:id="@+id/action_groupExpensesFragment_to_seeDetailsFragment"
+                app:destination="@id/seeDetailsFragment"
+                app:popUpTo="@id/seeDetailsFragment"
+                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/createExpenseFragment"
-            android:name="ru.nsu.fit.modao.CreateExpenseFragment"
+            android:name="ru.nsu.fit.modao.fragments.CreateExpenseFragment"
             android:label="fragment_create_expense"
-            tools:layout="@layout/fragment_create_expense" />
+            tools:layout="@layout/fragment_create_expense">
+            <action
+                android:id="@+id/action_createExpenseFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment"
+                app:popUpTo="@id/groupExpensesFragment"
+                app:popUpToInclusive="true" />
+            <argument
+                android:name="dataExpense"
+                app:argType="ru.nsu.fit.modao.models.CreationExpense" />
+        </fragment>
+        <fragment
+            android:id="@+id/dataConfirmationFragment"
+            android:name="ru.nsu.fit.modao.fragments.DataConfirmationFragment"
+            android:label="fragment_data_confirmation"
+            tools:layout="@layout/fragment_data_confirmation">
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_dataConfirmationFragment_to_seeDetailsFragment"
+                app:destination="@id/seeDetailsFragment"
+                app:popUpTo="@id/seeDetailsFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/groupMembersFragment"
+            android:name="ru.nsu.fit.modao.fragments.GroupMembersFragment"
+            android:label="fragment_group_members"
+            tools:layout="@layout/fragment_group_members">
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_groupMembersFragment_to_addMemberFragment"
+                app:destination="@id/addMemberFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/userExpensesInGroupFragment"
+            android:name="ru.nsu.fit.modao.fragments.UserExpensesInGroupFragment"
+            android:label="fragment_user_expenses_in_group"
+            tools:layout="@layout/fragment_user_expenses_in_group">
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <deepLink
+                android:id="@+id/deepLink2"
+                app:uri="https://modao/group/dataConfirmation?group={group}" />
+        </fragment>
+        <fragment
+            android:id="@+id/groupInformationFragment"
+            android:name="ru.nsu.fit.modao.fragments.GroupInformationFragment"
+            android:label="fragment_group_information"
+            tools:layout="@layout/fragment_group_information">
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+        </fragment>
+        <dialog
+            android:id="@+id/selectSecondParticipantFragment"
+            android:name="ru.nsu.fit.modao.fragments.SelectSecondParticipantFragment"
+            android:label="fragment_select_second_participant"
+            tools:layout="@layout/fragment_select_second_participant">
+            <action
+                android:id="@+id/action_selectSecondParticipantFragment_to_createAnExpenseFragment"
+                app:destination="@id/createAnExpenseFragment"
+                app:popUpTo="@id/createAnExpenseFragment"
+                app:popUpToSaveState="true"
+                app:restoreState="true"
+                app:popUpToInclusive="true" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group" />
+            <action
+                android:id="@+id/action_selectSecondParticipantFragment_to_groupMembersFragment"
+                app:destination="@id/groupMembersFragment"
+                app:popUpTo="@id/groupMembersFragment"
+                app:popUpToInclusive="true" />
+        </dialog>
+        <fragment
+            android:id="@+id/seeDetailsFragment"
+            android:name="ru.nsu.fit.modao.fragments.SeeDetailsFragment"
+            android:label="fragment_see_details"
+            tools:layout="@layout/fragment_see_details" >
+            <argument
+                android:name="isConfirmation"
+                app:argType="boolean" />
+            <argument
+                android:name="expense"
+                app:argType="ru.nsu.fit.modao.models.Expense" />
+            <argument
+                android:name="group"
+                app:argType="ru.nsu.fit.modao.models.Group"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <action
+                android:id="@+id/action_seeDetailsFragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment"
+                app:popUpTo="@id/dataConfirmationFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="ru.nsu.fit.modao.fragments.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_startFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notification_fragment"
+        android:name="ru.nsu.fit.modao.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://modao/notification" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_friends_fragment"
+        app:destination="@id/friends_fragment"
+        app:popUpTo="@id/friends_fragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_nested_groups"
+        app:destination="@id/nested_groups"
+        app:popUpTo="@id/nested_groups"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_notification_fragment"
+        app:destination="@id/notification_fragment"
+        app:popUpTo="@id/notification_fragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_profile_fragment"
+        app:destination="@id/profile_fragment"
+        app:popUpTo="@id/profile_fragment"
+        app:popUpToInclusive="true" />
+
+
 </navigation>
