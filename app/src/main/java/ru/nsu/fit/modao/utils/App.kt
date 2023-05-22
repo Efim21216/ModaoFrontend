@@ -3,6 +3,7 @@ package ru.nsu.fit.modao.utils
 import android.app.Application
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,21 +29,16 @@ class App: Application() {
     val api: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
-/*
+
     override fun onCreate() {
         super.onCreate()
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (!it.isSuccessful) {
                 return@addOnCompleteListener
             }
-            val token = it.result
-            Log.d("MyTag", token)
+            deviceToken = it.result
         }
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(INTENT_FILTER)
-        val receiver = MyReceiver()
-        registerReceiver(receiver, intentFilter)
-    }*/
+    }
 
     val encryptedSharedPreferences by lazy {
         val masterKey: MasterKey = MasterKey.Builder(applicationContext)
@@ -59,4 +55,5 @@ class App: Application() {
     var userId: Long = -1
     var accessToken: String? = null
     var refreshToken: String? = null
+    var deviceToken: String? = null
 }

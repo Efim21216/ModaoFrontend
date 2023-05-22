@@ -19,9 +19,15 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<User>
 
-    @GET("/user/listGroups")
-    suspend fun getUserGroups(
+    @GET("/user/exitUser")
+    suspend fun exit(
         @Header("Authorization") token: String
+    ): Response<Unit>
+
+    @GET("/user/listGroups/{type}")
+    suspend fun getUserGroups(
+        @Header("Authorization") token: String,
+        @Path("type") type: Int
     ): Response<Array<Group>>
 
     @POST("/group/create")

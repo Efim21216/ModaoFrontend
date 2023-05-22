@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentStartBinding
+import ru.nsu.fit.modao.models.Tokens
 import ru.nsu.fit.modao.notification.PushService.Companion.KEY_ACTION
 import ru.nsu.fit.modao.notification.PushService.Companion.KEY_GROUP_ID
 import ru.nsu.fit.modao.notification.PushService.Companion.TO_DATA_CONFIRMATION
@@ -43,18 +44,20 @@ class StartFragment : Fragment() {
 
         val sharedPreferences = app.encryptedSharedPreferences
         val refreshToken = sharedPreferences.getString(REFRESH_TOKEN, null)
-        val accessToken = sharedPreferences.getString(ACCESS_TOKEN, null)
         if (refreshToken == null){
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToAuthorizationFragment())
         } else {
-            //mainViewModel.getAccessToken(Tokens(refreshToken = refreshToken))
-            app.accessToken = accessToken
-            app.userId = sharedPreferences.getLong(ID_USER, -1)
-            binding.progressBar.visibility = View.VISIBLE
-            mainViewModel.getUser()
+            mainViewModel.getRefreshToken(Tokens(refreshToken = refreshToken))
         }
-        mainViewModel.accessToken.observe(viewLifecycleOwner) {
-            app.accessToken = it
+        mainViewModel.tokens.observe(viewLifecycleOwner) {
+            app.accessToken = it.accessToken
+            if (it.refreshToken != null) {
+                app.refreshToken = it.refreshToken
+                Log.d("MyTag", "New refresh")
+            }
+            val edit = sharedPreferences.edit()
+            edit.putString(ACCESS_TOKEN, it.accessToken)
+                .putString(REFRESH_TOKEN, it.refreshToken).apply()
             app.userId = sharedPreferences.getLong(ID_USER, -1)
             binding.progressBar.visibility = View.VISIBLE
             mainViewModel.getUser()

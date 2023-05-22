@@ -12,6 +12,9 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="go">Go!</string>
+    <string name="all">All</string>
+    <string name="archive">Archive</string>
+    <string name="active">Active</string>
     <string name="FilterByDate">Filter by date</string>
     <string name="onlyMy">Only my</string>
     <string name="only_expenses">Only expenses</string>

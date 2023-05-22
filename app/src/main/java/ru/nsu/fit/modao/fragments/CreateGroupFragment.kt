@@ -34,7 +34,7 @@ class CreateGroupFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainViewModel.groupId.observe(viewLifecycleOwner) {
-            mainViewModel.getUserGroups()
+            mainViewModel.getUserGroups(0)
             group?.id = it
             findNavController().navigate(CreateGroupFragmentDirections.actionCreateGroupFragmentToGroupInfoFragment(group!!))
         }

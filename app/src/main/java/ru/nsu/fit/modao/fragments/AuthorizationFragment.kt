@@ -55,7 +55,8 @@ class AuthorizationFragment : Fragment() {
             binding.tipMessage.setText(R.string.wait)
             loginViewModel.login(
                 login = binding.personLogin.text.toString(),
-                password = binding.personPassword.text.toString()
+                password = binding.personPassword.text.toString(),
+                app.deviceToken
             )
         }
         binding.buttonSignUp.setOnClickListener {

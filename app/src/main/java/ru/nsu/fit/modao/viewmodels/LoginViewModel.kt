@@ -20,12 +20,12 @@ class LoginViewModel @Inject constructor(private val repository: MainRepository)
     val userId = MutableLiveData<Long>()
     val message = MutableLiveData<String>()
     private val handler = CoroutineExceptionHandler { _, _ ->  message.value = "Server problems"}
-    fun login(login: String, password: String){
+    fun login(login: String, password: String, deviceToken: String?){
         if (login == "" || password == ""){
             message.value = "Enter the data"
             return
         }
-        val user = User(login = login, password = password)
+        val user = User(login = login, password = password/*, deviceToken = deviceToken*/)
         viewModelScope.launch(handler) {
             val response = repository.login(user)
             if (response.isSuccessful){

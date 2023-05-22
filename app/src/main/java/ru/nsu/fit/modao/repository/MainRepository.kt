@@ -22,6 +22,10 @@ class MainRepository(private val app: App) {
         return app.api.getRefreshToken(refreshToken)
     }
 
+    suspend fun exit(): Response<Unit> {
+        return app.api.exit(Constants.AUTH + app.accessToken)
+    }
+
     suspend fun getUser(): Response<User> {
         return app.api.getUser(Constants.AUTH + app.accessToken)
     }
@@ -71,8 +75,8 @@ class MainRepository(private val app: App) {
         return app.api.getGroupUnconfirmedExpenses(Constants.AUTH + app.accessToken, groupId)
     }
 
-    suspend fun getUserGroups(): Response<Array<Group>> {
-        return app.api.getUserGroups(Constants.AUTH + app.accessToken)
+    suspend fun getUserGroups(type: Int): Response<Array<Group>> {
+        return app.api.getUserGroups(Constants.AUTH + app.accessToken, type)
     }
 
     suspend fun getGroupInfo(groupId: Long): Response<Group> {

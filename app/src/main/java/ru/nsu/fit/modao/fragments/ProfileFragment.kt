@@ -16,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentProfileBinding
 import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.utils.Constants.Companion.FAIL
+import ru.nsu.fit.modao.utils.Constants.Companion.SUCCESS
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -44,11 +46,7 @@ class ProfileFragment: Fragment() {
         }
         mainViewModel.getUser()
         binding.logOutLayout.setOnClickListener {
-            activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.GONE
-            val sharedPreferences = app.encryptedSharedPreferences
-            sharedPreferences.edit().clear().apply()
-            findNavController().navigate(ProfileFragmentDirections
-                .actionProfileFragmentToAuthorizationFragment())
+            mainViewModel.exit()
         }
         binding.personUuid.setOnLongClickListener {
             val clipboard = context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
@@ -56,6 +54,19 @@ class ProfileFragment: Fragment() {
             clipboard?.setPrimaryClip(clip)
             Toast.makeText(context, "Copied!", Toast.LENGTH_LONG).show()
             true
+        }
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            when (it) {
+                FAIL -> Toast.makeText(context,
+                "Check internet connection", Toast.LENGTH_LONG).show()
+                SUCCESS -> {
+                    activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.GONE
+                    val sharedPreferences = app.encryptedSharedPreferences
+                    sharedPreferences.edit().clear().apply()
+                    findNavController().navigate(ProfileFragmentDirections
+                        .actionProfileFragmentToAuthorizationFragment())
+                }
+            }
         }
     }
 
