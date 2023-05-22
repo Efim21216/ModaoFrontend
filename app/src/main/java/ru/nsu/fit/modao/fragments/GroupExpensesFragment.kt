@@ -41,7 +41,10 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private var showOnlyMy = false
     private var lastEvent: Expense? = null
     private lateinit var window: PopupWindow
+    private var totalPages = 2
+    private var lastPage = 0
     private lateinit var bindingPopupWindow: FilterExpensesBinding
+    private var newList = true
     private val Boolean.intValue
         get() = if (this) 1 else 0
     override fun onCreateView(
@@ -64,7 +67,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         setRecycler()
         setButtonOnClick()
         setPopupWindow()
-        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
+        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2, 0, PAGE_SIZE)
         setObserver()
 
     }
@@ -72,10 +75,22 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
 
         mainViewModel.expenses.observe(viewLifecycleOwner) {
             val list: MutableList<ExpenseListItem> = it.toMutableList()
-            if (it.size > PAGE_SIZE) {
-                list.add(PAGE_SIZE - 5, LoadItems(isLoad = false))
+            if (totalPages > lastPage + 1) {
+                lastPage++
+                if (list.size > PAGE_SIZE - 5) {
+                    list.add(PAGE_SIZE - 5, LoadItems(isLoad = false, lastPage))
+                }
             }
-            adapter.setList(list.toTypedArray())
+            if (newList) {
+                newList = false
+                adapter.setList(list.toTypedArray())
+            } else {
+                adapter.addItems(list.toTypedArray())
+            }
+
+        }
+        mainViewModel.totalPages.observe(viewLifecycleOwner) {
+            totalPages = it
         }
 
         mainViewModel.infoEvent.observe(viewLifecycleOwner) {
@@ -190,17 +205,9 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         }
     }
     private fun getGroupExpenses(){
-        if (bindingPopupWindow.transfer.isChecked){
-            if (bindingPopupWindow.event.isChecked) {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
-            } else {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 1)
-            }
-        } else {
-            if (bindingPopupWindow.event.isChecked) {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 0)
-            }
-        }
+        newList = true
+        lastPage = 0
+        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, getFilter(), 0, PAGE_SIZE)
     }
     override fun onClickItem(item: ExpenseListItem) {
         when (item) {
@@ -210,8 +217,14 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
                     return
                 }
                 item.isLoad = true
+                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue,
+                    getFilter(), item.page, PAGE_SIZE)
             }
         }
-
+    }
+    private fun getFilter(): Int {
+        return if (bindingPopupWindow.transfer.isChecked){
+            if (bindingPopupWindow.event.isChecked) 2 else 1
+        } else 0
     }
 }

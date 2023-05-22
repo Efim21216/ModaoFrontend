@@ -22,7 +22,6 @@ import ru.nsu.fit.modao.databinding.PopUpWindowDataConfBinding
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.ExpenseListItem
 import ru.nsu.fit.modao.models.LoadItems
-import ru.nsu.fit.modao.utils.Constants
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 
 @AndroidEntryPoint
@@ -83,9 +82,6 @@ class DataConfirmationFragment : Fragment(), AdapterListener<ExpenseListItem> {
         }
         mainViewModel.unconfirmedExpenses.observe(viewLifecycleOwner){
             val list: MutableList<ExpenseListItem> = it.toMutableList()
-            if (it.size == Constants.PAGE_SIZE) {
-                list.add(Constants.PAGE_SIZE - 5, LoadItems(isLoad = false))
-            }
             adapter.setList(list.toTypedArray())
         }
     }

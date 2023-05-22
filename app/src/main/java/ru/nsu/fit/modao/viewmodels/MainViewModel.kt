@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     val invitationUser = MutableLiveData<Array<Notification>>()
     val listFriends = MutableLiveData<Array<User>>()
     val tokens = MutableLiveData<Tokens>()
-
+    val totalPages = MutableLiveData<Int>()
 
     private val handler = CoroutineExceptionHandler { _, throwable ->
         messageHandler.value = throwable.message
@@ -137,11 +137,14 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
-    fun getGroupExpenses(id: Long, mode: Int, filter: Int) {
+    fun getGroupExpenses(id: Long, mode: Int, filter: Int,
+                         offset: Int, limit: Int) {
         viewModelScope.launch(handler) {
-            val response = repository.getGroupExpenses(id, mode, filter)
+            val response = repository.getGroupExpenses(id, mode,
+                filter, offset, limit)
             if (response.isSuccessful) {
-                expenses.value = response.body()
+                expenses.value = response.body()?.content!!
+                totalPages.value = response.body()?.totalPages!!
             } else {
                 Log.e("MyError", response.message())
             }

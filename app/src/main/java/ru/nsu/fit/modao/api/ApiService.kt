@@ -68,8 +68,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("groupId") id: Long,
         @Path("mode") mode: Int,
-        @Path("type") type: Int
-    ): Response<Array<Expense>>
+        @Path("type") type: Int,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
+    ): Response<PagingExpenses>
 
     @GET("/event/listEventsUnconfirmed/{groupId}")
     suspend fun getGroupUnconfirmedExpenses(

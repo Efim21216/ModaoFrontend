@@ -8,7 +8,7 @@ class Constants {
         const val BASE_URL = "http://139.59.143.34:5000" //server
         //const val BASE_URL = "http://192.168.0.101:8080" //my wifi
         //const val BASE_URL = "http://192.168.0.107:8080"
-        const val PAGE_SIZE = 10
+        const val PAGE_SIZE = 20
         const val AUTH = "Bearer "
         const val ACCESS_TOKEN = "Access token"
         const val REFRESH_TOKEN = "Refresh token"

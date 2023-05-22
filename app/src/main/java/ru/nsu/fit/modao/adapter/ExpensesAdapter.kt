@@ -13,7 +13,7 @@ import ru.nsu.fit.modao.models.ExpenseListItem
 import ru.nsu.fit.modao.models.LoadItems
 
 class ExpensesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var expensesList: Array<ExpenseListItem> = arrayOf()
+    private var expensesList: MutableList<ExpenseListItem> = mutableListOf()
     private lateinit var listener: AdapterListener<ExpenseListItem>
     companion object {
         const val EXPENSE = 0
@@ -23,8 +23,13 @@ class ExpensesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.listener = listener
     }
     fun setList(list: Array<ExpenseListItem>){
-        expensesList = list
+        expensesList = list.toMutableList()
         notifyDataSetChanged()
+    }
+    fun addItems(list: Array<ExpenseListItem>) {
+        val size = expensesList.size
+        expensesList.addAll(list)
+        notifyItemRangeChanged(size, list.size)
     }
     class LoadHolder(item: View): RecyclerView.ViewHolder(item) {
         fun bind(load: LoadItems, listener: AdapterListener<ExpenseListItem>) {

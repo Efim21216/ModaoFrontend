@@ -35,8 +35,10 @@ class MainRepository(private val app: App) {
     }
 
 
-    suspend fun getGroupExpenses(id: Long, mode: Int, type: Int): Response<Array<Expense>> {
-        return app.api.getGroupExpenses(Constants.AUTH + app.accessToken, id, mode, type)
+    suspend fun getGroupExpenses(id: Long, mode: Int,
+                                 type: Int, offset: Int, limit: Int): Response<PagingExpenses> {
+        return app.api.getGroupExpenses(Constants.AUTH + app.accessToken,
+            id, mode, type, offset, limit)
     }
 
     suspend fun createExpense(expense: Expense): Response<Long> {
