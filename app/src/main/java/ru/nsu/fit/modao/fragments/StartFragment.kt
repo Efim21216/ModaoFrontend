@@ -19,6 +19,7 @@ import ru.nsu.fit.modao.notification.PushService.Companion.TO_NOTIFICATION
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.ACCESS_TOKEN
 import ru.nsu.fit.modao.utils.Constants.Companion.ID_USER
+import ru.nsu.fit.modao.utils.Constants.Companion.REFRESH_TOKEN
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
 
@@ -41,11 +42,19 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPreferences = app.encryptedSharedPreferences
-        val accessToken: String? = sharedPreferences.getString(ACCESS_TOKEN, null)
-        if (accessToken == null){
+        val refreshToken = sharedPreferences.getString(REFRESH_TOKEN, null)
+        val accessToken = sharedPreferences.getString(ACCESS_TOKEN, null)
+        if (refreshToken == null){
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToAuthorizationFragment())
         } else {
+            //mainViewModel.getAccessToken(Tokens(refreshToken = refreshToken))
             app.accessToken = accessToken
+            app.userId = sharedPreferences.getLong(ID_USER, -1)
+            binding.progressBar.visibility = View.VISIBLE
+            mainViewModel.getUser()
+        }
+        mainViewModel.accessToken.observe(viewLifecycleOwner) {
+            app.accessToken = it
             app.userId = sharedPreferences.getLong(ID_USER, -1)
             binding.progressBar.visibility = View.VISIBLE
             mainViewModel.getUser()

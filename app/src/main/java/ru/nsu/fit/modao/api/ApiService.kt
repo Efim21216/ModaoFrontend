@@ -8,10 +8,17 @@ interface ApiService {
     @POST("/api/auth/login")
     suspend fun login(@Body user: User): Response<Authorization>
 
+    @POST("/api/auth/token")
+    suspend fun getAccessToken(@Body refreshToken: Tokens): Response<Authorization>
+
+    @POST("/api/auth/refresh")
+    suspend fun getRefreshToken(@Body refreshToken: Tokens): Response<Authorization>
+
     @GET("/user/myInfo")
     suspend fun getUser(
         @Header("Authorization") token: String
     ): Response<User>
+
     @GET("/user/listGroups")
     suspend fun getUserGroups(
         @Header("Authorization") token: String
@@ -22,6 +29,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body group: Group
     ): Response<Long>
+
     @PUT("/group/addUserInGroup/{groupUUID}")
     suspend fun addToGroup(
         @Header("Authorization") token: String,
@@ -85,55 +93,66 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("groupId") groupId: Long
     ): Response<Array<User>>
+
     @GET("/debt/{userId}/{groupId}")
     suspend fun getUserDebtInGroup(
         @Header("Authorization") token: String,
         @Path("userId") userId: Long,
         @Path("groupId") groupId: Long
     ): Response<Array<UserDebt>>
+
     @GET("/group/listOrganizers/{groupId}")
     suspend fun getListOrganizers(
         @Header("Authorization") token: String,
         @Path("groupId") groupId: Long
     ): Response<Array<User>>
+
     @GET("/group/info/{groupId}")
     suspend fun getGroupInfo(
         @Header("Authorization") token: String,
         @Path("groupId") groupId: Long
     ): Response<Group>
+
     @GET("/invitation/getInvitationsFriend")
     suspend fun getInvitationsFriend(
         @Header("Authorization") token: String
     ): Response<Array<Notification>>
+
     @POST("/invitation/createInvitationFriend/{userUuid}")
     suspend fun addFriend(
         @Header("Authorization") token: String,
         @Path("userUuid") userUuid: String
     ): Response<Unit>
+
     @GET("/invitation/getInvitationsInGroup")
     suspend fun getInvitationsGroup(
         @Header("Authorization") token: String
     ): Response<Array<Notification>>
+
     @POST("/invitation/acceptInvitationFriend/{invitationId}")
     suspend fun acceptInvitationFriend(
         @Header("Authorization") token: String,
         @Path("invitationId") invitationId: Long
     ): Response<Unit>
+
     @POST("/invitation/declineInvitationFriend/{invitationId}")
     suspend fun denyInvitationFriend(
         @Header("Authorization") token: String,
         @Path("invitationId") invitationId: Long
     ): Response<Unit>
+
     @POST("/invitation/acceptInvitationInGroup/{invitationId}")
     suspend fun acceptInvitationGroup(
         @Header("Authorization") token: String,
         @Path("invitationId") invitationId: Long
     ): Response<Unit>
+
     @POST("/invitation/declineInvitationInGroup/{invitationId}")
     suspend fun denyInvitationGroup(
         @Header("Authorization") token: String,
         @Path("invitationId") invitationId: Long
     ): Response<Unit>
+
     @GET("/user/listFriends")
     suspend fun getListFriends(
         @Header("Authorization") token: String

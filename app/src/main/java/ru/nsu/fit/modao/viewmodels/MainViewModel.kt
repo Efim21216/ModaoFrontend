@@ -27,6 +27,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     val groupInfo = MutableLiveData<Group>()
     val invitationUser = MutableLiveData<Array<Notification>>()
     val listFriends = MutableLiveData<Array<User>>()
+    val accessToken = MutableLiveData<String>()
 
 
     private val handler = CoroutineExceptionHandler { _, throwable ->
@@ -44,9 +45,21 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
                 user.value = response.body()
             } else {
                 tipMessage.value = "error"
-                Log.e("MyError", response.message())
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
             }
         }
+    }
+    fun getAccessToken(refreshToken: Tokens){
+        viewModelScope.launch(handler) {
+            val response = repository.getAccessToken(refreshToken)
+            if (response.isSuccessful) {
+                accessToken.value = response.body()?.accessToken
+            } else {
+                tipMessage.value = "error"
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
+            }
+        }
+
     }
     fun getUserGroups(){
         viewModelScope.launch(handler) {

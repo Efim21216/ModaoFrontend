@@ -5,12 +5,21 @@ import ru.nsu.fit.modao.models.*
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants
 
-class MainRepository (private val app: App) {
+class MainRepository(private val app: App) {
     suspend fun login(user: User): Response<Authorization> {
         return app.api.login(user)
     }
+
     suspend fun createUser(user: User): Response<Long> {
         return app.api.createUser(user)
+    }
+
+    suspend fun getAccessToken(refreshToken: Tokens): Response<Authorization> {
+        return app.api.getAccessToken(refreshToken)
+    }
+
+    suspend fun getRefreshToken(refreshToken: Tokens): Response<Authorization> {
+        return app.api.getRefreshToken(refreshToken)
     }
 
     suspend fun getUser(): Response<User> {
@@ -57,39 +66,51 @@ class MainRepository (private val app: App) {
     suspend fun getEventInfo(eventId: Long, groupId: Long): Response<Expense> {
         return app.api.getEventInfo(Constants.AUTH + app.accessToken, eventId, groupId)
     }
+
     suspend fun getGroupUnconfirmedExpenses(groupId: Long): Response<Array<Expense>> {
         return app.api.getGroupUnconfirmedExpenses(Constants.AUTH + app.accessToken, groupId)
     }
-    suspend fun getUserGroups(): Response<Array<Group>>{
+
+    suspend fun getUserGroups(): Response<Array<Group>> {
         return app.api.getUserGroups(Constants.AUTH + app.accessToken)
     }
-    suspend fun getGroupInfo(groupId: Long): Response<Group>{
-        return app.api.getGroupInfo(Constants.AUTH + app.accessToken ,groupId)
+
+    suspend fun getGroupInfo(groupId: Long): Response<Group> {
+        return app.api.getGroupInfo(Constants.AUTH + app.accessToken, groupId)
     }
+
     suspend fun addFriend(userUuid: String): Response<Unit> {
         return app.api.addFriend(Constants.AUTH + app.accessToken, userUuid)
     }
+
     suspend fun getInvitationsFriend(): Response<Array<Notification>> {
         return app.api.getInvitationsFriend(Constants.AUTH + app.accessToken)
     }
+
     suspend fun getInvitationsGroup(): Response<Array<Notification>> {
         return app.api.getInvitationsGroup(Constants.AUTH + app.accessToken)
     }
-    suspend fun acceptInvitationFriend(invitationId: Long):Response<Unit> {
+
+    suspend fun acceptInvitationFriend(invitationId: Long): Response<Unit> {
         return app.api.acceptInvitationFriend(Constants.AUTH + app.accessToken, invitationId)
     }
-    suspend fun denyInvitationFriend(invitationId: Long):Response<Unit> {
+
+    suspend fun denyInvitationFriend(invitationId: Long): Response<Unit> {
         return app.api.denyInvitationFriend(Constants.AUTH + app.accessToken, invitationId)
     }
-    suspend fun acceptInvitationGroup(invitationId: Long):Response<Unit> {
+
+    suspend fun acceptInvitationGroup(invitationId: Long): Response<Unit> {
         return app.api.acceptInvitationGroup(Constants.AUTH + app.accessToken, invitationId)
     }
-    suspend fun denyInvitationGroup(invitationId: Long):Response<Unit> {
+
+    suspend fun denyInvitationGroup(invitationId: Long): Response<Unit> {
         return app.api.denyInvitationGroup(Constants.AUTH + app.accessToken, invitationId)
     }
+
     suspend fun getListFriends(): Response<Array<User>> {
         return app.api.getListFriends(Constants.AUTH + app.accessToken)
     }
+
     suspend fun addToGroup(groupUUID: String): Response<Unit> {
         return app.api.addToGroup(Constants.AUTH + app.accessToken, groupUUID)
     }
