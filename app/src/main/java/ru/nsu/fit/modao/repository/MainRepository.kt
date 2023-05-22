@@ -74,6 +74,13 @@ class MainRepository(private val app: App) {
     suspend fun getGroupUnconfirmedExpenses(groupId: Long): Response<Array<Expense>> {
         return app.api.getGroupUnconfirmedExpenses(Constants.AUTH + app.accessToken, groupId)
     }
+    suspend fun deleteGroup(groupId: Long): Response<Unit> {
+        return app.api.deleteGroup(Constants.AUTH + app.accessToken, groupId)
+    }
+
+    suspend fun archiveGroup(groupId: Long): Response<Unit> {
+        return app.api.archiveGroup(Constants.AUTH + app.accessToken, groupId)
+    }
 
     suspend fun getUserGroups(type: Int): Response<Array<Group>> {
         return app.api.getUserGroups(Constants.AUTH + app.accessToken, type)

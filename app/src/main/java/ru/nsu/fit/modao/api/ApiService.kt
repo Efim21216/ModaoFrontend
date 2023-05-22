@@ -30,6 +30,17 @@ interface ApiService {
         @Path("type") type: Int
     ): Response<Array<Group>>
 
+    @GET("/group/delete/{groupId}")
+    suspend fun deleteGroup(
+        @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long
+    ): Response<Unit>
+    @GET("/group/archive/{groupId}")
+    suspend fun archiveGroup(
+        @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long
+    ): Response<Unit>
+
     @POST("/group/create")
     suspend fun createGroup(
         @Header("Authorization") token: String,

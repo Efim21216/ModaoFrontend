@@ -12,6 +12,8 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="go">Go!</string>
+    <string name="archiveGroup">Archive group</string>
+    <string name="deleteGroup">Delete group</string>
     <string name="all">All</string>
     <string name="archive">Archive</string>
     <string name="active">Active</string>

@@ -49,14 +49,11 @@ class GroupInfoFragment : Fragment() {
         binding.nameGroup.text = args.group.groupName
 
         mainViewModel.getListOrganizers(args.group.id!!)
-        mainViewModel.organizers.observe(viewLifecycleOwner) {
-            val isOrganizer = it.any { org -> org.id == app.userId }
-            if (isOrganizer) {
-                binding.buttonDataConfirmation.visibility = View.VISIBLE
-                binding.textDataConfirmation.visibility = View.VISIBLE
-            }
-        }
+        initObserver()
+        initButton()
 
+    }
+    private fun initButton() {
         binding.buttonGroupExpenses.setOnClickListener {
             findNavController().navigate(
                 GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(
@@ -84,6 +81,30 @@ class GroupInfoFragment : Fragment() {
                     args.group
                 )
             )
+        }
+        binding.archiveGroup.setOnClickListener {
+            mainViewModel.archiveGroup(args.group.id!!)
+        }
+        binding.deleteGroup.setOnClickListener {
+            mainViewModel.deleteGroup(args.group.id!!)
+        }
+    }
+    private fun initObserver() {
+        mainViewModel.organizers.observe(viewLifecycleOwner) {
+            val isOrganizer = it.any { org -> org.id == app.userId }
+            if (isOrganizer) {
+                binding.buttonDataConfirmation.visibility = View.VISIBLE
+                binding.textDataConfirmation.visibility = View.VISIBLE
+            }
+        }
+        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
+            when (it) {
+                "Deleted" -> findNavController().navigate(GroupInfoFragmentDirections
+                    .actionGlobalNestedGroups())
+                "Archived" -> findNavController().navigate(GroupInfoFragmentDirections
+                    .actionGlobalNestedGroups())
+                else -> Log.d("MyTag", "Unknown message $it")
+            }
         }
     }
 }

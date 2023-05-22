@@ -67,6 +67,28 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
+    fun deleteGroup(groupId: Long) {
+        viewModelScope.launch(handler) {
+            val response = repository.deleteGroup(groupId)
+            if (response.isSuccessful) {
+                tipMessage.value = "Deleted"
+            } else {
+                Log.d("MyTag", "Error ${response.errorBody()?.string()}")
+            }
+        }
+    }
+
+    fun archiveGroup(groupId: Long) {
+        viewModelScope.launch(handler) {
+            val response = repository.archiveGroup(groupId)
+            if (response.isSuccessful) {
+                tipMessage.value = "Archived"
+            } else {
+                Log.d("MyTag", "Error ${response.errorBody()?.string()}")
+            }
+        }
+    }
+
     fun getRefreshToken(refreshToken: Tokens) {
         viewModelScope.launch(handler) {
             val response = repository.getRefreshToken(refreshToken)
