@@ -81,6 +81,22 @@
         app:layout_constraintEnd_toEndOf="@+id/expensesRecycler"
         app:layout_constraintTop_toTopOf="@+id/event" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/filterButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="68dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/filter_events"
+        android:icon="@drawable/filter_icon"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/event"
+        app:layout_constraintEnd_toEndOf="@+id/expensesRecycler"
+        app:layout_constraintTop_toTopOf="@+id/event"
+        app:layout_constraintVertical_bias="0.823" />
+
     <Button
         android:id="@+id/buttonFilterByDate"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
