@@ -12,6 +12,8 @@ data class Expense (
     val name: String? = null,
     val groupId: Long? = null,
     val price: Float? = null,
+    val time: String? = null,
+    val status: Int? = null,
     val userPayingId: Long? = null,
     val usernameCreator: String? = null,
     val usernamePaying: String? = null,

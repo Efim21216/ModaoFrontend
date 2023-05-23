@@ -21,6 +21,7 @@ import ru.nsu.fit.modao.databinding.FilterGroupsBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupsBinding
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+
 @AndroidEntryPoint
 class GroupsFragment : Fragment(), AdapterListener<Group> {
     private var _binding: FragmentGroupsBinding? = null

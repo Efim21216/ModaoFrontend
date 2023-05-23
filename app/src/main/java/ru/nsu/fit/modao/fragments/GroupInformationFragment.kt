@@ -12,6 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nsu.fit.modao.databinding.FragmentGroupInformationBinding
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,5 +49,8 @@ class GroupInformationFragment : Fragment() {
                 binding.groupUuid.visibility = View.VISIBLE
             }
         }
+        val time = LocalDateTime.parse(args.group.time)
+        val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        binding.dataCreation.text = time.format(pattern)
     }
 }

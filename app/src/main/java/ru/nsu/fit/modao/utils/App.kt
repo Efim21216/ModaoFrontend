@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.utils
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.firebase.messaging.FirebaseMessaging
@@ -40,17 +41,22 @@ class App: Application() {
         }
     }
 
-    val encryptedSharedPreferences by lazy {
-        val masterKey: MasterKey = MasterKey.Builder(applicationContext)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        EncryptedSharedPreferences.create(
-            applicationContext,
-            "secret_shared_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+    val encryptedSharedPreferences: SharedPreferences by lazy {
+        try {
+            val masterKey: MasterKey = MasterKey.Builder(applicationContext)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+            EncryptedSharedPreferences.create(
+                applicationContext,
+                "secret_shared_prefs",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } catch (e: Exception) {
+            applicationContext.getSharedPreferences("secret_shared_prefs", MODE_PRIVATE)
+        }
+
     }
     var userId: Long = -1
     var accessToken: String? = null

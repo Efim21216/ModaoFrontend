@@ -269,6 +269,11 @@
                 app:destination="@id/dataConfirmationFragment"
                 app:popUpTo="@id/dataConfirmationFragment"
                 app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_seeDetailsFragment_to_groupExpensesFragment"
+                app:destination="@id/groupExpensesFragment"
+                app:popUpTo="@id/groupExpensesFragment"
+                app:popUpToInclusive="true" />
         </fragment>
     </navigation>
     <fragment

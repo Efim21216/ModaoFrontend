@@ -32,6 +32,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textConfirm2"
         app:srcCompat="@drawable/no_button" />
 
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/deleteEvent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textConfirm2"
         android:layout_width="wrap_content"
@@ -61,7 +72,7 @@
         android:id="@+id/cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
         android:text="@string/cost"
         android:textColor="#515151"
@@ -100,18 +111,29 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
-        android:text="@string/who_participated"
+        android:text="@string/date_of_creation"
         android:textColor="#515151"
         android:textSize="@dimen/subtitle"
         app:layout_constraintStart_toStartOf="@+id/whoSpent"
         app:layout_constraintTop_toBottomOf="@+id/whoSpent" />
+    <TextView
+        android:id="@+id/dateCreation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/who_participated"
+        android:textColor="#515151"
+        android:textSize="@dimen/subtitle"
+        app:layout_constraintStart_toStartOf="@+id/whoParticipated"
+        app:layout_constraintTop_toBottomOf="@+id/whoParticipated" />
 
     <TextView
         android:id="@+id/theCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
         android:text="@string/testNum"
         android:textColor="@android:color/black"
@@ -145,6 +167,19 @@
         app:layout_constraintStart_toEndOf="@+id/whoSpent"
         app:layout_constraintTop_toBottomOf="@+id/theCreator" />
 
+    <TextView
+        android:id="@+id/theDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="@string/test"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/subtitle"
+        app:layout_constraintStart_toEndOf="@+id/whoParticipated"
+        app:layout_constraintTop_toBottomOf="@+id/theSpender" />
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
@@ -162,11 +197,11 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textConfirm2"
+        android:layout_marginBottom="135dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whoParticipated"
+        app:layout_constraintTop_toBottomOf="@+id/dateCreation"
         tools:listitem="@layout/who_participated_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

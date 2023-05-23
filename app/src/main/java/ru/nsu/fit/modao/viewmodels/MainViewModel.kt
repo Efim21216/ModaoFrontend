@@ -121,7 +121,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             if (response.isSuccessful) {
                 userGroups.value = response.body()
             } else {
-                Log.e("MyTag", response.message())
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
             }
         }
     }
@@ -132,21 +132,50 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             if (response.isSuccessful) {
                 groupId.value = response.body()
             } else {
-                Log.e("MyError", response.message())
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
             }
         }
     }
 
-    fun getGroupExpenses(id: Long, mode: Int, filter: Int,
-                         offset: Int, limit: Int) {
+    fun getGroupExpenses(
+        id: Long, mode: Int, filter: Int,
+        minTime: Long, maxTime: Long,
+        offset: Int, limit: Int
+    ) {
         viewModelScope.launch(handler) {
-            val response = repository.getGroupExpenses(id, mode,
-                filter, offset, limit)
+            val response = repository.getGroupExpenses(
+                id, mode, filter,
+                minTime, maxTime, offset, limit
+            )
             if (response.isSuccessful) {
                 expenses.value = response.body()?.content!!
                 totalPages.value = response.body()?.totalPages!!
             } else {
-                Log.e("MyError", response.message())
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
+            }
+        }
+    }
+
+    fun deleteEvent(groupId: Long, eventId: Long, name: String) {
+        viewModelScope.launch(handler) {
+            val response = repository.deleteEvent(groupId, eventId, name)
+            if (response.isSuccessful) {
+                tipMessage.value = SUCCESS
+            } else {
+                tipMessage.value = FAIL
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
+            }
+        }
+    }
+
+    fun deleteUser(groupId: Long, userId: Long) {
+        viewModelScope.launch(handler) {
+            val response = repository.deleteUser(groupId, userId)
+            if (response.isSuccessful) {
+                tipMessage.value = SUCCESS
+            } else {
+                tipMessage.value = FAIL
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
             }
         }
     }

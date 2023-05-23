@@ -16,7 +16,10 @@ import ru.nsu.fit.modao.adapter.AdapterListener
 import ru.nsu.fit.modao.adapter.FriendsAdapter
 import ru.nsu.fit.modao.databinding.FragmentGroupMembersBinding
 import ru.nsu.fit.modao.models.User
+import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import javax.inject.Inject
+
 @AndroidEntryPoint
 class GroupMembersFragment : Fragment(), AdapterListener<User> {
     private var _binding: FragmentGroupMembersBinding? = null
@@ -24,6 +27,9 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
     private val mainViewModel: MainViewModel by viewModels()
     private val args by navArgs<GroupMembersFragmentArgs>()
     private val adapter = FriendsAdapter()
+    private var organizer = false
+    @Inject
+    lateinit var app: App
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +57,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
             adapter.setFriendsList(it)
         }
-
+        mainViewModel.getListOrganizers(args.group.id!!)
         mainViewModel.getUsersInGroup(args.group.id!!)
         binding.buttonAddMember.setOnClickListener {
             findNavController().navigate(GroupMembersFragmentDirections
@@ -63,6 +69,9 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+        mainViewModel.organizers.observe(viewLifecycleOwner) {
+            organizer = it.any { org -> org.id == app.userId }
+        }
 
     }
 
@@ -71,6 +80,11 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         builder.setTitle(item.username)
         builder.setMessage("Phone: " + item.phone_number + "\n" + "Bank: " + item.bank)
         builder.setPositiveButton("OK") { _, _ -> }
+        if (organizer) {
+            builder.setNegativeButton("Delete user") { _, _ ->
+                mainViewModel.deleteUser(args.group.id!!, item.id!!)
+            }
+        }
         builder.create().show()
     }
 

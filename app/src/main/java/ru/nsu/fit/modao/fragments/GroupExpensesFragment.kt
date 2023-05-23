@@ -45,8 +45,11 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private var lastPage = 0
     private lateinit var bindingPopupWindow: FilterExpensesBinding
     private var newList = true
+    private var minTime: Long = 0
+    private var maxTime: Long = 9999999999999L
     private val Boolean.intValue
         get() = if (this) 1 else 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,10 +70,19 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         setRecycler()
         setButtonOnClick()
         setPopupWindow()
-        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2, 0, PAGE_SIZE)
+        mainViewModel.getGroupExpenses(
+            args.group.id!!,
+            showOnlyMy.intValue,
+            2,
+            minTime,
+            maxTime,
+            0,
+            PAGE_SIZE
+        )
         setObserver()
 
     }
+
     private fun setObserver() {
 
         mainViewModel.expenses.observe(viewLifecycleOwner) {
@@ -109,15 +121,18 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             bindingAlert.textConfirm.visibility = View.GONE
             builder.setView(bindingAlert.root)
             val dialog = builder.create()
-            bindingAlert.buttonDetails.setOnClickListener {_ ->
+            bindingAlert.buttonDetails.setOnClickListener { _ ->
                 dialog.dismiss()
-                findNavController().navigate(GroupExpensesFragmentDirections
-                    .actionGroupExpensesFragmentToSeeDetailsFragment(false, it))
+                val action = GroupExpensesFragmentDirections
+                    .actionGroupExpensesFragmentToSeeDetailsFragment(false, it)
+                action.group = args.group
+                findNavController().navigate(action)
             }
 
             dialog.show()
         }
     }
+
     private fun setButtonOnClick() {
         binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
@@ -140,31 +155,38 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             showDatePicker()
         }
     }
-    private fun showDatePicker(){
+
+    private fun showDatePicker() {
         val dialog = MaterialDatePicker.Builder.dateRangePicker()
             .setTheme(R.style.MaterialCalendarTheme)
             .setPositiveButtonText("Save")
             .setNegativeButtonText("Cancel")
             .build()
         dialog.addOnPositiveButtonClickListener {
+            minTime = it.first
+            maxTime = it.second
             val date1 = Date(it.first)
             val date2 = Date(it.second)
-            Toast.makeText(context, "${DateFormat.getDateInstance().format(date1)} " +
-                    "- ${DateFormat.getDateInstance().format(date2)}",
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context, "${DateFormat.getDateInstance().format(date1)} " +
+                        "- ${DateFormat.getDateInstance().format(date2)}",
+                Toast.LENGTH_LONG
+            ).show()
         }
         dialog.show(childFragmentManager, "MyTag")
     }
-    private fun setRecycler(){
+
+    private fun setRecycler() {
         adapter.attachListener(this)
         binding.expensesRecycler.layoutManager =
             LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
     }
 
-    private fun setPopupWindow(){
+    private fun setPopupWindow() {
         window = PopupWindow(context)
-        val view = LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
         bindingPopupWindow = FilterExpensesBinding.bind(view)
         window.contentView = bindingPopupWindow.root
         window.isFocusable = true
@@ -172,10 +194,11 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         bindingPopupWindow.transfer.isChecked = true
         setButton()
     }
-    private fun setButton(){
+
+    private fun setButton() {
         bindingPopupWindow.transfer.setOnClickListener {
-            if (showTransfer){
-                if (bindingPopupWindow.event.isChecked){
+            if (showTransfer) {
+                if (bindingPopupWindow.event.isChecked) {
                     showTransfer = false
                     bindingPopupWindow.transfer.isChecked = false
                 }
@@ -204,11 +227,21 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             getGroupExpenses()
         }
     }
-    private fun getGroupExpenses(){
+
+    private fun getGroupExpenses() {
         newList = true
         lastPage = 0
-        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, getFilter(), 0, PAGE_SIZE)
+        mainViewModel.getGroupExpenses(
+            args.group.id!!,
+            showOnlyMy.intValue,
+            getFilter(),
+            minTime,
+            maxTime,
+            0,
+            PAGE_SIZE
+        )
     }
+
     override fun onClickItem(item: ExpenseListItem) {
         when (item) {
             is Expense -> mainViewModel.getEventInfo(item.id!!, args.group.id!!)
@@ -217,13 +250,16 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
                     return
                 }
                 item.isLoad = true
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue,
-                    getFilter(), item.page, PAGE_SIZE)
+                mainViewModel.getGroupExpenses(
+                    args.group.id!!, showOnlyMy.intValue,
+                    getFilter(), minTime, maxTime, item.page, PAGE_SIZE
+                )
             }
         }
     }
+
     private fun getFilter(): Int {
-        return if (bindingPopupWindow.transfer.isChecked){
+        return if (bindingPopupWindow.transfer.isChecked) {
             if (bindingPopupWindow.event.isChecked) 2 else 1
         } else 0
     }

@@ -63,12 +63,29 @@ interface ApiService {
         @Path("groupId") groupId: Long
     ): Response<Expense>
 
-    @GET("/event/listEventsConfirmed/{mode}/{groupId}/{type}")
+    @PUT("/event/delete/{groupId}/{eventId}")
+    suspend fun deleteEvent(
+        @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long,
+        @Path("eventId") eventId: Long,
+        @Body name: String
+    ): Response<Unit>
+
+    @GET("/group/deleteUser/{groupId}/{userId}")
+    suspend fun deleteUser(
+        @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long,
+        @Path("userId") userId: Long
+    ): Response<Unit>
+
+    @GET("/event/listEventsConfirmed/{mode}/{groupId}/{type}/{minTime}/{maxTime}")
     suspend fun getGroupExpenses(
         @Header("Authorization") token: String,
         @Path("groupId") id: Long,
         @Path("mode") mode: Int,
         @Path("type") type: Int,
+        @Path("minTime") minTime: Long,
+        @Path("maxTime") maxTime: Long,
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
     ): Response<PagingExpenses>

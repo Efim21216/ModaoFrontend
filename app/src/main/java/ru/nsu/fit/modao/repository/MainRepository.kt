@@ -35,14 +35,27 @@ class MainRepository(private val app: App) {
     }
 
 
-    suspend fun getGroupExpenses(id: Long, mode: Int,
-                                 type: Int, offset: Int, limit: Int): Response<PagingExpenses> {
-        return app.api.getGroupExpenses(Constants.AUTH + app.accessToken,
-            id, mode, type, offset, limit)
+    suspend fun getGroupExpenses(
+        id: Long, mode: Int,
+        type: Int, minTime: Long, maxTime: Long,
+        offset: Int, limit: Int
+    ): Response<PagingExpenses> {
+        return app.api.getGroupExpenses(
+            Constants.AUTH + app.accessToken,
+            id, mode, type, minTime, maxTime, offset, limit
+        )
     }
 
     suspend fun createExpense(expense: Expense): Response<Long> {
         return app.api.createExpense(Constants.AUTH + app.accessToken, expense)
+    }
+
+    suspend fun deleteUser(groupId: Long, userId: Long): Response<Unit> {
+        return app.api.deleteUser(Constants.AUTH + app.accessToken, groupId, userId)
+    }
+
+    suspend fun deleteEvent(groupId: Long, eventId: Long, name: String): Response<Unit> {
+        return app.api.deleteEvent(Constants.AUTH + app.accessToken, groupId, eventId, name)
     }
 
     suspend fun addUserToGroup(groupId: Long, userId: Long): Response<Unit> {
@@ -76,6 +89,7 @@ class MainRepository(private val app: App) {
     suspend fun getGroupUnconfirmedExpenses(groupId: Long): Response<Array<Expense>> {
         return app.api.getGroupUnconfirmedExpenses(Constants.AUTH + app.accessToken, groupId)
     }
+
     suspend fun deleteGroup(groupId: Long): Response<Unit> {
         return app.api.deleteGroup(Constants.AUTH + app.accessToken, groupId)
     }

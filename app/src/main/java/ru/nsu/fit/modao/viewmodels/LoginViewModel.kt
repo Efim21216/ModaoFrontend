@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(private val repository: MainRepository)
             message.value = "Enter the data"
             return
         }
-        val user = User(login = login, password = password/*, deviceToken = deviceToken*/)
+        val user = User(login = login, password = password, deviceToken = deviceToken)
         viewModelScope.launch(handler) {
             val response = repository.login(user)
             if (response.isSuccessful){

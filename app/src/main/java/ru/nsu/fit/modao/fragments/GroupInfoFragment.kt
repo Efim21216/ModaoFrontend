@@ -95,6 +95,8 @@ class GroupInfoFragment : Fragment() {
             if (isOrganizer) {
                 binding.buttonDataConfirmation.visibility = View.VISIBLE
                 binding.textDataConfirmation.visibility = View.VISIBLE
+                binding.archiveGroup.visibility = View.VISIBLE
+                binding.deleteGroup.visibility = View.VISIBLE
             }
         }
         mainViewModel.tipMessage.observe(viewLifecycleOwner) {

@@ -14,6 +14,7 @@
     <string name="go">Go!</string>
     <string name="archiveGroup">Archive group</string>
     <string name="deleteGroup">Delete group</string>
+    <string name="deleteEvent">Delete event</string>
     <string name="all">All</string>
     <string name="archive">Archive</string>
     <string name="active">Active</string>
