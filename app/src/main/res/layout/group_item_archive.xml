@@ -13,7 +13,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/frame_active_group"
+        android:background="@drawable/frame_archive_group"
         android:includeFontPadding="false"
         android:paddingStart="50dp"
         android:paddingTop="17dp"
@@ -35,6 +35,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/nameGroup"
         app:layout_constraintStart_toStartOf="@+id/nameGroup"
         app:layout_constraintTop_toTopOf="@+id/nameGroup"
-        app:srcCompat="@drawable/ic_group_active" />
+        app:srcCompat="@drawable/ic_group_archive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,6 +46,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
         View itemView;
 
         public void bind(User friend, AdapterListener<User> listener) {
+            // здесь ломается из-за materialButton
             ImageView imageView = itemView.findViewById(R.id.friendItem);
             imageView.setOnClickListener(v -> listener.onClickItem(friend));
             TextView textView = itemView.findViewById(R.id.nameFriends);

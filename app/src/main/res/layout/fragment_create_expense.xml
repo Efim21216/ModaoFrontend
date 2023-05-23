@@ -16,7 +16,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/plain_text"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="#57D6D6D6"
         app:cornerRadius="10dp"
         app:strokeWidth="2dp"
         app:strokeColor="@color/gray"

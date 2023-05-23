@@ -12,8 +12,8 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="go">Go!</string>
-    <string name="archiveGroup">Archive group</string>
-    <string name="deleteGroup">Delete group</string>
+    <string name="archiveGroup">ARCHIVE GROUP</string>
+    <string name="deleteGroup">DELETE GROUP</string>
     <string name="deleteEvent">Delete event</string>
     <string name="all">All</string>
     <string name="archive">Archive</string>
@@ -22,7 +22,7 @@
     <string name="onlyMy">Only my</string>
     <string name="only_expenses">Only expenses</string>
     <string name="transfer">Only transfers</string>
-    <string name="my_debt_caps"> MY DEBT </string>
+    <string name="my_debt_caps">MY DEBT</string>
     <string name="my_debt"> My debt </string>
     <string name="add_event">ADD EVENT</string>
     <string name="create_expense">Create expense</string>
@@ -94,7 +94,7 @@
     <string name="add_new_friend">Add new friend</string>
     <string name="add_by_uuid">🔍  Add by user code</string>
     <string name="add_by_guid">🔍  Add by group code</string>
-    <string name="add_member_to_the_group">Add member to the group</string>
+    <string name="add_member_to_the_group">Add member</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_new_member">Select new member</string>
     <string name="completed_the_selection">Completed the selection</string>
@@ -128,4 +128,5 @@
     <string name="pay_for">Pay for</string>
     <string name="new_transfer">New transfer</string>
     <string name="new_expense">New expense</string>
+    <string name="new_group_button">New group</string>
 </resources>

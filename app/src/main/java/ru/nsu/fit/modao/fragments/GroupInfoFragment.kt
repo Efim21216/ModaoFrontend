@@ -94,7 +94,6 @@ class GroupInfoFragment : Fragment() {
             val isOrganizer = it.any { org -> org.id == app.userId }
             if (isOrganizer) {
                 binding.buttonDataConfirmation.visibility = View.VISIBLE
-                binding.textDataConfirmation.visibility = View.VISIBLE
                 binding.archiveGroup.visibility = View.VISIBLE
                 binding.deleteGroup.visibility = View.VISIBLE
             }

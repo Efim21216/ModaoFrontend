@@ -121,6 +121,8 @@
         android:visibility="visible"
         app:backgroundTint="#FFBEFD"
         app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="#839C27B0"
         app:layout_constraintBottom_toBottomOf="@+id/buttonTwo"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
         app:layout_constraintTop_toTopOf="@+id/buttonTwo" />
@@ -138,6 +140,8 @@
         android:visibility="visible"
         app:backgroundTint="#FFE1BE"
         app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="#6DFF9800"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
 
@@ -154,6 +158,8 @@
         android:visibility="visible"
         app:backgroundTint="#BEDCFF"
         app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="#AB568EFC"
         app:layout_constraintStart_toStartOf="@+id/buttonAll"
         app:layout_constraintTop_toBottomOf="@+id/buttonAll" />
 
@@ -168,8 +174,10 @@
         android:textColor="@color/black"
         android:textSize="@dimen/plain_text"
         android:visibility="visible"
-        app:backgroundTint="#BEFFC0"
+        app:backgroundTint="#A5ECA7"
         app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="#AE4CAF50"
         app:layout_constraintEnd_toEndOf="@+id/buttonTwo"
         app:layout_constraintTop_toBottomOf="@+id/buttonTwo" />
 
