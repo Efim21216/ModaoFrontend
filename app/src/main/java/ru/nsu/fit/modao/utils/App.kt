@@ -2,6 +2,7 @@ package ru.nsu.fit.modao.utils
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.firebase.messaging.FirebaseMessaging

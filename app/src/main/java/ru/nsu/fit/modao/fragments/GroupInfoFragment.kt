@@ -41,7 +41,6 @@ class GroupInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (args.notification && first) {
-            Log.d("MyTag", "group info to data")
             first = false
             findNavController().navigate(GroupInfoFragmentDirections
                 .actionGroupInfoFragmentToDataConfirmationFragment(args.group))

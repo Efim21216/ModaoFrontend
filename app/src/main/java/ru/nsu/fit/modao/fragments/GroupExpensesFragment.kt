@@ -172,6 +172,7 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
                         "- ${DateFormat.getDateInstance().format(date2)}",
                 Toast.LENGTH_LONG
             ).show()
+            getGroupExpenses()
         }
         dialog.show(childFragmentManager, "MyTag")
     }

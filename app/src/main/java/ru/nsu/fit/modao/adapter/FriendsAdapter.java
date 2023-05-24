@@ -3,11 +3,11 @@ package ru.nsu.fit.modao.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
 
 import ru.nsu.fit.modao.R;
 import ru.nsu.fit.modao.models.User;
@@ -46,11 +46,9 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
         View itemView;
 
         public void bind(User friend, AdapterListener<User> listener) {
-            // здесь ломается из-за materialButton
-            ImageView imageView = itemView.findViewById(R.id.friendItem);
-            imageView.setOnClickListener(v -> listener.onClickItem(friend));
-            TextView textView = itemView.findViewById(R.id.nameFriends);
-            textView.setText(friend.getUsername());
+            MaterialButton cell = itemView.findViewById(R.id.friendItem);
+            cell.setOnClickListener(v -> listener.onClickItem(friend));
+            cell.setText(friend.getUsername());
         }
 
         public FriendsHolder(@NonNull View itemView) {
