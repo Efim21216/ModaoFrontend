@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:paddingBottom="20dp"
     android:layout_height="320dp">
@@ -79,7 +78,6 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/inter_light"
         android:text="@string/see_details"
-        android:textAllCaps="false"
         android:textColor="#4556AF"
         android:textSize="@dimen/small"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,30 +96,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonDetails" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/yesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="-10dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/yes"
-        android:minHeight="48dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/yes"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textSize="@dimen/plain_text"
+        app:backgroundTint="#FF00D856"
+        app:cornerRadius="10dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintEnd_toStartOf="@+id/textConfirm"
-        app:layout_constraintTop_toBottomOf="@+id/textConfirm"
-        app:srcCompat="@drawable/yes_button"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textConfirm" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/noButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-10dp"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/no"
-        android:minHeight="48dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/no"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textSize="@dimen/plain_text"
+        app:backgroundTint="#FFFF4E60"
+        app:cornerRadius="10dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintStart_toEndOf="@+id/textConfirm"
-        app:layout_constraintTop_toBottomOf="@+id/textConfirm"
-        app:srcCompat="@drawable/no_button" />
+        app:layout_constraintTop_toBottomOf="@+id/textConfirm" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
