@@ -78,6 +78,12 @@ interface ApiService {
         @Path("userId") userId: Long
     ): Response<Unit>
 
+    @GET("/group/archiveNo/{groupId}")
+    suspend fun makeGroupActive(
+        @Header("Authorization") token: String,
+        @Path("groupId") groupId: Long
+    ): Response<Unit>
+
     @GET("/event/listEventsConfirmed/{mode}/{groupId}/{type}/{minTime}/{maxTime}")
     suspend fun getGroupExpenses(
         @Header("Authorization") token: String,

@@ -164,7 +164,7 @@ class CreateNewEventFragment : Fragment() {
             createExpenseViewModel.eventId.value = lastEvent
             findNavController().navigate(
                 CreateNewEventFragmentDirections
-                    .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group)
+                    .actionCreateAnExpenseFragmentToDataConfirmationFragment(args.group)
             )
         }
     }

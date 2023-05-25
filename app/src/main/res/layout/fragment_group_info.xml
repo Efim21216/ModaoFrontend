@@ -87,7 +87,6 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="@dimen/subtitle"
-        android:visibility="gone"
         app:backgroundTint="@color/white"
         app:cornerRadius="5dp"
         app:icon="@drawable/baseline_warning_24"
@@ -143,7 +142,7 @@
         android:fontFamily="@font/roboto"
         android:textSize="@dimen/plain_text"
         android:textColor="#F44336"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -158,7 +157,7 @@
         android:fontFamily="@font/roboto"
         android:textSize="@dimen/plain_text"
         android:textColor="#00BCD4"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -168,6 +168,18 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
+    fun makeGroupActive(groupId: Long) {
+        viewModelScope.launch(handler) {
+            val response = repository.makeGroupActive(groupId)
+            if (response.isSuccessful) {
+                tipMessage.value = SUCCESS
+            } else {
+                tipMessage.value = FAIL
+                Log.e("MyError", "Error ${response.errorBody()?.string()}")
+            }
+        }
+    }
+
     fun deleteUser(groupId: Long, userId: Long) {
         viewModelScope.launch(handler) {
             val response = repository.deleteUser(groupId, userId)

@@ -58,6 +58,10 @@ class MainRepository(private val app: App) {
         return app.api.deleteEvent(Constants.AUTH + app.accessToken, groupId, eventId, name)
     }
 
+    suspend fun makeGroupActive(groupId: Long): Response<Unit> {
+        return app.api.makeGroupActive(Constants.AUTH + app.accessToken, groupId)
+    }
+
     suspend fun addUserToGroup(groupId: Long, userId: Long): Response<Unit> {
         return app.api.addUserToGroup(Constants.AUTH + app.accessToken, groupId, userId)
     }

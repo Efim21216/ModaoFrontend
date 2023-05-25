@@ -86,6 +86,7 @@ class SeeDetailsFragment : Fragment() {
         binding.theSpender.text = args.expense.usernamePaying
         binding.theCreator.text = args.expense.usernameCreator
         binding.theDate.text = time.format(pattern)
+        binding.expenseName.text = args.expense.name
     }
     private fun initButton() {
         binding.noButton2.setOnClickListener {
@@ -107,6 +108,15 @@ class SeeDetailsFragment : Fragment() {
             val isOrganizer = it.any { org -> org.id == app.userId }
             if (isOrganizer && !args.isConfirmation) {
                 binding.deleteButton.visibility = View.VISIBLE
+            }
+            if (!isOrganizer) {
+                binding.noButton2.visibility = View.GONE
+                binding.yesButton2.visibility = View.GONE
+                binding.textConfirm2.visibility = View.GONE
+            } else if (args.isConfirmation) {
+                binding.noButton2.visibility = View.VISIBLE
+                binding.yesButton2.visibility = View.VISIBLE
+                binding.textConfirm2.visibility = View.VISIBLE
             }
         }
         mainViewModel.tipMessage.observe(viewLifecycleOwner) {

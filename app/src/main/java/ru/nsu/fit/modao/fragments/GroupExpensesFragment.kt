@@ -64,12 +64,8 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setRecycler()
-        setButtonOnClick()
-        setPopupWindow()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mainViewModel.getGroupExpenses(
             args.group.id!!,
             showOnlyMy.intValue,
@@ -79,6 +75,17 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             0,
             PAGE_SIZE
         )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        newList = true
+        lastPage = 0
+        minTime = 0
+        maxTime = 9999999999999L
+        setRecycler()
+        setButtonOnClick()
+        setPopupWindow()
         setObserver()
 
     }
@@ -86,7 +93,9 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private fun setObserver() {
 
         mainViewModel.expenses.observe(viewLifecycleOwner) {
+
             val list: MutableList<ExpenseListItem> = it.toMutableList()
+
             if (totalPages > lastPage + 1) {
                 lastPage++
                 if (list.size > PAGE_SIZE - 5) {
@@ -134,6 +143,9 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     }
 
     private fun setButtonOnClick() {
+        if (args.group.typeGroup == 1) {
+            binding.buttonAddEvent.visibility = View.GONE
+        }
         binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
                 GroupExpensesFragmentDirections

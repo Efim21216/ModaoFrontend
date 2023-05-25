@@ -53,7 +53,6 @@ class StartFragment : Fragment() {
             app.accessToken = it.accessToken
             if (it.refreshToken != null) {
                 app.refreshToken = it.refreshToken
-                Log.d("MyTag", "New refresh")
             }
             val edit = sharedPreferences.edit()
             edit.putString(ACCESS_TOKEN, it.accessToken)

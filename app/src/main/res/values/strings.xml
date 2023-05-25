@@ -11,6 +11,7 @@
     <string name="deleteGroup">DELETE GROUP</string>
     <string name="deleteEvent">Delete event</string>
     <string name="all">All</string>
+    <string name="makeGroupActive">MAKE ACTIVE</string>
     <string name="archive">Archive</string>
     <string name="active">Active</string>
     <string name="onlyMy">Only my</string>

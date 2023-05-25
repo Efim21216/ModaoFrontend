@@ -61,7 +61,7 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
             findNavController().navigate(
                 CreateExpenseFragmentDirections
-                    .actionCreateExpenseFragmentToGroupExpensesFragment(args.dataExpense.group)
+                    .actionCreateExpenseFragmentToDataConfirmationFragment(args.dataExpense.group)
             )
         }
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {

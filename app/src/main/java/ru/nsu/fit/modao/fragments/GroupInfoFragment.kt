@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding
 import ru.nsu.fit.modao.utils.App
+import ru.nsu.fit.modao.utils.Constants.Companion.SUCCESS
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -81,9 +83,17 @@ class GroupInfoFragment : Fragment() {
                 )
             )
         }
-        binding.archiveGroup.setOnClickListener {
-            mainViewModel.archiveGroup(args.group.id!!)
+        if (args.group.typeGroup == 1) {
+            binding.archiveGroup.setText(R.string.makeGroupActive)
+            binding.archiveGroup.setOnClickListener {
+                mainViewModel.makeGroupActive(args.group.id!!)
+            }
+        } else {
+            binding.archiveGroup.setOnClickListener {
+                mainViewModel.archiveGroup(args.group.id!!)
+            }
         }
+
         binding.deleteGroup.setOnClickListener {
             mainViewModel.deleteGroup(args.group.id!!)
         }
@@ -92,7 +102,6 @@ class GroupInfoFragment : Fragment() {
         mainViewModel.organizers.observe(viewLifecycleOwner) {
             val isOrganizer = it.any { org -> org.id == app.userId }
             if (isOrganizer) {
-                binding.buttonDataConfirmation.visibility = View.VISIBLE
                 binding.archiveGroup.visibility = View.VISIBLE
                 binding.deleteGroup.visibility = View.VISIBLE
             }
@@ -102,6 +111,8 @@ class GroupInfoFragment : Fragment() {
                 "Deleted" -> findNavController().navigate(GroupInfoFragmentDirections
                     .actionGlobalNestedGroups())
                 "Archived" -> findNavController().navigate(GroupInfoFragmentDirections
+                    .actionGlobalNestedGroups())
+                SUCCESS -> findNavController().navigate(GroupInfoFragmentDirections
                     .actionGlobalNestedGroups())
                 else -> Log.d("MyTag", "Unknown message $it")
             }

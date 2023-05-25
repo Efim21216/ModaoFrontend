@@ -107,6 +107,11 @@
             <action
                 android:id="@+id/action_createAnExpenseFragment_to_selectSecondParticipantFragment"
                 app:destination="@id/selectSecondParticipantFragment" />
+            <action
+                android:id="@+id/action_createAnExpenseFragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment"
+                app:popUpTo="@id/dataConfirmationFragment"
+                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/createGroupFragment"
@@ -178,6 +183,11 @@
             <argument
                 android:name="dataExpense"
                 app:argType="ru.nsu.fit.modao.models.CreationExpense" />
+            <action
+                android:id="@+id/action_createExpenseFragment_to_dataConfirmationFragment"
+                app:destination="@id/dataConfirmationFragment"
+                app:popUpTo="@id/dataConfirmationFragment"
+                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/dataConfirmationFragment"
