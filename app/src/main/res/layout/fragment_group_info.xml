@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".fragments.GroupInfoFragment">
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/plain_text"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMembers"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMembers"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonMembers"
         android:layout_width="320dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/roboto"
         android:text="@string/group_members"
         android:textAlignment="textStart"
@@ -119,48 +130,16 @@
         android:background="@drawable/white_background"
         android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/headers"
         app:layout_constraintBottom_toBottomOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="tiramisu" />
-
-    <Button
-        android:id="@+id/deleteGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/deleteGroup"
-        android:fontFamily="@font/roboto"
-        android:textSize="@dimen/plain_text"
-        android:textColor="#F44336"
-        android:visibility="gone"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/archiveGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/archiveGroup"
-        android:fontFamily="@font/roboto"
-        android:textSize="@dimen/plain_text"
-        android:textColor="#00BCD4"
-        android:visibility="gone"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

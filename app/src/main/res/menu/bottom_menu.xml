@@ -7,7 +7,7 @@
         android:id="@+id/profile_fragment"/>
     <item
         android:title="@string/notification"
-        android:icon="@drawable/ic_wallet"
+        android:icon="@drawable/ic_notification"
         android:id="@+id/notification_fragment"/>
     <item
         android:title="@string/friends"

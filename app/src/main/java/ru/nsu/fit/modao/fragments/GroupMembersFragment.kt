@@ -81,7 +81,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
         builder.setMessage("Phone: " + item.phone_number + "\n" + "Bank: " + item.bank)
         builder.setPositiveButton("OK") { _, _ -> }
         if (organizer) {
-            builder.setNegativeButton("Delete user") { _, _ ->
+            builder.setNegativeButton("Delete") { _, _ ->
                 mainViewModel.deleteUser(args.group.id!!, item.id!!)
             }
         }
