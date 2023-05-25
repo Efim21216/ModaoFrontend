@@ -1,7 +1,6 @@
 package ru.nsu.fit.modao.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import ru.nsu.fit.modao.R
 import ru.nsu.fit.modao.databinding.FragmentGroupInfoBinding
 import ru.nsu.fit.modao.utils.App
-import ru.nsu.fit.modao.utils.Constants.Companion.SUCCESS
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class GroupInfoFragment : Fragment() {
     private var _binding: FragmentGroupInfoBinding? = null
@@ -50,7 +48,6 @@ class GroupInfoFragment : Fragment() {
         binding.nameGroup.text = args.group.groupName
 
         mainViewModel.getListOrganizers(args.group.id!!)
-        initObserver()
         initButton()
 
     }
@@ -82,40 +79,6 @@ class GroupInfoFragment : Fragment() {
                     args.group
                 )
             )
-        }
-        if (args.group.typeGroup == 1) {
-            binding.archiveGroup.setText(R.string.makeGroupActive)
-            binding.archiveGroup.setOnClickListener {
-                mainViewModel.makeGroupActive(args.group.id!!)
-            }
-        } else {
-            binding.archiveGroup.setOnClickListener {
-                mainViewModel.archiveGroup(args.group.id!!)
-            }
-        }
-
-        binding.deleteGroup.setOnClickListener {
-            mainViewModel.deleteGroup(args.group.id!!)
-        }
-    }
-    private fun initObserver() {
-        mainViewModel.organizers.observe(viewLifecycleOwner) {
-            val isOrganizer = it.any { org -> org.id == app.userId }
-            if (isOrganizer) {
-                binding.archiveGroup.visibility = View.VISIBLE
-                binding.deleteGroup.visibility = View.VISIBLE
-            }
-        }
-        mainViewModel.tipMessage.observe(viewLifecycleOwner) {
-            when (it) {
-                "Deleted" -> findNavController().navigate(GroupInfoFragmentDirections
-                    .actionGlobalNestedGroups())
-                "Archived" -> findNavController().navigate(GroupInfoFragmentDirections
-                    .actionGlobalNestedGroups())
-                SUCCESS -> findNavController().navigate(GroupInfoFragmentDirections
-                    .actionGlobalNestedGroups())
-                else -> Log.d("MyTag", "Unknown message $it")
-            }
         }
     }
 }
