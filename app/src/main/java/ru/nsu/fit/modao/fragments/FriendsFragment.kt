@@ -15,6 +15,10 @@ import ru.nsu.fit.modao.adapter.FriendsAdapter
 import ru.nsu.fit.modao.databinding.FragmentFriendsBinding
 import ru.nsu.fit.modao.models.User
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
+
 @AndroidEntryPoint
 class FriendsFragment : Fragment(), AdapterListener<User> {
     private var _binding: FragmentFriendsBinding? = null
@@ -58,6 +62,8 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
             builder.setPositiveButton("OK") { _, _ -> }
             builder.create().show()
         }
+        val slots = UnderscoreDigitSlotsParser().parseSlots("___-___-___")
+        MaskFormatWatcher(MaskImpl.createTerminated(slots)).installOn(binding.AddByUUID)
 
     }
 
