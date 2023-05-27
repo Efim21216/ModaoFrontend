@@ -39,7 +39,6 @@ class NotificationFriendsAdapter: RecyclerView.Adapter<NotificationFriendsAdapte
         fun bind(elem: Notification, listenerFriend: AdapterListener<Notification>,
                  listenerGroup: AdapterListener<Notification>){
             if (elem.nameGroup != null){
-                binding.frameNewGroup.visibility = View.VISIBLE
                 binding.nameNewGroup.visibility = View.VISIBLE
                 binding.nameNewGroup.text = elem.nameGroup
                 binding.newGroup.visibility = View.VISIBLE
@@ -48,7 +47,6 @@ class NotificationFriendsAdapter: RecyclerView.Adapter<NotificationFriendsAdapte
                     listenerGroup.onClickItem(elem)
                 }
             } else {
-                binding.frameNewFriend.visibility = View.VISIBLE
                 binding.nameNewFriend.visibility = View.VISIBLE
                 binding.newFriend.visibility = View.VISIBLE
                 binding.nameNewFriend.text = elem.username

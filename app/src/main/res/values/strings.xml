@@ -70,7 +70,6 @@
     <string name="new_expense_notification">New expense notification</string>
     <string name="new_friend">New friend:</string>
     <string name="new_group">New Group:</string>
-    <string name="new_expense_notify">New expense:</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="add_by_uuid">🔍  Add by user code</string>
     <string name="add_by_guid">🔍  Add by group code</string>
