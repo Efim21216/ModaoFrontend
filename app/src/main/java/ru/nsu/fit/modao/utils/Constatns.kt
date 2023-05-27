@@ -13,7 +13,7 @@ class Constants {
         const val ACCESS_TOKEN = "Access token"
         const val REFRESH_TOKEN = "Refresh token"
         const val ID_USER = "User id"
-        const val FAIL = "fail"
-        const val SUCCESS = "success"
+        const val FAIL = "Fail"
+        const val SUCCESS = "Success"
     }
 }

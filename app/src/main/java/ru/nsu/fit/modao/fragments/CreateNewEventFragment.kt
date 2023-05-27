@@ -56,9 +56,17 @@ class CreateNewEventFragment : Fragment() {
 
         initObserver()
         initButton()
-
+        initOrganizer()
     }
 
+    private fun initOrganizer() {
+        if (args.group.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.group.id!!)
+            mainViewModel.organizers.observe(viewLifecycleOwner) {
+                args.group.isOrganizer = it.any { org -> org.id == app.userId }
+            }
+        }
+    }
     private fun initButton() {
         binding.grayNewTransfer.setOnClickListener {
             changeMode(View.VISIBLE, View.GONE)
@@ -162,10 +170,23 @@ class CreateNewEventFragment : Fragment() {
                 return@observe
             }
             createExpenseViewModel.eventId.value = lastEvent
-            findNavController().navigate(
-                CreateNewEventFragmentDirections
-                    .actionCreateAnExpenseFragmentToDataConfirmationFragment(args.group)
-            )
+            if (args.group.isOrganizer == null) {
+                findNavController().navigate(
+                    CreateNewEventFragmentDirections
+                        .actionCreateAnExpenseFragmentToDataConfirmationFragment(args.group)
+                )
+            } else if (args.group.isOrganizer!!) {
+                findNavController().navigate(
+                    CreateNewEventFragmentDirections
+                        .actionCreateAnExpenseFragmentToGroupExpensesFragment(args.group)
+                )
+            } else {
+                findNavController().navigate(
+                    CreateNewEventFragmentDirections
+                        .actionCreateAnExpenseFragmentToDataConfirmationFragment(args.group)
+                )
+            }
+
         }
     }
 

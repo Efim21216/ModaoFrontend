@@ -30,4 +30,5 @@ class MasterActivity: AppCompatActivity() {
             return@setOnItemSelectedListener true
         }
     }
+
 }

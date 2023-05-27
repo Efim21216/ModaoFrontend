@@ -47,23 +47,25 @@ class GroupInformationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainViewModel.getGroupInfo(args.group.id!!)
-        mainViewModel.groupInfo.observe(viewLifecycleOwner) {
-            binding.groupName.text = it.groupName
-            binding.groupUuid.text = it.uuid
-            binding.groupDescription.text = it.description
-        }
-        mainViewModel.getListOrganizers(args.group.id!!)
-        mainViewModel.organizers.observe(viewLifecycleOwner) {
-            val isOrganizer = it.any { org -> org.id == app.userId }
-            if (isOrganizer) {
-                binding.titleGroupUuid.visibility = View.VISIBLE
-                binding.groupUuid.visibility = View.VISIBLE
-            }
-        }
+        initView()
+        initButton()
+        initObserver()
+    }
+    private fun initView() {
         val time = LocalDateTime.parse(args.group.time)
         val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         binding.dataCreation.text = time.format(pattern)
+        if (args.group.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.group.id!!)
+        } else if (args.group.isOrganizer!!) {
+            binding.archiveGroup.visibility = View.VISIBLE
+            binding.deleteGroup.visibility = View.VISIBLE
+            binding.titleGroupUuid.visibility = View.VISIBLE
+            binding.groupUuid.visibility = View.VISIBLE
+        }
 
+    }
+    private fun initButton() {
         if (args.group.typeGroup == 1) {
             binding.archiveGroup.setText(R.string.makeGroupActive)
             binding.archiveGroup.setOnClickListener {
@@ -73,36 +75,42 @@ class GroupInformationFragment : Fragment() {
             binding.archiveGroup.setOnClickListener {
                 mainViewModel.archiveGroup(args.group.id!!)
             }
-
-            binding.deleteGroup.setOnClickListener {
-                mainViewModel.deleteGroup(args.group.id!!)
-            }
-            initObserver()
+        }
+        binding.deleteGroup.setOnClickListener {
+            mainViewModel.deleteGroup(args.group.id!!)
         }
     }
 
     private fun initObserver() {
         mainViewModel.organizers.observe(viewLifecycleOwner) {
             val isOrganizer = it.any { org -> org.id == app.userId }
+            args.group.isOrganizer = isOrganizer
             if (isOrganizer) {
                 binding.archiveGroup.visibility = View.VISIBLE
                 binding.deleteGroup.visibility = View.VISIBLE
+                binding.titleGroupUuid.visibility = View.VISIBLE
+                binding.groupUuid.visibility = View.VISIBLE
             }
+        }
+        mainViewModel.groupInfo.observe(viewLifecycleOwner) {
+            binding.groupName.text = it.groupName
+            binding.groupUuid.text = it.uuid
+            binding.groupDescription.text = it.description
         }
         mainViewModel.tipMessage.observe(viewLifecycleOwner) {
             when (it) {
                 "Deleted" -> findNavController().navigate(
-                    GroupInfoFragmentDirections
+                    GroupInformationFragmentDirections
                         .actionGlobalNestedGroups()
                 )
 
                 "Archived" -> findNavController().navigate(
-                    GroupInfoFragmentDirections
+                    GroupInformationFragmentDirections
                         .actionGlobalNestedGroups()
                 )
 
                 Constants.SUCCESS -> findNavController().navigate(
-                    GroupInfoFragmentDirections
+                    GroupInformationFragmentDirections
                         .actionGlobalNestedGroups()
                 )
 

@@ -67,7 +67,7 @@
         android:textSize="@dimen/subtitle"
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="5dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:icon="@drawable/ic_new_group"
         app:iconGravity="textStart"
         app:iconPadding="130dp"
@@ -90,7 +90,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/subtitle"
         android:fontFamily="@font/roboto"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/nameNewGroup"
         app:layout_constraintStart_toStartOf="@+id/nameNewGroup"
         app:layout_constraintTop_toTopOf="@+id/nameNewGroup" />

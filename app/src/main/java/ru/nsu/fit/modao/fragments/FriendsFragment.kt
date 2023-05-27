@@ -42,7 +42,6 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        
         adapter.setListener(this)
         binding.friendsRecycler.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -68,10 +67,10 @@ class FriendsFragment : Fragment(), AdapterListener<User> {
     }
 
     override fun onClickItem(item: User) {
-        val builder = AlertDialog.Builder(context)
+        /*val builder = AlertDialog.Builder(context)
         builder.setTitle(item.username)
         builder.setMessage("Phone: " + item.phone_number + "\n" + "Bank: " + item.bank)
         builder.setPositiveButton("OK") { _, _ -> }
-        builder.create().show()
+        builder.create().show()*/
     }
 }

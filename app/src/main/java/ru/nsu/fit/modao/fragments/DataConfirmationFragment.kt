@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -45,7 +46,21 @@ class DataConfirmationFragment : Fragment(), AdapterListener<ExpenseListItem> {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        class OnBack(enable: Boolean): OnBackPressedCallback(enable) {
+            override fun handleOnBackPressed() {
+                if (findNavController().currentBackStackEntry?.destination?.id == R.id.dataConfirmationFragment) {
+                    if (findNavController().previousBackStackEntry?.destination?.id != R.id.groupInfoFragment) {
+                        findNavController().navigate(DataConfirmationFragmentDirections
+                            .actionDataConfirmationFragmentToGroupExpensesFragment(args.group))
+                    } else {
+                        findNavController().popBackStack()
+                    }
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,  OnBack(true))
         initObserver()
         mainViewModel.getGroupUnconfirmedExpenses(args.group.id!!)
         mainViewModel.getListOrganizers(args.group.id!!)
@@ -101,6 +116,8 @@ class DataConfirmationFragment : Fragment(), AdapterListener<ExpenseListItem> {
             organizer = it.any { org -> org.id == app.userId }
         }
     }
+
+
     override fun onClickItem(item: ExpenseListItem) {
         when (item) {
             is LoadItems -> {

@@ -12,7 +12,8 @@ data class Group(
     val groupName: String? = null,
     val uuid: String? = null,
     val userIdList: Array<Long>? = null,
-    val time: String? = null
+    val time: String? = null,
+    var isOrganizer: Boolean? = null
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

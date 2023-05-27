@@ -24,10 +24,12 @@ import ru.nsu.fit.modao.databinding.PopUpWindowDataConfBinding
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.ExpenseListItem
 import ru.nsu.fit.modao.models.LoadItems
+import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.PAGE_SIZE
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import java.text.DateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
@@ -36,6 +38,8 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private val adapter = ExpensesAdapter()
     private val args by navArgs<GroupExpensesFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var app: App
     private var showEvent = true
     private var showTransfer = true
     private var showOnlyMy = false
@@ -87,9 +91,17 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         setButtonOnClick()
         setPopupWindow()
         setObserver()
+        initOrganizer()
 
     }
-
+    private fun initOrganizer() {
+        if (args.group.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.group.id!!)
+            mainViewModel.organizers.observe(viewLifecycleOwner) {
+                args.group.isOrganizer = it.any { org -> org.id == app.userId }
+            }
+        }
+    }
     private fun setObserver() {
 
         mainViewModel.expenses.observe(viewLifecycleOwner) {

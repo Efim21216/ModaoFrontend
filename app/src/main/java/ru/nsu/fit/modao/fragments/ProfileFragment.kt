@@ -40,8 +40,6 @@ class ProfileFragment: Fragment() {
 
         mainViewModel.user.observe(viewLifecycleOwner){
             binding.personName.text = it.username
-            binding.personBank.text = it.bank
-            binding.personPhone.text = it.phone_number
             binding.personUuid.text = it.uuid
         }
         mainViewModel.getUser()

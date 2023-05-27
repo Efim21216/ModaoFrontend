@@ -185,6 +185,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             val response = repository.deleteUser(groupId, userId)
             if (response.isSuccessful) {
                 tipMessage.value = SUCCESS
+                getUsersInGroup(groupId)
             } else {
                 tipMessage.value = FAIL
                 Log.e("MyError", "Error ${response.errorBody()?.string()}")

@@ -21,6 +21,9 @@ import ru.nsu.fit.modao.databinding.FilterGroupsBinding
 import ru.nsu.fit.modao.databinding.FragmentGroupsBinding
 import ru.nsu.fit.modao.models.Group
 import ru.nsu.fit.modao.viewmodels.MainViewModel
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 @AndroidEntryPoint
 class GroupsFragment : Fragment(), AdapterListener<Group> {
@@ -83,6 +86,8 @@ class GroupsFragment : Fragment(), AdapterListener<Group> {
         binding.filterIcon.setOnClickListener {
             window.showAsDropDown(binding.filterIcon, -250, 0)
         }
+        val slots = UnderscoreDigitSlotsParser().parseSlots("___-___-___")
+        MaskFormatWatcher(MaskImpl.createTerminated(slots)).installOn(binding.editGroupUUID)
     }
 
     override fun onClickItem(item: Group) {

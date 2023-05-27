@@ -76,16 +76,18 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
     }
 
     override fun onClickItem(item: User) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(item.username)
-        builder.setMessage("Phone: " + item.phone_number + "\n" + "Bank: " + item.bank)
-        builder.setPositiveButton("OK") { _, _ -> }
-        if (organizer) {
-            builder.setNegativeButton("Delete") { _, _ ->
-                mainViewModel.deleteUser(args.group.id!!, item.id!!)
+        if (organizer && item.id != app.userId) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(item.username)
+            builder.setPositiveButton("OK") { _, _ -> }
+            if (organizer) {
+                builder.setNegativeButton("Delete user") { _, _ ->
+                    mainViewModel.deleteUser(args.group.id!!, item.id!!)
+                }
             }
+            builder.create().show()
         }
-        builder.create().show()
+
     }
 
 

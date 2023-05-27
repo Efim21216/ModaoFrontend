@@ -48,11 +48,22 @@ class SeeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mainViewModel.getListOrganizers(args.group?.id!!)
+        initOrganizer()
         setRecycler()
         initView()
         initObserver()
+
+    }
+    private fun initOrganizer() {
+        if (args.group?.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.group?.id!!)
+            mainViewModel.organizers.observe(viewLifecycleOwner) {
+                args.group?.isOrganizer = it.any { org -> org.id == app.userId }
+                processOrganizer(args.group?.isOrganizer!!)
+            }
+        } else {
+            processOrganizer(args.group?.isOrganizer!!)
+        }
     }
     private fun setRecycler(){
         val list = args.expense.expenseDtoList?.map {
@@ -67,6 +78,7 @@ class SeeDetailsFragment : Fragment() {
         binding.whoParticipatedRecycler.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.whoParticipatedRecycler.adapter = adapter
+        binding.deleteButton
     }
     private fun initView(){
         if (!args.isConfirmation){
@@ -77,6 +89,7 @@ class SeeDetailsFragment : Fragment() {
         else {
             initButton()
         }
+
         binding.deleteButton.setOnClickListener {
             mainViewModel.deleteEvent(args.group?.id!!, args.expense.id!!, args.expense.name!!)
         }
@@ -103,22 +116,22 @@ class SeeDetailsFragment : Fragment() {
         }
 
     }
-    private fun initObserver() {
-        mainViewModel.organizers.observe(viewLifecycleOwner) {
-            val isOrganizer = it.any { org -> org.id == app.userId }
-            if (isOrganizer && !args.isConfirmation) {
-                binding.deleteButton.visibility = View.VISIBLE
-            }
-            if (!isOrganizer) {
-                binding.noButton2.visibility = View.GONE
-                binding.yesButton2.visibility = View.GONE
-                binding.textConfirm2.visibility = View.GONE
-            } else if (args.isConfirmation) {
-                binding.noButton2.visibility = View.VISIBLE
-                binding.yesButton2.visibility = View.VISIBLE
-                binding.textConfirm2.visibility = View.VISIBLE
-            }
+    private fun processOrganizer(isOrganizer: Boolean) {
+        if (isOrganizer && !args.isConfirmation && args.expense.status!! >= 0) {
+            binding.deleteButton.visibility = View.VISIBLE
         }
+        if (!isOrganizer) {
+            binding.noButton2.visibility = View.GONE
+            binding.yesButton2.visibility = View.GONE
+            binding.textConfirm2.visibility = View.GONE
+        } else if (args.isConfirmation) {
+            binding.noButton2.visibility = View.VISIBLE
+            binding.yesButton2.visibility = View.VISIBLE
+            binding.textConfirm2.visibility = View.VISIBLE
+        }
+    }
+
+    private fun initObserver() {
         mainViewModel.tipMessage.observe(viewLifecycleOwner) {
             when (it) {
                 SUCCESS -> {
