@@ -50,6 +50,7 @@ class DataConfirmationFragment : Fragment(), AdapterListener<ExpenseListItem> {
             override fun handleOnBackPressed() {
                 if (findNavController().currentBackStackEntry?.destination?.id == R.id.dataConfirmationFragment) {
                     if (findNavController().previousBackStackEntry?.destination?.id != R.id.groupInfoFragment) {
+
                         findNavController().navigate(DataConfirmationFragmentDirections
                             .actionDataConfirmationFragmentToGroupExpensesFragment(args.group))
                     } else {

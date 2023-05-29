@@ -204,7 +204,9 @@
                 app:popUpToInclusive="true" />
             <action
                 android:id="@+id/action_dataConfirmationFragment_to_groupExpensesFragment"
-                app:destination="@id/groupExpensesFragment" />
+                app:destination="@id/groupExpensesFragment"
+                app:popUpTo="@id/groupExpensesFragment"
+                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/groupMembersFragment"

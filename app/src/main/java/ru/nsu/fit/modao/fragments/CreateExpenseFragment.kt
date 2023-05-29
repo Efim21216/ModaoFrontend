@@ -29,17 +29,17 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
     private val binding get() = _binding!!
     private var menuList = listOf("Who spent", "Participants", "Coefficient")
     private val adapter = MenuAdapter()
+    private val listDestinations = listOf(
+        R.id.enterCostFragment,
+        R.id.selectParticipantsFragment,
+        R.id.enterCoefficientsFragment
+    )
 
     @Inject
     lateinit var app: App
     private val args by navArgs<CreateExpenseFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
     private val createExpenseViewModel: CreateExpenseViewModel by viewModels()
-    private val listDestinations = listOf(
-        R.id.enterCostFragment,
-        R.id.enterCoefficientsFragment,
-        R.id.selectParticipantsFragment
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,

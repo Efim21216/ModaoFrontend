@@ -1,6 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.PAGE_SIZE
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import java.text.DateFormat
+import java.time.LocalDateTime
 import java.util.*
 import javax.inject.Inject
 
@@ -142,13 +144,24 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             bindingAlert.textConfirm.visibility = View.GONE
             builder.setView(bindingAlert.root)
             val dialog = builder.create()
-            bindingAlert.buttonDetails.setOnClickListener { _ ->
-                dialog.dismiss()
-                val action = GroupExpensesFragmentDirections
-                    .actionGroupExpensesFragmentToSeeDetailsFragment(false, it)
-                action.group = args.group
-                findNavController().navigate(action)
+            if (it.status != -2) {
+                bindingAlert.buttonDetails.setOnClickListener { _ ->
+                    dialog.dismiss()
+                    val action = GroupExpensesFragmentDirections
+                        .actionGroupExpensesFragmentToSeeDetailsFragment(false, it)
+                    action.group = args.group
+                    findNavController().navigate(action)
+                }
+            } else {
+                bindingAlert.buttonDetails.text = "See deleted event"
+                bindingAlert.buttonDetails.paintFlags =
+                    bindingAlert.buttonDetails.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+                bindingAlert.buttonDetails.setOnClickListener {_ ->
+                    dialog.dismiss()
+                    mainViewModel.getEventInfo(it.deleteId!!, args.group.id!!)
+                }
             }
+
 
             dialog.show()
         }
@@ -187,13 +200,15 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             .setNegativeButtonText("Cancel")
             .build()
         dialog.addOnPositiveButtonClickListener {
-            minTime = it.first
-            maxTime = it.second
+            minTime = it.first - 3600000 * 3
+            maxTime = it.second + 3600000 * 21
             val date1 = Date(it.first)
             val date2 = Date(it.second)
+            val date3 = LocalDateTime.now()
             Toast.makeText(
-                context, "${DateFormat.getDateInstance().format(date1)} " +
-                        "- ${DateFormat.getDateInstance().format(date2)}",
+                context, "${DateFormat.getDateTimeInstance().format(date1)} " +
+                        "- ${DateFormat.getDateTimeInstance().format(date2)}" +
+                        "- ${date3.hour} - ${it.first}",
                 Toast.LENGTH_LONG
             ).show()
             getGroupExpenses()
