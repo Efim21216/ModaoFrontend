@@ -105,14 +105,10 @@ class SeeDetailsFragment : Fragment() {
         binding.noButton2.setOnClickListener {
             val id = args.expense.id
             mainViewModel.notConfirmEvent(args.group!!.id!!, id!!)
-            findNavController().navigate(SeeDetailsFragmentDirections
-                .actionSeeDetailsFragmentToDataConfirmationFragment(args.group!!))
         }
         binding.yesButton2.setOnClickListener {
             val id = args.expense.id
             mainViewModel.confirmEvent(args.group!!.id!!, id!!)
-            findNavController().navigate(SeeDetailsFragmentDirections
-                .actionSeeDetailsFragmentToDataConfirmationFragment(args.group!!))
         }
 
     }
@@ -140,6 +136,8 @@ class SeeDetailsFragment : Fragment() {
                         .actionSeeDetailsFragmentToGroupExpensesFragment(args.group!!))
                 }
                 FAIL -> Toast.makeText(context, "Fail", Toast.LENGTH_LONG).show()
+                "OK" -> findNavController().navigate(SeeDetailsFragmentDirections
+                    .actionSeeDetailsFragmentToDataConfirmationFragment(args.group!!))
             }
         }
     }

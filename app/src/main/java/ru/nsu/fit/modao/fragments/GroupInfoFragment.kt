@@ -48,7 +48,7 @@ class GroupInfoFragment : Fragment() {
         binding.nameGroup.text = args.group.groupName
         if (args.group.typeGroup == 1) {
             binding.status.setTextColor(Color.parseColor("#FF00BCD4"))
-            binding.status.text = "Archive"
+            binding.status.text = "Archived"
         } else {
             binding.status.setTextColor(Color.parseColor("#1AE622"))
             binding.status.text = "Active"

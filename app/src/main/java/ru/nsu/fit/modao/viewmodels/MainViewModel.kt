@@ -210,6 +210,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             if (!response.isSuccessful) {
                 Log.d("MyTag", response.message())
             } else {
+                tipMessage.value = "OK"
                 getGroupUnconfirmedExpenses(groupId)
             }
         }
@@ -221,6 +222,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             if (!response.isSuccessful) {
                 Log.d("MyTag", response.message())
             } else {
+                tipMessage.value = "OK"
                 getGroupUnconfirmedExpenses(groupId)
             }
         }
