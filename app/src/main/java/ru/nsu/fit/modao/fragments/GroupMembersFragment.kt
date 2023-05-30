@@ -2,7 +2,6 @@ package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,8 +76,8 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
     }
 
     override fun onClickItem(item: User) {
-        Log.d("MyTag", "on click member")
-        if (organizer && item.id != app.userId) {
+
+        /*if (organizer && item.id != app.userId) {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(item.username)
             builder.setPositiveButton("OK") { _, _ -> }
@@ -88,7 +87,7 @@ class GroupMembersFragment : Fragment(), AdapterListener<User> {
                 }
             }
             builder.create().show()
-        }
+        }*/
 
     }
 

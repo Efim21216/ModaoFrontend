@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -28,9 +27,6 @@ import ru.nsu.fit.modao.models.LoadItems
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.PAGE_SIZE
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import java.text.DateFormat
-import java.time.LocalDateTime
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -202,15 +198,6 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         dialog.addOnPositiveButtonClickListener {
             minTime = it.first - 3600000 * 3
             maxTime = it.second + 3600000 * 21
-            val date1 = Date(it.first)
-            val date2 = Date(it.second)
-            val date3 = LocalDateTime.now()
-            Toast.makeText(
-                context, "${DateFormat.getDateTimeInstance().format(date1)} " +
-                        "- ${DateFormat.getDateTimeInstance().format(date2)}" +
-                        "- ${date3.hour} - ${it.first}",
-                Toast.LENGTH_LONG
-            ).show()
             getGroupExpenses()
         }
         dialog.show(childFragmentManager, "MyTag")
@@ -229,9 +216,9 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
         bindingPopupWindow = FilterExpensesBinding.bind(view)
         window.contentView = bindingPopupWindow.root
-        window.isFocusable = true
         bindingPopupWindow.event.isChecked = true
         bindingPopupWindow.transfer.isChecked = true
+        window.isFocusable = true
         setButton()
     }
 
