@@ -22,17 +22,25 @@ import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.viewmodels.CreateExpenseViewModel
 import ru.nsu.fit.modao.viewmodels.MainViewModel
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class CreateExpenseFragment : Fragment(), AdapterListener<String> {
     private var _binding: FragmentCreateExpenseBinding? = null
     private val binding get() = _binding!!
     private var menuList = listOf("Who spent", "Participants", "Coefficient")
     private val adapter = MenuAdapter()
+    private val listDestinations = listOf(
+        R.id.enterCostFragment,
+        R.id.selectParticipantsFragment,
+        R.id.enterCoefficientsFragment
+    )
+
     @Inject
     lateinit var app: App
     private val args by navArgs<CreateExpenseFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
     private val createExpenseViewModel: CreateExpenseViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +58,8 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        initOrganizer()
         binding.recyclerMenu.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter.attachListener(this)
@@ -59,10 +69,22 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
         mainViewModel.getUsersInGroup(args.dataExpense.group.id!!)
 
         createExpenseViewModel.eventId.observe(viewLifecycleOwner) {
-            findNavController().navigate(
-                CreateExpenseFragmentDirections
-                    .actionCreateExpenseFragmentToGroupExpensesFragment(args.dataExpense.group)
-            )
+            if (args.dataExpense.group.isOrganizer == null) {
+                findNavController().navigate(
+                    CreateExpenseFragmentDirections
+                        .actionCreateExpenseFragmentToDataConfirmationFragment(args.dataExpense.group)
+                )
+            } else if (args.dataExpense.group.isOrganizer!!) {
+                findNavController().navigate(
+                    CreateExpenseFragmentDirections
+                        .actionCreateExpenseFragmentToGroupExpensesFragment(args.dataExpense.group)
+                )
+            } else {
+                findNavController().navigate(
+                    CreateExpenseFragmentDirections
+                        .actionCreateExpenseFragmentToDataConfirmationFragment(args.dataExpense.group)
+                )
+            }
         }
         mainViewModel.usersInGroup.observe(viewLifecycleOwner) {
             createExpenseViewModel.participants.value = it.map { user ->
@@ -97,6 +119,15 @@ class CreateExpenseFragment : Fragment(), AdapterListener<String> {
                 args.dataExpense.cost.toString(),
                 args.dataExpense.group.id!!, 0
             )
+        }
+    }
+
+    private fun initOrganizer() {
+        if (args.dataExpense.group.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.dataExpense.group.id!!)
+            mainViewModel.organizers.observe(viewLifecycleOwner) {
+                args.dataExpense.group.isOrganizer = it.any { org -> org.id == app.userId }
+            }
         }
     }
 

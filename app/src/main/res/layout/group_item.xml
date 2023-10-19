@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:contentDescription="@string/groups"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/button_group" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nameGroup"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/test"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/subtitle"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="5dp"
+            app:icon="@drawable/ic_groups"
+            app:iconGravity="textStart"
+            app:iconPadding="20dp"
+            app:iconSize="30dp"
+            app:iconTint="#f37e21"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#FF2196F3"
+            app:strokeWidth="3dp" />
 
-    <TextView
-        android:id="@+id/nameGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/test"
-        android:textColor="@color/black"
-        android:textSize="@dimen/plain_text"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

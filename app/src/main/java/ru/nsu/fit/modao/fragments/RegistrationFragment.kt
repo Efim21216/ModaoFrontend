@@ -39,7 +39,7 @@ class RegistrationFragment: Fragment() {
             binding.tipMessage.text = it
         }
         loginViewModel.userId.observe(viewLifecycleOwner) {
-            loginViewModel.login(login = login!!, password = password!!)
+            loginViewModel.login(login = login!!, password = password!!, app.deviceToken)
         }
         loginViewModel.token.observe(viewLifecycleOwner) {
             app.userId = it.id

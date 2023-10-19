@@ -6,112 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".fragments.GroupInfoFragment">
 
-
-    <ImageButton
-        android:id="@+id/groupInformation"
+    <TextView
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/info_group"
-        android:src="@drawable/button_info_group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGroupExpenses" />
-
-    <ImageButton
-        android:id="@+id/buttonMembers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/group_members"
-        android:src="@drawable/button_member"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/plain_text"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMembers"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMembers"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonMembers"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/group_members"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="@dimen/subtitle"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="5dp"
+        app:icon="@drawable/baseline_people_outline_24"
+        app:iconGravity="textStart"
+        app:iconPadding="20dp"
+        app:iconSize="30dp"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:strokeColor="#8ABBD9"
+        app:strokeWidth="3dp" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonGroupExpenses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/group_events"
-        android:src="@drawable/button_expenses_group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMembers" />
-
-    <ImageButton
-        android:id="@+id/buttonDataConfirmation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/data_confirmation_of_the_group"
-        android:src="@drawable/button_data_conf"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupInformation" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/info"
-        android:textColor="@color/black"
-        android:textSize="@dimen/subtitle"
-        app:layout_constraintBottom_toBottomOf="@+id/groupInformation"
-        app:layout_constraintStart_toStartOf="@+id/groupInformation"
-        app:layout_constraintTop_toTopOf="@+id/groupInformation" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/members"
-        android:textColor="@color/black"
-        android:textSize="@dimen/subtitle"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonMembers"
-        app:layout_constraintStart_toStartOf="@+id/buttonMembers"
-        app:layout_constraintTop_toTopOf="@+id/buttonMembers" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/events"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="@dimen/subtitle"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonGroupExpenses"
-        app:layout_constraintStart_toStartOf="@+id/buttonGroupExpenses"
-        app:layout_constraintTop_toTopOf="@+id/buttonGroupExpenses" />
+        app:backgroundTint="@color/white"
+        app:cornerRadius="5dp"
+        app:icon="@drawable/balloons"
+        app:iconGravity="textStart"
+        app:iconPadding="20dp"
+        app:iconSize="30dp"
+        app:iconTint="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMembers"
+        app:strokeColor="#8ABBD9"
+        app:strokeWidth="3dp" />
 
-    <TextView
-        android:id="@+id/textDataConfirmation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="12dp"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/groupInformation"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/info"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="@dimen/subtitle"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="5dp"
+        app:icon="@drawable/baseline_info_24"
+        app:iconGravity="textStart"
+        app:iconPadding="20dp"
+        app:iconSize="30dp"
+        app:iconTint="@color/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGroupExpenses"
+        app:strokeColor="#8ABBD9"
+        app:strokeWidth="3dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDataConfirmation"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/data_conf"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="@dimen/subtitle"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonDataConfirmation"
-        app:layout_constraintStart_toStartOf="@+id/buttonDataConfirmation"
-        app:layout_constraintTop_toTopOf="@+id/buttonDataConfirmation" />
+        app:backgroundTint="@color/white"
+        app:cornerRadius="5dp"
+        app:icon="@drawable/baseline_warning_24"
+        app:iconGravity="textStart"
+        app:iconPadding="20dp"
+        app:iconSize="30dp"
+        app:iconTint="#F44336"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupInformation"
+        app:strokeColor="#8ABBD9"
+        app:strokeWidth="3dp" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -127,19 +125,21 @@
 
     <TextView
         android:id="@+id/nameGroup"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/white_background"
         android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/headers"
         app:layout_constraintBottom_toBottomOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="tiramisu" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

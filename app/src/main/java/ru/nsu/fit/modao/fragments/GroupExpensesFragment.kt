@@ -1,12 +1,12 @@
 package ru.nsu.fit.modao.fragments
 
 import android.app.AlertDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,10 +24,10 @@ import ru.nsu.fit.modao.databinding.PopUpWindowDataConfBinding
 import ru.nsu.fit.modao.models.Expense
 import ru.nsu.fit.modao.models.ExpenseListItem
 import ru.nsu.fit.modao.models.LoadItems
+import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.PAGE_SIZE
 import ru.nsu.fit.modao.viewmodels.MainViewModel
-import java.text.DateFormat
-import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
@@ -36,14 +36,22 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
     private val adapter = ExpensesAdapter()
     private val args by navArgs<GroupExpensesFragmentArgs>()
     private val mainViewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var app: App
     private var showEvent = true
     private var showTransfer = true
     private var showOnlyMy = false
     private var lastEvent: Expense? = null
     private lateinit var window: PopupWindow
+    private var totalPages = 2
+    private var lastPage = 0
     private lateinit var bindingPopupWindow: FilterExpensesBinding
+    private var newList = true
+    private var minTime: Long = 0
+    private var maxTime: Long = 9999999999999L
     private val Boolean.intValue
         get() = if (this) 1 else 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,24 +66,62 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
         _binding = null
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel.getGroupExpenses(
+            args.group.id!!,
+            showOnlyMy.intValue,
+            2,
+            minTime,
+            maxTime,
+            0,
+            PAGE_SIZE
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        newList = true
+        lastPage = 0
+        minTime = 0
+        maxTime = 9999999999999L
         setRecycler()
         setButtonOnClick()
         setPopupWindow()
-        mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
         setObserver()
+        initOrganizer()
 
+    }
+    private fun initOrganizer() {
+        if (args.group.isOrganizer == null) {
+            mainViewModel.getListOrganizers(args.group.id!!)
+            mainViewModel.organizers.observe(viewLifecycleOwner) {
+                args.group.isOrganizer = it.any { org -> org.id == app.userId }
+            }
+        }
     }
     private fun setObserver() {
 
         mainViewModel.expenses.observe(viewLifecycleOwner) {
+
             val list: MutableList<ExpenseListItem> = it.toMutableList()
-            if (it.size > PAGE_SIZE) {
-                list.add(PAGE_SIZE - 5, LoadItems(isLoad = false))
+
+            if (totalPages > lastPage + 1) {
+                lastPage++
+                if (list.size > PAGE_SIZE - 5) {
+                    list.add(PAGE_SIZE - 5, LoadItems(isLoad = false, lastPage))
+                }
             }
-            adapter.setList(list.toTypedArray())
+            if (newList) {
+                newList = false
+                adapter.setList(list.toTypedArray())
+            } else {
+                adapter.addItems(list.toTypedArray())
+            }
+
+        }
+        mainViewModel.totalPages.observe(viewLifecycleOwner) {
+            totalPages = it
         }
 
         mainViewModel.infoEvent.observe(viewLifecycleOwner) {
@@ -94,16 +140,33 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             bindingAlert.textConfirm.visibility = View.GONE
             builder.setView(bindingAlert.root)
             val dialog = builder.create()
-            bindingAlert.buttonDetails.setOnClickListener {_ ->
-                dialog.dismiss()
-                findNavController().navigate(GroupExpensesFragmentDirections
-                    .actionGroupExpensesFragmentToSeeDetailsFragment(false, it))
+            if (it.status != -2) {
+                bindingAlert.buttonDetails.setOnClickListener { _ ->
+                    dialog.dismiss()
+                    val action = GroupExpensesFragmentDirections
+                        .actionGroupExpensesFragmentToSeeDetailsFragment(false, it)
+                    action.group = args.group
+                    findNavController().navigate(action)
+                }
+            } else {
+                bindingAlert.buttonDetails.text = "See deleted event"
+                bindingAlert.buttonDetails.paintFlags =
+                    bindingAlert.buttonDetails.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+                bindingAlert.buttonDetails.setOnClickListener {_ ->
+                    dialog.dismiss()
+                    mainViewModel.getEventInfo(it.deleteId!!, args.group.id!!)
+                }
             }
+
 
             dialog.show()
         }
     }
+
     private fun setButtonOnClick() {
+        if (args.group.typeGroup == 1) {
+            binding.buttonAddEvent.visibility = View.GONE
+        }
         binding.buttonAddEvent.setOnClickListener {
             findNavController().navigate(
                 GroupExpensesFragmentDirections
@@ -125,42 +188,44 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             showDatePicker()
         }
     }
-    private fun showDatePicker(){
+
+    private fun showDatePicker() {
         val dialog = MaterialDatePicker.Builder.dateRangePicker()
             .setTheme(R.style.MaterialCalendarTheme)
             .setPositiveButtonText("Save")
             .setNegativeButtonText("Cancel")
             .build()
         dialog.addOnPositiveButtonClickListener {
-            val date1 = Date(it.first)
-            val date2 = Date(it.second)
-            Toast.makeText(context, "${DateFormat.getDateInstance().format(date1)} " +
-                    "- ${DateFormat.getDateInstance().format(date2)}",
-                Toast.LENGTH_LONG).show()
+            minTime = it.first - 3600000 * 3
+            maxTime = it.second + 3600000 * 21
+            getGroupExpenses()
         }
         dialog.show(childFragmentManager, "MyTag")
     }
-    private fun setRecycler(){
+
+    private fun setRecycler() {
         adapter.attachListener(this)
         binding.expensesRecycler.layoutManager =
             LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         binding.expensesRecycler.adapter = adapter
     }
 
-    private fun setPopupWindow(){
+    private fun setPopupWindow() {
         window = PopupWindow(context)
-        val view = LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.filter_expenses, binding.root, false)
         bindingPopupWindow = FilterExpensesBinding.bind(view)
         window.contentView = bindingPopupWindow.root
-        window.isFocusable = true
         bindingPopupWindow.event.isChecked = true
         bindingPopupWindow.transfer.isChecked = true
+        window.isFocusable = true
         setButton()
     }
-    private fun setButton(){
+
+    private fun setButton() {
         bindingPopupWindow.transfer.setOnClickListener {
-            if (showTransfer){
-                if (bindingPopupWindow.event.isChecked){
+            if (showTransfer) {
+                if (bindingPopupWindow.event.isChecked) {
                     showTransfer = false
                     bindingPopupWindow.transfer.isChecked = false
                 }
@@ -189,19 +254,21 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
             getGroupExpenses()
         }
     }
-    private fun getGroupExpenses(){
-        if (bindingPopupWindow.transfer.isChecked){
-            if (bindingPopupWindow.event.isChecked) {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 2)
-            } else {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 1)
-            }
-        } else {
-            if (bindingPopupWindow.event.isChecked) {
-                mainViewModel.getGroupExpenses(args.group.id!!, showOnlyMy.intValue, 0)
-            }
-        }
+
+    private fun getGroupExpenses() {
+        newList = true
+        lastPage = 0
+        mainViewModel.getGroupExpenses(
+            args.group.id!!,
+            showOnlyMy.intValue,
+            getFilter(),
+            minTime,
+            maxTime,
+            0,
+            PAGE_SIZE
+        )
     }
+
     override fun onClickItem(item: ExpenseListItem) {
         when (item) {
             is Expense -> mainViewModel.getEventInfo(item.id!!, args.group.id!!)
@@ -210,8 +277,17 @@ class GroupExpensesFragment : Fragment(), AdapterListener<ExpenseListItem> {
                     return
                 }
                 item.isLoad = true
+                mainViewModel.getGroupExpenses(
+                    args.group.id!!, showOnlyMy.intValue,
+                    getFilter(), minTime, maxTime, item.page, PAGE_SIZE
+                )
             }
         }
+    }
 
+    private fun getFilter(): Int {
+        return if (bindingPopupWindow.transfer.isChecked) {
+            if (bindingPopupWindow.event.isChecked) 2 else 1
+        } else 0
     }
 }

@@ -20,7 +20,6 @@
         android:id="@+id/enterCostFragment"
         android:name="ru.nsu.fit.modao.fragments.ExpenseWhoSpentFragment"
         android:label="fragment_enter_cost"
-        tools:layout="@layout/fragment_expense_who_spent" >
-    </fragment>
+        tools:layout="@layout/fragment_expense_who_spent" />
 
 </navigation>

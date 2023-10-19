@@ -19,6 +19,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editGroupUUID" />
 
+    <ImageButton
+        android:id="@+id/filterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/filter_events"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/filter_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+
     <TextView
         android:id="@+id/groups"
         android:layout_width="wrap_content"
@@ -45,17 +59,30 @@
         app:layout_constraintTop_toBottomOf="@+id/editGroupUUID"
         tools:listitem="@layout/group_item" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="107dp"
         android:layout_marginBottom="30dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/add_group"
+        android:fontFamily="@font/roboto"
+        android:text="@string/new_group_button"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="@dimen/subtitle"
+        app:backgroundTint="#57D6D6D6"
+        app:icon="@drawable/new_group_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="20dp"
+        app:iconSize="20dp"
+        app:iconTint="#FF4E5AEA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/button_add_group" />
+        app:cornerRadius="10dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/gray"/>
 
     <EditText
         android:id="@+id/editGroupUUID"
@@ -68,7 +95,7 @@
         android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:fontFamily="@font/roboto"
-        android:hint="@string/add_by_uuid"
+        android:hint="@string/add_by_guid"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="@dimen/plain_text"

@@ -63,10 +63,14 @@ class CreateExpenseViewModel @Inject constructor(private val repository: MainRep
             message.value = "Select participants"
             return
         }
-
-        if (type == 1 || payFor) {
+        if (type == 1 && participantsEvent.size != 1) {
+            message.value = "Select participants"
+            return
+        }
+        if (type == 1 || payFor || !sponsor.selected) {
             sponsor.coefficient = 0f
         }
+
         viewModelScope.launch(handler) {
             val expense = Expense(
                 name = description, price = sum,

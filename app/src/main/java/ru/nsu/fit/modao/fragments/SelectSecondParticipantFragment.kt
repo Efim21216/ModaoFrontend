@@ -47,10 +47,8 @@ class SelectSecondParticipantFragment : BottomSheetDialogFragment(),
         initRecycler()
         binding.buttonDone.setOnClickListener {
             //createExpenseViewModel.users.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
-            createExpenseViewModel.participants.value = createExpenseViewModel.users.filter {
-                it.id == app.userId ||
-                        it.id == lastUser?.id
-            }.toTypedArray()
+            createExpenseViewModel.participants.value?.forEach { it.selected = it.id == app.userId ||
+                    it.id == lastUser?.id }
             //createExpenseViewModel.participants.value?.forEach { Log.d("MyTag", "${it.username!!} select ${it.selected} sponsor ${it.isSponsor}") }
             findNavController().popBackStack(R.id.createAnExpenseFragment, inclusive = false)
         }

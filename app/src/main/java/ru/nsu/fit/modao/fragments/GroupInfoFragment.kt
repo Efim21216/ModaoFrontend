@@ -1,7 +1,7 @@
 package ru.nsu.fit.modao.fragments
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,22 +41,24 @@ class GroupInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (args.notification && first) {
-            Log.d("MyTag", "group info to data")
             first = false
             findNavController().navigate(GroupInfoFragmentDirections
                 .actionGroupInfoFragmentToDataConfirmationFragment(args.group))
         }
         binding.nameGroup.text = args.group.groupName
-
-        mainViewModel.getListOrganizers(args.group.id!!)
-        mainViewModel.organizers.observe(viewLifecycleOwner) {
-            val isOrganizer = it.any { org -> org.id == app.userId }
-            if (isOrganizer) {
-                binding.buttonDataConfirmation.visibility = View.VISIBLE
-                binding.textDataConfirmation.visibility = View.VISIBLE
-            }
+        if (args.group.typeGroup == 1) {
+            binding.status.setTextColor(Color.parseColor("#FF00BCD4"))
+            binding.status.text = "Archived"
+        } else {
+            binding.status.setTextColor(Color.parseColor("#1AE622"))
+            binding.status.text = "Active"
         }
+        mainViewModel.getListOrganizers(args.group.id!!)
+        initObserver()
+        initButton()
 
+    }
+    private fun initButton() {
         binding.buttonGroupExpenses.setOnClickListener {
             findNavController().navigate(
                 GroupInfoFragmentDirections.actionGroupInfoFragmentToGroupExpensesFragment(
@@ -85,5 +87,12 @@ class GroupInfoFragment : Fragment() {
                 )
             )
         }
+
+    }
+    private fun initObserver() {
+        mainViewModel.organizers.observe(viewLifecycleOwner) {
+            args.group.isOrganizer = it.any { org -> org.id == app.userId }
+        }
+
     }
 }

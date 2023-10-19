@@ -50,7 +50,6 @@ class AddMemberFragment : BottomSheetDialogFragment(), AdapterListener<Participa
             mainViewModel.getListFriends()
             members = mainViewModel.usersInGroup.value?.toList()!!
         }
-        adapter.setList(arrayOf(ParticipantEvent(username = "Efim", id = 1, selected = false)))
         mainViewModel.listFriends.observe(viewLifecycleOwner) {
             listFriends = it.filter{ user -> !members.contains(user)}.map { user ->
                 ParticipantEvent(

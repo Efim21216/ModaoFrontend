@@ -1,6 +1,5 @@
 package ru.nsu.fit.modao.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,20 +38,17 @@ class NotificationFriendsAdapter: RecyclerView.Adapter<NotificationFriendsAdapte
         fun bind(elem: Notification, listenerFriend: AdapterListener<Notification>,
                  listenerGroup: AdapterListener<Notification>){
             if (elem.nameGroup != null){
-                binding.frameNewGroup.visibility = View.VISIBLE
                 binding.nameNewGroup.visibility = View.VISIBLE
                 binding.nameNewGroup.text = elem.nameGroup
                 binding.newGroup.visibility = View.VISIBLE
-                binding.root.setOnClickListener {
-                    Log.d("MyTag", "Notification adapter group")
+                binding.nameNewGroup.setOnClickListener {
                     listenerGroup.onClickItem(elem)
                 }
             } else {
-                binding.frameNewFriend.visibility = View.VISIBLE
                 binding.nameNewFriend.visibility = View.VISIBLE
                 binding.newFriend.visibility = View.VISIBLE
                 binding.nameNewFriend.text = elem.username
-                binding.root.setOnClickListener {
+                binding.nameNewFriend.setOnClickListener {
                     listenerFriend.onClickItem(elem)
                 }
             }

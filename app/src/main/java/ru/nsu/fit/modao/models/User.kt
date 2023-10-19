@@ -9,6 +9,8 @@ data class User(
     val idPicture: Int? = null,
     val id: Long? = null,
 
-    val uuid: String? = null
-    //val groupCustomPairIdNameList: ArrayList<Group>? = null
+    val uuid: String? = null,
+    val deviceToken: String? = null,
+    val packageName: String = "ru.nsu.fit.modao",
+    val appVersion: String = "1"
 )

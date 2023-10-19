@@ -15,6 +15,7 @@ import ru.nsu.fit.modao.models.Authorization
 import ru.nsu.fit.modao.utils.App
 import ru.nsu.fit.modao.utils.Constants.Companion.ACCESS_TOKEN
 import ru.nsu.fit.modao.utils.Constants.Companion.ID_USER
+import ru.nsu.fit.modao.utils.Constants.Companion.REFRESH_TOKEN
 import ru.nsu.fit.modao.viewmodels.LoginViewModel
 import javax.inject.Inject
 
@@ -54,7 +55,8 @@ class AuthorizationFragment : Fragment() {
             binding.tipMessage.setText(R.string.wait)
             loginViewModel.login(
                 login = binding.personLogin.text.toString(),
-                password = binding.personPassword.text.toString()
+                password = binding.personPassword.text.toString(),
+                app.deviceToken
             )
         }
         binding.buttonSignUp.setOnClickListener {
@@ -67,7 +69,8 @@ class AuthorizationFragment : Fragment() {
         app.accessToken = it.accessToken
         app.refreshToken = it.refreshToken
         val edit = app.encryptedSharedPreferences.edit()
-        edit.putString(ACCESS_TOKEN, it.accessToken).putLong(ID_USER, it.id).apply()
+        edit.putString(ACCESS_TOKEN, it.accessToken).putLong(ID_USER, it.id)
+            .putString(REFRESH_TOKEN, it.refreshToken).apply()
         activity?.findViewById<BottomNavigationView>(R.id.bottomMenu)?.visibility = View.VISIBLE
         findNavController().navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToProfileFragment())
     }

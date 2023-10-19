@@ -12,6 +12,7 @@
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:background="@color/bottom_menu"
         android:visibility="gone"
         app:itemIconSize="30dp"
